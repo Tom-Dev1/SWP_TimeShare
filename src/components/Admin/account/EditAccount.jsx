@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Dialog,
   DialogActions,
@@ -14,15 +13,17 @@ const EditAccount = ({
   editData,
   handleInputChange,
   handleSubmit,
+  handleOldPasswordChange,
+  oldPassword,
 }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Edit Account</DialogTitle>
+      <DialogTitle>Chỉnh Sửa Tài Khoản</DialogTitle>
       <DialogContent>
         <TextField
           margin="dense"
           name="name"
-          label="Name"
+          label="Tên"
           type="text"
           fullWidth
           variant="standard"
@@ -32,8 +33,8 @@ const EditAccount = ({
         <TextField
           margin="dense"
           name="email"
-          label="Email Address"
-          type="email"
+          label="Email"
+          type="Email"
           fullWidth
           variant="standard"
           value={editData.email}
@@ -41,18 +42,42 @@ const EditAccount = ({
         />
         <TextField
           margin="dense"
-          name="password"
-          label="Password"
+          name="oldPassword"
+          label="Mật khẩu cũ"
           type="password"
           fullWidth
           variant="standard"
-          value={editData.password}
+          value={oldPassword}
+          onChange={handleOldPasswordChange}
+        />
+        <TextField
+          margin="dense"
+          name="password"
+          label="Mật khẩu mới"
+          type="password"
+          fullWidth
+          variant="standard"
+          value={editData.password1}
           onChange={handleInputChange}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleSubmit}>Save</Button>
+        <Button
+          variant="outlined"
+          color="error"
+          size="large"
+          onClick={handleClose}
+        >
+          Hủy
+        </Button>
+        <Button
+          variant="contained"
+          color="success"
+          size="large"
+          onClick={handleSubmit}
+        >
+          Lưu
+        </Button>
       </DialogActions>
     </Dialog>
   );
