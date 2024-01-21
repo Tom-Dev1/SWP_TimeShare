@@ -1,6 +1,5 @@
 import {
   faBed,
-  faCalendarDay,
   faCalendarDays,
   faCar,
   faPerson,
@@ -14,9 +13,13 @@ import { useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header({ type }) {
+  const navigate = useNavigate();
   const [openDate, setOpenDate] = useState(false);
+  const [destination, setDestination] = useState('');
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -37,6 +40,11 @@ export default function Header({ type }) {
         [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
       };
     });
+  };
+
+  const handleSearch = () => {
+    // set states of header include (destination, date, options)
+    navigate('/hotels', { state: { destination, date, options } });
   };
   return (
     <div className="header">
@@ -69,7 +77,12 @@ export default function Header({ type }) {
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
-                <input type="text" placeholder="Bạn muốn đến đâu ?" className="headerSearchInput" />
+                <input
+                  type="text"
+                  placeholder="Bạn muốn đến đâu ?"
+                  className="headerSearchInput"
+                  onChange={(e) => setDestination(e.target.value)}
+                />
               </div>
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
@@ -159,7 +172,9 @@ export default function Header({ type }) {
                 )}
               </div>
               <div className="headerSearchItem">
-                <button className="headerBtn">Search</button>
+                <button className="headerBtn" onClick={handleSearch}>
+                  Search
+                </button>
               </div>
             </div>
           </>
