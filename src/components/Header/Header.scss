@@ -1,0 +1,29 @@
+.header-bg {
+    background-color: var(--color-2);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    .header-container {
+        padding: 0.75rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 72rem;
+        margin: 0 auto;
+
+        .h-container-mid {
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            background-color: rgb(255 255 255);
+            // opacity: 1;
+            .h-text {
+                width: 16rem;
+                background-color: transparent;
+                &:focus {
+                    outline: 2px solid transparent;
+                    outline-offset: 2px;
+                }
+            }
+        }
+    }
+}
