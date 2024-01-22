@@ -1,5 +1,5 @@
 import "../Header/Header.scss";
-import { FaSearch } from "react-icons/fa";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
     return (
@@ -12,7 +12,7 @@ const Header = () => {
 
                 <form className="h-container-mid">
                     <input type="text" placeholder="Search.." className="h-text" />
-                    <FaSearch />
+                    <SearchIcon />
                 </form>
                 <ul className="h-container-right">
                     <li>Home</li>

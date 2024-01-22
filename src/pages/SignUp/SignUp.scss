@@ -33,4 +33,18 @@
             }
         }
     }
+
+    .signup-footer {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1.25rem;
+
+        .signin-direction {
+            color: rgb(29 78 216);
+        }
+    }
+}
+.error-message {
+    color: red;
+    padding: 0 0.75rem;
 }
