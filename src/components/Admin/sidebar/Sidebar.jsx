@@ -1,4 +1,3 @@
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -10,11 +9,15 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../../../appStore";
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import CategoryIcon from "@mui/icons-material/Category";
+import FeedbackIcon from "@mui/icons-material/Feedback";
 
 const drawerWidth = 240;
 
@@ -101,7 +104,7 @@ export default function Sidebar() {
                 px: 2.5,
               }}
             >
-              <ListItemIcon
+              <SpaceDashboardIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : "auto",
@@ -109,7 +112,7 @@ export default function Sidebar() {
                 }}
               >
                 <InboxIcon />
-              </ListItemIcon>
+              </SpaceDashboardIcon>
               <ListItemText primary="Thống kê" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
@@ -127,7 +130,7 @@ export default function Sidebar() {
                 px: 2.5,
               }}
             >
-              <ListItemIcon
+              <CategoryIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : "auto",
@@ -135,7 +138,7 @@ export default function Sidebar() {
                 }}
               >
                 <InboxIcon />
-              </ListItemIcon>
+              </CategoryIcon>
               <ListItemText
                 primary="TimeShare"
                 sx={{ opacity: open ? 1 : 0 }}
@@ -156,7 +159,7 @@ export default function Sidebar() {
                 px: 2.5,
               }}
             >
-              <ListItemIcon
+              <ManageAccountsIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : "auto",
@@ -164,14 +167,20 @@ export default function Sidebar() {
                 }}
               >
                 <InboxIcon />
-              </ListItemIcon>
+              </ManageAccountsIcon>
               <ListItemText
                 primary="Người dùng"
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/wallet");
+            }}
+          >
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -179,7 +188,7 @@ export default function Sidebar() {
                 px: 2.5,
               }}
             >
-              <ListItemIcon
+              <AccountBalanceWalletIcon
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : "auto",
@@ -187,11 +196,37 @@ export default function Sidebar() {
                 }}
               >
                 <InboxIcon />
-              </ListItemIcon>
+              </AccountBalanceWalletIcon>
               <ListItemText
                 primary="Thanh toán"
                 sx={{ opacity: open ? 1 : 0 }}
               />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/feedback");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <FeedbackIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <InboxIcon />
+              </FeedbackIcon>
+              <ListItemText primary="Đánh giá" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>

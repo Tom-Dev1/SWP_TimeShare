@@ -2,8 +2,8 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Sidebar from "../../components/Admin/sidebar/Sidebar";
 import Navbar from "../../components/Admin/navbar/Navbar";
-import Account from "../../components/Admin/account/Account";
-export default function About() {
+
+export default function Wallet() {
   return (
     <div>
       <Navbar />
@@ -11,7 +11,7 @@ export default function About() {
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Account />
+          <h1>Feedback</h1>
         </Box>
       </Box>
     </div>

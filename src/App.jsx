@@ -6,6 +6,8 @@ import Admin from "./pages/admin/Admin";
 import About from "./pages/admin/About";
 import Setting from "./pages/admin/Setting";
 import Account from "./pages/admin/Account";
+import Wallet from "./pages/admin/Wallet";
+import Feedback from "./pages/admin/Feedback";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/admin/about" element={<About />} />
           <Route path="/admin/settings" element={<Setting />} />
           <Route path="/admin/account" element={<Account />} />
+          <Route path="/admin/wallet" element={<Wallet />} />
+          <Route path="/admin/feedback" element={<Feedback />} />
         </Routes>
       </BrowserRouter>
     </>
