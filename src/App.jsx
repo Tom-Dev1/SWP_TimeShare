@@ -8,16 +8,13 @@ import Setting from "./pages/admin/Setting";
 import Account from "./pages/admin/Account";
 import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
-import SignIn from "./pages/SignIn/SignIn.jsx";
-import SignUp from "./pages/SignUp/SignUp.jsx";
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/sign-in" element={<SignIn />} />
           <Route path="/hotels" element={<List />} />
           <Route path="/hotels/:id" element={<Hotel />} />
           <Route path="/admin" element={<Admin />} />
@@ -30,7 +27,6 @@ function App() {
       </BrowserRouter>
     </>
   );
-
 }
 
 export default App;
