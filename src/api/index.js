@@ -1,3 +1,3 @@
 // Định nghĩa URL của API
-const baseUrl = "https://your-api-url.com";
-const apiAccount = baseUrl + "/account/getall";
+const baseUrl = "http://meokool-001-site1.ltempurl.com";
+const apiGetAccount = baseUrl + "/Accounts/GetAll";

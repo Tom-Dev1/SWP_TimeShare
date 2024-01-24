@@ -2,8 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Sidebar from "../../components/Admin/sidebar/Sidebar";
 import Navbar from "../../components/Admin/navbar/Navbar";
+import Dashboard from "../../components/Admin/managerUser/DashBoard";
 
-export default function Setting() {
+export default function User() {
   return (
     <div>
       <Navbar />
@@ -11,7 +12,7 @@ export default function Setting() {
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <h1>Settings</h1>
+          <Dashboard />
         </Box>
       </Box>
     </div>

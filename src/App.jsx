@@ -4,7 +4,7 @@ import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
 import Admin from "./pages/admin/Admin";
 import About from "./pages/admin/About";
-import Setting from "./pages/admin/Setting";
+import User from "./pages/admin/User";
 import Account from "./pages/admin/Account";
 import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
@@ -19,7 +19,7 @@ function App() {
           <Route path="/hotels/:id" element={<Hotel />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/about" element={<About />} />
-          <Route path="/admin/settings" element={<Setting />} />
+          <Route path="/admin/user" element={<User />} />
           <Route path="/admin/account" element={<Account />} />
           <Route path="/admin/wallet" element={<Wallet />} />
           <Route path="/admin/feedback" element={<Feedback />} />
