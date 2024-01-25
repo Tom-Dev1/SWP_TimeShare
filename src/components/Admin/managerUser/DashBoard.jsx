@@ -11,12 +11,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import PopupStatus from "./PopupStatus";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-
+import { apiGetAccount, apiUpdateStatusAccount } from "../../../api";
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [open, setOpen] = useState(false);
-  // const [statusDisplay, setStatusDisplay] = useState();
 
   useEffect(() => {
     fetchUsers();
@@ -24,9 +23,7 @@ const Dashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(
-        "http://meokool-001-site1.ltempurl.com/api/Accounts/GetAll"
-      );
+      const response = await axios.get(apiGetAccount);
       setUsers(Array.isArray(response.data.data) ? response.data.data : []);
     } catch (err) {
       setUsers([]);
@@ -45,7 +42,7 @@ const Dashboard = () => {
   const handleUpdateStatus = async (newStatus) => {
     try {
       const response = await axios.put(
-        `http://meokool-001-site1.ltempurl.com/api/Accounts/UpdateAccountStatus?id=${currentUserId}`,
+        apiUpdateStatusAccount + `${currentUserId}`,
         { status: newStatus },
         {
           headers: { "Content-Type": "application/json" },

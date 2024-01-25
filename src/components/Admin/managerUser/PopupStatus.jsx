@@ -7,7 +7,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-
+import { InputLabel } from "@mui/material";
+import "./popup.css";
 const PopupStatus = ({ open, handleClose, handleUpdateStatus }) => {
   const [status, setStatus] = React.useState("");
 
@@ -20,12 +21,23 @@ const PopupStatus = ({ open, handleClose, handleUpdateStatus }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Update Status</DialogTitle>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      className="popupStatus"
+      fullWidth={"sm"}
+    >
+      <DialogTitle style={{ textAlign: "center" }}>Update Status</DialogTitle>
       <DialogContent>
-        <DialogContentText>Cập nhật trạng thái</DialogContentText>
-        <Select value={status} onChange={handleChange}>
-          <MenuItem value={true}>Hoạt đọng</MenuItem>
+        <InputLabel id="demo-simple-select-label">Chọn Trạng Thái</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={status}
+          label="Chọn trạng thái"
+          onChange={handleChange}
+        >
+          <MenuItem value={true}>Hoạt động</MenuItem>
           <MenuItem value={false}>Vô Hiệu Hóa</MenuItem>
         </Select>
       </DialogContent>
