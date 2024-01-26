@@ -18,6 +18,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CategoryIcon from "@mui/icons-material/Category";
 import FeedbackIcon from "@mui/icons-material/Feedback";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 const drawerWidth = 240;
 
@@ -169,6 +170,35 @@ export default function Sidebar() {
               </ManageAccountsIcon>
               <ListItemText
                 primary="Người dùng"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/trade");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ChangeCircleIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <InboxIcon />
+              </ChangeCircleIcon>
+              <ListItemText
+                primary="Trao đổi "
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>

@@ -7,15 +7,33 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import TablePagination from "@mui/material/TablePagination";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { MenuItem, Select, TextField } from "@mui/material";
+
 import PopupStatus from "./PopupStatus";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { apiGetAccount, apiUpdateStatusAccount } from "../../../api";
+
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [open, setOpen] = useState(false);
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [page, setPage] = React.useState(0);
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   useEffect(() => {
     fetchUsers();
@@ -58,11 +76,75 @@ const Dashboard = () => {
     }
     handleClose();
   };
+  const RemoveFunction = (id) => {
+    if (window.confirm(`Xóa: ${id}`)) {
+      const baseUrl = `http://meokool-001-site1.ltempurl.com/api/Accounts/DeleteAccount`;
+      fetch(baseUrl + "?id=" + id, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            toast.success(`Xóa tài khoản thành công!`);
+            setUsers((users) => users.filter((user) => user.id !== id));
+          } else {
+            throw new Error("Xóa không thành công.");
+          }
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    } else {
+      toast.warning("Hủy bỏ xóa");
+    }
+  };
+
+  const filteredStatus = users.filter((user) => {
+    // Filter by status
+    if (
+      selectedStatusFilter !== "all" &&
+      user.status !== selectedStatusFilter
+    ) {
+      return false;
+    }
+
+    // Filter by username
+    if (
+      searchTerm &&
+      !user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
+  const slicedUser = filteredStatus.slice(
+    page * rowsPerPage,
+    (page + 1) * rowsPerPage
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
         <div className="main">
+          <Select
+            value={selectedStatusFilter}
+            onChange={(e) => setSelectedStatusFilter(e.target.value)}
+            style={{ marginTop: "30px" }}
+          >
+            <MenuItem value="all">Tất cả</MenuItem>
+            <MenuItem value={true}>Hoạt động</MenuItem>
+            <MenuItem value={false}>Vô Hiệu Hóa</MenuItem>
+          </Select>
+          <TextField
+            label="Tên tài khoản"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ marginTop: "30px", marginLeft: "20px" }}
+          />
           <TableContainer component={Paper} className="dashboard-container">
             <h2
               style={{
@@ -132,7 +214,7 @@ const Dashboard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.map((user) => (
+                {slicedUser.map((user) => (
                   <TableRow key={user.id}>
                     <TableCell style={{ fontSize: "13px" }} align="center">
                       {user.username}
@@ -163,11 +245,30 @@ const Dashboard = () => {
                       >
                         <EditIcon sx={{ fontSize: 25 }} />
                       </Button>
+                      <Button
+                        variant="outlined"
+                        color="error"
+                        className="delete-btn"
+                        onClick={() => {
+                          RemoveFunction(user.id);
+                        }}
+                      >
+                        <DeleteIcon sx={{ fontSize: 25 }} />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={users.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
           </TableContainer>
           <PopupStatus
             open={open}

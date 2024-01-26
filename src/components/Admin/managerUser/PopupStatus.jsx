@@ -11,6 +11,8 @@ import { InputLabel } from "@mui/material";
 import "./popup.css";
 const PopupStatus = ({ open, handleClose, handleUpdateStatus }) => {
   const [status, setStatus] = React.useState("");
+  const [fullWidth, setFullWidth] = React.useState(true);
+  const [maxWidth, setMaxWidth] = React.useState("xs");
 
   const handleChange = (event) => {
     setStatus(event.target.value);
@@ -25,7 +27,8 @@ const PopupStatus = ({ open, handleClose, handleUpdateStatus }) => {
       open={open}
       onClose={handleClose}
       className="popupStatus"
-      fullWidth={"sm"}
+      fullWidth={fullWidth}
+      maxWidth={maxWidth}
     >
       <DialogTitle style={{ textAlign: "center" }}>Update Status</DialogTitle>
       <DialogContent>
