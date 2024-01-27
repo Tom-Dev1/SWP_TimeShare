@@ -7,7 +7,7 @@ function FindByPlace() {
 
   return (
     <div className="fbl__container">
-      <Marquee direction="left" speed={60} delay={5} pauseOnHover loop={0}>
+      <Marquee direction="left" speed={60} delay={1} pauseOnHover loop={0}>
         {data.map((item) => (
           <div className="fbl__location__item" key={item.id}>
             <img className="fbl__img" src={item.img} alt={item.name} />

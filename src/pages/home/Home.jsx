@@ -1,5 +1,5 @@
-import FavLocation from '../../components/Components_Langding/favLocation/favLocation';
-import FindByPlace from '../../components/Components_Langding/findByPlace/FindByPlace';
+import FavLocation from '../../components/Components_LandingPages/favLocation/favLocation';
+import FindByPlace from '../../components/Components_LandingPages/findByPlace/FindByPlace';
 import FeatureProperties from '../../components/featureProperties/FeatureProperties';
 import Featured from '../../components/featured/Featured';
 import Footer from '../../components/footer/Footer';
