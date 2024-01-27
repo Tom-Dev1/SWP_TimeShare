@@ -49,9 +49,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleClickOpen = (id) => {
+  const handleClickOpen = (user) => {
     setOpen(true);
-    setCurrentUserId(id);
+    setCurrentUserId(user);
   };
   const handleClose = () => {
     setOpen(false);
@@ -60,7 +60,7 @@ const Dashboard = () => {
   const handleUpdateStatus = async (newStatus) => {
     try {
       const response = await axios.put(
-        apiUpdateStatusAccount + `${currentUserId}`,
+        apiUpdateStatusAccount + `${currentUserId.id}`,
         { status: newStatus },
         {
           headers: { "Content-Type": "application/json" },
@@ -241,7 +241,7 @@ const Dashboard = () => {
                         variant="outlined"
                         color="success"
                         className="edit-btn"
-                        onClick={() => handleClickOpen(user.id)}
+                        onClick={() => handleClickOpen(user)}
                       >
                         <EditIcon sx={{ fontSize: 25 }} />
                       </Button>
@@ -274,6 +274,7 @@ const Dashboard = () => {
             open={open}
             handleClose={handleClose}
             handleUpdateStatus={handleUpdateStatus}
+            currentUserId={currentUserId}
           />
         </div>
       </Box>

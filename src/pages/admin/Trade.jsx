@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Sidebar from "../../components/Admin/sidebar/Sidebar";
 import Navbar from "../../components/Admin/navbar/Navbar";
 
-export default function Wallet() {
+export default function Trade() {
   return (
     <div>
       <Navbar />
