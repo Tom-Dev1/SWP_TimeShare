@@ -1,4 +1,4 @@
-import FavLocation from '../../components/Components_LandingPages/favLocation/favLocation';
+import FavLocations from '../../components/Components_LandingPages/favLocation/FavLocations';
 import FindByPlace from '../../components/Components_LandingPages/findByPlace/FindByPlace';
 import TrendPlace from '../../components/Components_LandingPages/trendPlace/TrendPlace';
 import FeatureProperties from '../../components/featureProperties/FeatureProperties';
@@ -22,7 +22,7 @@ function Home() {
         <TrendPlace />
         <div className="homeTitle">Khám phá Việt Nam</div>
         <div className="homeTitle litle">Các điểm đến phổ biến này có nhiều điều chờ đón bạn</div>
-        <FavLocation />
+        <FavLocations />
         <div className="homeTitle">Tìm theo loại chỗ nghỉ</div>
         <FindByPlace />
         <div className="homeTitle"></div>

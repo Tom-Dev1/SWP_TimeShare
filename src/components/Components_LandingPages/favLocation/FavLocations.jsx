@@ -4,7 +4,7 @@ import dataLocation from './favLocationData';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
-function FavLocation() {
+function FavLocations() {
   const data = dataLocation;
 
   const splideOptions = {
@@ -36,4 +36,4 @@ function FavLocation() {
     </div>
   );
 }
-export default FavLocation;
+export default FavLocations;
