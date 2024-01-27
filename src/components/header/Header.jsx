@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './header.css';
 import { DateRange } from 'react-date-range';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
@@ -19,7 +19,20 @@ export default function Header({ type }) {
   const navigate = useNavigate();
   const [openDate, setOpenDate] = useState(false);
   const [destination, setDestination] = useState('');
+  // handleClickOoutside
+  const optionsRef = useRef(null);
+  const handleClickOutside = (event) => {
+    if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+      setOpenOptions(false);
+    }
+  };
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -110,7 +123,7 @@ export default function Header({ type }) {
                   className="headerSearchText"
                 >{`${options.adult} Người lớn - ${options.children} Trẻ em - ${options.room} Phòng`}</span>
                 {openOptions && (
-                  <div className="options">
+                  <div className="options" ref={optionsRef}>
                     <div className="optionItem">
                       <span className="optionText">Người Lớn</span>
                       <div className="optionCounter">
