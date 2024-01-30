@@ -1,3 +1,4 @@
+
 import FavLocations from '../../components/Components_LandingPages/favLocation/FavLocations';
 import FindByPlace from '../../components/Components_LandingPages/findByPlace/FindByPlace';
 import TrendPlace from '../../components/Components_LandingPages/trendPlace/TrendPlace';
@@ -34,6 +35,7 @@ function Home() {
       </div>
     </div>
   );
+
 }
 
 export default Home;
