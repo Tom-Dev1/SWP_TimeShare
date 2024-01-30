@@ -4,15 +4,19 @@ import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
 import Admin from "./pages/admin/Admin";
 import About from "./pages/admin/About";
-import Setting from "./pages/admin/Setting";
+import User from "./pages/admin/User";
 import Account from "./pages/admin/Account";
 import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
+
+import Trade from "./pages/admin/Trade";
+
 import Form from "./pages/form/Form";
 
 function App() {
     return (
         <Routes>
+          <Route path="/admin/trade" element={<Trade />} />
             <Route path="/" element={<Home />} />
             <Route path="/login-register" element={<Form />} />
             <Route path="/hotels" element={<List />} />
@@ -23,6 +27,7 @@ function App() {
             <Route path="/admin/account" element={<Account />} />
             <Route path="/admin/wallet" element={<Wallet />} />
             <Route path="/admin/feedback" element={<Feedback />} />
+
         </Routes>
     );
 }
