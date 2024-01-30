@@ -14,22 +14,21 @@ import Trade from "./pages/admin/Trade";
 import Form from "./pages/form/Form";
 
 function App() {
-    return (
-        <Routes>
-          <Route path="/admin/trade" element={<Trade />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login-register" element={<Form />} />
-            <Route path="/hotels" element={<List />} />
-            <Route path="/hotels/:id" element={<Hotel />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/about" element={<About />} />
-            <Route path="/admin/settings" element={<Setting />} />
-            <Route path="/admin/account" element={<Account />} />
-            <Route path="/admin/wallet" element={<Wallet />} />
-            <Route path="/admin/feedback" element={<Feedback />} />
-
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path="/admin/trade" element={<Trade />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/login-register" element={<Form />} />
+      <Route path="/hotels" element={<List />} />
+      <Route path="/hotels/:id" element={<Hotel />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/admin/about" element={<About />} />
+      <Route path="/admin/user" element={<User />} />
+      <Route path="/admin/account" element={<Account />} />
+      <Route path="/admin/wallet" element={<Wallet />} />
+      <Route path="/admin/feedback" element={<Feedback />} />
+    </Routes>
+  );
 }
 
 export default App;
