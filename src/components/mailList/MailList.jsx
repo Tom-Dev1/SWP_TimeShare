@@ -2,7 +2,7 @@ import './mailList.css';
 
 function MailList() {
   return (
-    <div className='mailContainer'>
+    <div className="mailContainer">
       <div className="mail">
         <h1 className="mailTitle">Tiết kiệm thời gian và tiền bạc!</h1>
         <span className="mailDesc">
@@ -14,7 +14,7 @@ function MailList() {
         </div>
       </div>
       <div className="mailDangky">
-        <h1>Đăng chỗ nghỉ của Quý vị</h1>
+        <div className="mailDangkyText">Đăng chỗ nghỉ của Quý vị</div>
       </div>
       <div className="mailOptions">
         <ul className="ulOptions">

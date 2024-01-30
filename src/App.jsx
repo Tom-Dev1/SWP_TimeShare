@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
@@ -8,27 +8,28 @@ import User from "./pages/admin/User";
 import Account from "./pages/admin/Account";
 import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
+
 import Trade from "./pages/admin/Trade";
 
+import Form from "./pages/form/Form";
+
 function App() {
-  return (
-    <>
-      <BrowserRouter>
+    return (
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/hotels" element={<List />} />
-          <Route path="/hotels/:id" element={<Hotel />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/about" element={<About />} />
-          <Route path="/admin/user" element={<User />} />
-          <Route path="/admin/account" element={<Account />} />
-          <Route path="/admin/wallet" element={<Wallet />} />
-          <Route path="/admin/feedback" element={<Feedback />} />
           <Route path="/admin/trade" element={<Trade />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login-register" element={<Form />} />
+            <Route path="/hotels" element={<List />} />
+            <Route path="/hotels/:id" element={<Hotel />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/about" element={<About />} />
+            <Route path="/admin/settings" element={<Setting />} />
+            <Route path="/admin/account" element={<Account />} />
+            <Route path="/admin/wallet" element={<Wallet />} />
+            <Route path="/admin/feedback" element={<Feedback />} />
+
         </Routes>
-      </BrowserRouter>
-    </>
-  );
+    );
 }
 
 export default App;
