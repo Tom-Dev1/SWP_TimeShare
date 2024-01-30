@@ -8,9 +8,7 @@ import User from "./pages/admin/User";
 import Account from "./pages/admin/Account";
 import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
-
 import Trade from "./pages/admin/Trade";
-
 import Form from "./pages/form/Form";
 
 function App() {
