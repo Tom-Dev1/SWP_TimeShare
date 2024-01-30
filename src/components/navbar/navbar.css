@@ -14,6 +14,7 @@
 }
 
 .logo {
+
     font-weight: 500;
 }
 .navButton {
@@ -27,6 +28,21 @@
     border: 1px solid #fff;
     background: transparent;
     border-radius: 20px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+.navButton {
+  width: 80px;
+  height: 30px;
+  margin-left: 20px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #003580;
+  border-radius: 5px;
+
 }
 /* .navButton {
     margin-left: 20px;
