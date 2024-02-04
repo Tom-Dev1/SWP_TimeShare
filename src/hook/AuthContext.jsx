@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
     const login = (user) => {
+        console.log("Logged in user:", user);
         localStorage.setItem("userInfo", JSON.stringify(user));
-
         dispatch({ type: "LOGIN", payload: { user } });
     };
     const logout = () => {

@@ -1,5 +1,4 @@
 import GoogleIcon from "@mui/icons-material/Google";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,7 +6,9 @@ import { useAuth } from "../../hook/AuthContext";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { jwtDecode } from "jwt-decode";
+
+import { SignInAccount } from "../API/APIConfigure";
+
 const SignIn = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -52,60 +53,66 @@ const SignIn = () => {
                     password: formData.password,
                 });
 
-                const response = await axios.post(
-                    `http://meokool-001-site1.ltempurl.com/api/Accounts/Signin?${queryParams}`,
-                );
+                const response = await SignInAccount(queryParams);
+                console.log(response);
 
-                if (response.data.data === null) {
+                if (response === null) {
                     Swal.fire({
                         icon: "error",
-                        title: response.data.messageError,
+                        title: response.messageError,
                     });
                 } else {
-                    console.log(response);
                     Swal.fire({
                         icon: "success",
                         title: "Đăng nhập thành công",
                     }).then((result) => {
                         if (result.isConfirmed) {
                             localStorage.removeItem("userInfo");
-                            const decodedToken = jwtDecode(response.data.data.accessToken);
-                            console.log(decodedToken);
+
                             const userInfo = {
-                                id: response.data.data.id,
-                                fullName: response.data.data.fullName,
-                                accessToken: response.data.data.accessToken,
+                                id: response.id,
+                                accessToken: response.accessToken,
+                                isAdmin: response.isAdmin,
                             };
                             login(userInfo);
-                            if (decodedToken.name === "admin") {
+
+                            if (userInfo.isAdmin === true) {
                                 navigate("/admin");
                             } else {
                                 navigate("/");
                             }
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: response.messageError,
+                            });
                         }
                     });
                 }
             } catch (error) {
-                console.error("Login failed:", error.message);
+                Swal.fire({
+                    icon: "error",
+                    title: "Sai tài khoản hoặc mật khẩu",
+                });
             }
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className="sign-in-up-form">
-            <h1 className="sign-up-title">Sign in</h1>
+            <h1 className="sign-up-title">Đăng Nhập</h1>
             <div className="social-container">
                 <a href="#" className="social">
                     <GoogleIcon />
                 </a>
             </div>
-            <span className="introduce">or use your account</span>
+            <span className="introduce">hoặc sử dụng tài khoản của bạn</span>
             <div className="infield">
                 <div className="infield-text">
                     <input
                         className="input-infield"
                         type="text"
-                        placeholder="Username"
+                        placeholder="Tài khoản"
                         name="Username"
                         id="username"
                         onChange={handleChange}
@@ -122,7 +129,7 @@ const SignIn = () => {
                     <input
                         className="input-infield"
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
+                        placeholder="Mật khẩu"
                         id="password"
                         onChange={handleChange}
                     />
@@ -137,9 +144,9 @@ const SignIn = () => {
             </div>
 
             <a href="#" className="forgot">
-                Forgot your password?
+                Quên mật khẩu ?
             </a>
-            <button className="btn-form">Sign In</button>
+            <button className="btn-form">Đăng nhập</button>
         </form>
     );
 };

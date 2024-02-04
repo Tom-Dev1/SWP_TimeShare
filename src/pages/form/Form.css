@@ -45,7 +45,7 @@
 }
 
 .social-container {
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .social-container .social {
@@ -148,7 +148,7 @@
     cursor: pointer;
     position: absolute;
     left: 50%;
-    top: 451px;
+    top: 449px;
     transform: translateX(-50%);
     width: 143.67px;
     height: 40px;

@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
-import axios from "axios";
+import { SignUpAccount } from "../API/APIConfigure";
 import Swal from "sweetalert2";
 
 const SignUp = ({ handleToggleForm }) => {
@@ -89,7 +89,7 @@ const SignUp = ({ handleToggleForm }) => {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const response = await axios.post("http://meokool-001-site1.ltempurl.com/api/Accounts/SignUpUser", {
+                const userData = {
                     username: formData.username,
                     fullName: formData.fullName,
                     address: formData.address,
@@ -97,12 +97,13 @@ const SignUp = ({ handleToggleForm }) => {
                     phone: formData.phone,
                     status: formData.status,
                     sex: formData.sex,
-                });
+                };
+                const response = await SignUpAccount(userData);
                 console.log(response);
-                if (response.data.data === null) {
+                if (response === null) {
                     Swal.fire({
                         icon: "error",
-                        title: response.data.messageError,
+                        title: response.messageError,
                     });
                 } else {
                     Swal.fire({
@@ -116,13 +117,14 @@ const SignUp = ({ handleToggleForm }) => {
                     });
                 }
             } catch (err) {
+                console.log(err);
                 console.log(err.message);
             }
         }
     };
     return (
         <form onSubmit={handleSubmit} className="sign-in-up-form">
-            <h1 className="sign-up-title">Create Account</h1>
+            <h1 className="sign-up-title">Tạo Tài Khoản</h1>
             <div className="social-container">
                 <a href="#" className="social">
                     <i className="fab fa-google-plus-g">
@@ -135,7 +137,7 @@ const SignUp = ({ handleToggleForm }) => {
                     <input
                         className="input-infield"
                         type="text"
-                        placeholder="Username"
+                        placeholder="Tài khoản"
                         id="username"
                         value={formData.username}
                         onChange={handleChange}
@@ -151,7 +153,7 @@ const SignUp = ({ handleToggleForm }) => {
                     <input
                         className="input-infield"
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
+                        placeholder="Mật khẩu"
                         id="password"
                         value={formData.password}
                         onChange={handleChange}
@@ -170,7 +172,7 @@ const SignUp = ({ handleToggleForm }) => {
                     <input
                         className="input-infield"
                         type={showConfirmPassword ? "text" : "password"}
-                        placeholder="Confirm Password"
+                        placeholder="Xác nhận mật khẩu"
                         id="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
@@ -189,7 +191,7 @@ const SignUp = ({ handleToggleForm }) => {
                     <input
                         className="input-infield"
                         type="text"
-                        placeholder="Full Name"
+                        placeholder="Họ tên"
                         id="fullName"
                         value={formData.fullName}
                         onChange={handleChange}
@@ -205,7 +207,7 @@ const SignUp = ({ handleToggleForm }) => {
                     <input
                         className="input-infield"
                         type="text"
-                        placeholder="Address"
+                        placeholder="Địa chỉ"
                         id="address"
                         value={formData.address}
                         onChange={handleChange}
@@ -219,13 +221,13 @@ const SignUp = ({ handleToggleForm }) => {
             <div className="infield">
                 <select
                     className="input-infield"
-                    placeholder="Sex"
+                    placeholder="GIới tính"
                     id="sex"
                     value={formData.sex ? "male" : "female"}
                     onChange={handleChange}
                 >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="male">Nam</option>
+                    <option value="female">Nữ</option>
                 </select>
                 <label className="input__label-field"></label>
             </div>
@@ -235,7 +237,7 @@ const SignUp = ({ handleToggleForm }) => {
                     <input
                         className="input-infield"
                         type="text"
-                        placeholder="Phone"
+                        placeholder="Số điện thoại"
                         id="phone"
                         value={formData.phone}
                         onChange={handleChange}

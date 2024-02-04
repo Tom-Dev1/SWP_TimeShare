@@ -8,9 +8,7 @@ import Swal from "sweetalert2";
 
 function Navbar() {
     const navigate = useNavigate();
-    const { isLoggedIn, user, logout } = useAuth();
-    console.log(user);
-
+    const { isLoggedIn, logout } = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const handleMenuClose = () => {
@@ -19,6 +17,10 @@ function Navbar() {
     const menuId = "primary-search-account-menu";
     const handleLogin = () => {
         navigate("/login-register");
+    };
+    const handleMyAccount = () => {
+        navigate("/user/myprofile");
+        handleMenuClose();
     };
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -50,7 +52,7 @@ function Navbar() {
         <Menu
             anchorEl={anchorEl}
             anchorOrigin={{
-                vertical: "top",
+                vertical: "bottom",
                 horizontal: "right",
             }}
             id={menuId}
@@ -62,7 +64,7 @@ function Navbar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem>{user && <span>{user.fullName}</span>}</MenuItem>
+            <MenuItem onClick={handleMyAccount}>My profile</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
     );
@@ -72,7 +74,7 @@ function Navbar() {
                 <span className="logo"> Booking</span>
                 <div className="navItems">
                     {isLoggedIn ? (
-                        <>
+                        <div className="btn-icon">
                             <IconButton
                                 edge="end"
                                 aria-label="account of current user"
@@ -84,13 +86,13 @@ function Navbar() {
                                 <AccountCircle />
                             </IconButton>
                             {renderMenu}
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div className="btn-div">
                             <button className="navButton" onClick={handleLogin}>
                                 Sign In
                             </button>
-                        </>
+                        </div>
                     )}
                 </div>
             </div>
