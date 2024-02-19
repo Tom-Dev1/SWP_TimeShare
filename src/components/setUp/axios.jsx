@@ -31,13 +31,21 @@ export const customAxios = axios.create({
 customAxios.interceptors.request.use(
     (config) => {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        console.log(userInfo);
+        // console.log(userInfo);
         if (userInfo && userInfo.accessToken) {
             config.headers["Authorization"] = `Bearer ${userInfo.accessToken}`;
         }
         return config;
     },
     (error) => {
+        return Promise.reject(error);
+    },
+);
+customAxios.interceptors.response.use(
+    function (response) {
+        return response.data.data;
+    },
+    function (error) {
         return Promise.reject(error);
     },
 );

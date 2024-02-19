@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 import { Box, Paper, Button } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,12 +15,13 @@ import { MenuItem, Select, TextField } from "@mui/material";
 import PopupStatus from "./PopupStatus";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { apiGetAccount, apiUpdateStatusAccount } from "../../../api";
-import { customAxios } from "../../setUp/axios";
+
+import { DeleteAccount, GetAllAccounts, UpdateStatus } from "../../API/APIConfigure";
 
 const Dashboard = () => {
     const [users, setUsers] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(null);
+    console.log(currentUserId);
     const [open, setOpen] = useState(false);
     const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -42,8 +43,8 @@ const Dashboard = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await customAxios.get(apiGetAccount);
-            setUsers(Array.isArray(response.data.data) ? response.data.data : []);
+            const response = await GetAllAccounts();
+            setUsers(Array.isArray(response) ? response : []);
         } catch (err) {
             setUsers([]);
             console.error(err);
@@ -60,43 +61,25 @@ const Dashboard = () => {
 
     const handleUpdateStatus = async (newStatus) => {
         try {
-            const response = await axios.put(
-                apiUpdateStatusAccount + `${currentUserId.id}`,
-                { status: newStatus },
-                {
-                    headers: { "Content-Type": "application/json" },
-                },
-            );
+            await UpdateStatus(currentUserId.id, newStatus);
             fetchUsers();
-            if (response.status === 200) {
-                toast.success("Cập nhật thành công!");
-            }
+            toast.success("Cập nhật thành công!");
         } catch (err) {
             toast.error("Cập nhật thất bại!");
             console.error(err);
         }
         handleClose();
     };
-    const RemoveFunction = (id) => {
+    const RemoveFunction = async (id) => {
         if (window.confirm(`Xóa: ${id}`)) {
-            const baseUrl = `http://meokool-001-site1.ltempurl.com/api/Accounts/DeleteAccount`;
-            fetch(baseUrl + "?id=" + id, {
-                method: "DELETE",
-                headers: {
-                    "content-type": "application/json",
-                },
-            })
-                .then((res) => {
-                    if (res.status === 200) {
-                        toast.success(`Xóa tài khoản thành công!`);
-                        setUsers((users) => users.filter((user) => user.id !== id));
-                    } else {
-                        throw new Error("Xóa không thành công.");
-                    }
-                })
-                .catch((err) => {
-                    toast.error(err.message);
-                });
+            try {
+                await DeleteAccount(id);
+                toast.success(`Xóa tài khoản thành công!`);
+                setUsers((users) => users.filter((user) => user.id !== id));
+            } catch (err) {
+                toast.error(err.message || "Xóa không thành công.");
+                console.error(err);
+            }
         } else {
             toast.warning("Hủy bỏ xóa");
         }
