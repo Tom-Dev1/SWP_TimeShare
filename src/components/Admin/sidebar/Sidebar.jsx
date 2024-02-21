@@ -21,6 +21,7 @@ import FeedbackIcon from "@mui/icons-material/Feedback";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import AddCardIcon from "@mui/icons-material/AddCard";
+import MapIcon from "@mui/icons-material/Map";
 
 const drawerWidth = 240;
 
@@ -171,6 +172,35 @@ export default function Sidebar() {
                 <InboxIcon />
               </VerifiedIcon>
               <ListItemText primary="Booking" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => {
+              navigate("/admin/realetates");
+            }}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <MapIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <InboxIcon />
+              </MapIcon>
+              <ListItemText
+                primary="Realestates"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem

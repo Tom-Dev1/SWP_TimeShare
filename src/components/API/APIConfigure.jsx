@@ -29,6 +29,9 @@ const GetAllVoucher = () => {
 const GetAllFeedback = () => {
   return customAxios.get(`api/Feedbacks/GetAll`);
 };
+const GetAllRealestates = () => {
+  return customAxios.get(`api/Realestates/GetAll`);
+};
 const GetUserByID = (userID) => {
   return customAxios.get(`api/Accounts/GetbyID?id=${userID}`);
 };
@@ -42,4 +45,5 @@ export {
   GetAllVoucher,
   GetAllFeedback,
   GetUserByID,
+  GetAllRealestates,
 };
