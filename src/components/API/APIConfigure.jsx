@@ -26,6 +26,12 @@ const GetAllBookings = () => {
 const GetAllVoucher = () => {
   return customAxios.get(`api/Vouchers/GetAll`);
 };
+const GetAllFeedback = () => {
+  return customAxios.get(`api/Feedbacks/GetAll`);
+};
+const GetUserByID = (userID) => {
+  return customAxios.get(`api/Accounts/GetbyID?id=${userID}`);
+};
 export {
   SignInAccount,
   SignUpAccount,
@@ -34,4 +40,6 @@ export {
   UpdateStatus,
   GetAllBookings,
   GetAllVoucher,
+  GetAllFeedback,
+  GetUserByID,
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Box, Paper, Button } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,15 +11,11 @@ import TablePagination from "@mui/material/TablePagination";
 import { MenuItem, Select, TextField } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { GetAllVoucher } from "../../API/APIConfigure";
 
 const Dashboard = () => {
   const [voucher, setVoucher] = useState([]);
-  const [currentUserId, setCurrentUserId] = useState(null);
-  console.log(currentUserId);
-  const [open, setOpen] = useState(false);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(0);
