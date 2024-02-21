@@ -23,6 +23,9 @@ const UpdateStatus = (userID, newStatus) => {
 const GetAllBookings = () => {
   return customAxios.get(`api/Bookings/GetAll`);
 };
+const GetAllVoucher = () => {
+  return customAxios.get(`api/Vouchers/GetAll`);
+};
 export {
   SignInAccount,
   SignUpAccount,
@@ -30,4 +33,5 @@ export {
   DeleteAccount,
   UpdateStatus,
   GetAllBookings,
+  GetAllVoucher,
 };
