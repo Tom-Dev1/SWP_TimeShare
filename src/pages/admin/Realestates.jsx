@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Sidebar from "../../components/Admin/sidebar/Sidebar";
 import Navbar from "../../components/Admin/navbar/Navbar";
-import Dashboard from "../../components/Admin/feedback/dashBoardFeedBack";
+import Dashboard from "../../components/Admin/realestates/realestatesDashBoard";
 
 export default function Wallet() {
   return (

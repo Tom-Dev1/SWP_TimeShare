@@ -10,6 +10,9 @@ import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
 import Trade from "./pages/admin/Trade";
 import Form from "./pages/form/Form";
+import Booking from "./pages/admin/Booking";
+import Voucher from "./pages/admin/Voucher";
+import Realestates from "./pages/admin/Realestates";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
       <Route path="/admin/account" element={<Account />} />
       <Route path="/admin/wallet" element={<Wallet />} />
       <Route path="/admin/feedback" element={<Feedback />} />
+      <Route path="/admin/booking" element={<Booking />} />
+      <Route path="/admin/voucher" element={<Voucher />} />
+      <Route path="/admin/realetates" element={<Realestates />} />
     </Routes>
   );
 }
