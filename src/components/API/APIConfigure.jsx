@@ -35,6 +35,9 @@ const GetAllRealestates = () => {
 const GetUserByID = (userID) => {
   return customAxios.get(`api/Accounts/GetbyID?id=${userID}`);
 };
+const CreateVouchers = (voucherData) => {
+  return instance.post(`api/Vouchers/Createvoucher`, voucherData);
+};
 export {
   SignInAccount,
   SignUpAccount,
@@ -46,4 +49,5 @@ export {
   GetAllFeedback,
   GetUserByID,
   GetAllRealestates,
+  CreateVouchers,
 };
