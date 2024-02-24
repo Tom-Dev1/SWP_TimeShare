@@ -9,6 +9,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { InputLabel, Typography } from "@mui/material";
 import "./popup.css";
+
 const PopupStatus = ({
   open,
   handleClose,
@@ -17,10 +18,12 @@ const PopupStatus = ({
 }) => {
   const [status, setStatus] = React.useState("");
   const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState("xs");
+  const [maxWidth, setMaxWidth] = React.useState("md");
+
   const handleChange = (event) => {
     setStatus(event.target.value);
   };
+
   const handleUpdate = () => {
     handleUpdateStatus(status);
   };
@@ -33,8 +36,18 @@ const PopupStatus = ({
       fullWidth={fullWidth}
       maxWidth={maxWidth}
     >
-      <DialogTitle style={{ textAlign: "center" }}>Chỉnh sửa</DialogTitle>
-      <DialogContent>
+      <DialogTitle
+        style={{
+          textAlign: "center",
+          backgroundColor: "#f2f2f2",
+          fontSize: "30px",
+          fontWeight: "bold",
+          color: "#003580",
+        }}
+      >
+        Chỉnh sửa
+      </DialogTitle>
+      <DialogContent style={{ backgroundColor: "#fff" }}>
         <Typography variant="h6">
           Username: {currentUserId?.username}
         </Typography>
@@ -60,8 +73,16 @@ const PopupStatus = ({
           <MenuItem value={false}>Vô Hiệu Hóa</MenuItem>
         </Select>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleUpdate} color="primary">
+      <DialogActions style={{ backgroundColor: "#f2f2f2" }}>
+        <Button
+          onClick={handleUpdate}
+          color="primary"
+          style={{
+            color: "#fff",
+            backgroundColor: "#3f51b5",
+            fontSize: "18px",
+          }}
+        >
           Update
         </Button>
       </DialogActions>

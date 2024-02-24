@@ -8,10 +8,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
-import { MenuItem, Select, TextField } from "@mui/material";
+import {
+  MenuItem,
+  Select,
+  TextField,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
-
+import CreateVoucher from "./CreateVoucher";
 import { GetAllVoucher } from "../../API/APIConfigure";
 
 const Dashboard = () => {
@@ -20,9 +27,20 @@ const Dashboard = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [fullWidth, setFullWidth] = React.useState(true);
+  const [maxWidth, setMaxWidth] = React.useState("md");
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -45,17 +63,15 @@ const Dashboard = () => {
   };
 
   const filteredStatus = voucher.filter((voucher) => {
-    // Filter by status
     if (
       selectedStatusFilter !== "all" &&
       voucher.status !== selectedStatusFilter
     ) {
       return false;
     }
-
-    // Filter by username
     if (
       searchTerm &&
+      voucher.name &&
       !voucher.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) {
       return false;
@@ -88,6 +104,38 @@ const Dashboard = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{ marginTop: "30px", marginLeft: "20px" }}
           />
+          <Button
+            variant="contained"
+            style={{
+              backgroundColor: "#003580",
+              fontSize: "21px",
+              float: "right",
+              marginTop: "30px",
+            }}
+            onClick={handleClickOpen}
+          >
+            Tạo mới
+          </Button>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            fullWidth={fullWidth}
+            maxWidth={maxWidth}
+          >
+            <DialogTitle
+              style={{
+                textAlign: "center",
+                fontSize: "30px",
+                fontWeight: "bold",
+                color: "#003580",
+              }}
+            >
+              Tạo mã giảm giá
+            </DialogTitle>
+            <DialogContent>
+              <CreateVoucher isOpen={open} onClose={handleClose} />
+            </DialogContent>
+          </Dialog>
           <TableContainer component={Paper} className="dashboard-container">
             <h2
               style={{
