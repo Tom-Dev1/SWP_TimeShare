@@ -10,23 +10,25 @@ import Wallet from "./pages/admin/Wallet";
 import Feedback from "./pages/admin/Feedback";
 import Trade from "./pages/admin/Trade";
 import Form from "./pages/form/Form";
+import UserPage from "./pages/user/userPage";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/admin/trade" element={<Trade />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/login-register" element={<Form />} />
-      <Route path="/hotels" element={<List />} />
-      <Route path="/hotels/:id" element={<Hotel />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/about" element={<About />} />
-      <Route path="/admin/user" element={<User />} />
-      <Route path="/admin/account" element={<Account />} />
-      <Route path="/admin/wallet" element={<Wallet />} />
-      <Route path="/admin/feedback" element={<Feedback />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login-register" element={<Form />} />
+            <Route path="/hotels" element={<List />} />
+            <Route path="/hotels/:id" element={<Hotel />} />
+            <Route path="/user/*" element={<UserPage />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/trade" element={<Trade />} />
+            <Route path="/admin/about" element={<About />} />
+            <Route path="/admin/user" element={<User />} />
+            <Route path="/admin/account" element={<Account />} />
+            <Route path="/admin/wallet" element={<Wallet />} />
+            <Route path="/admin/feedback" element={<Feedback />} />
+        </Routes>
+    );
 }
 
 export default App;

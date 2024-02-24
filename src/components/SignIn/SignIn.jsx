@@ -61,6 +61,11 @@ const SignIn = () => {
                         icon: "error",
                         title: response.messageError,
                     });
+                } else if (response.status === false) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Tài khoản đã bị vô hiệu hoá",
+                    });
                 } else {
                     Swal.fire({
                         icon: "success",
