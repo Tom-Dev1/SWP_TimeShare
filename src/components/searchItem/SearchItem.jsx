@@ -55,7 +55,7 @@ const SearchItem = () => {
         };
         fetchTimeShare();
     }, []);
-    console.log(timeshares);
+    // console.log(timeshares);
     return (
         <div>
             {timeshares?.map((timeshare) => (

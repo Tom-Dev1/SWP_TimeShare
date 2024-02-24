@@ -19,7 +19,7 @@ function Navbar() {
         navigate("/login-register");
     };
     const handleMyAccount = () => {
-        navigate("/user/myprofile");
+        navigate("/user/profile");
         handleMenuClose();
     };
     const handleProfileMenuOpen = (event) => {

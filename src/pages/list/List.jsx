@@ -2,18 +2,49 @@ import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import axios from "axios";
 
 const List = () => {
     const location = useLocation();
     const [destination, setDestination] = useState(location.state.destination);
+    console.log(destination);
     const [date, setDate] = useState(location.state.date);
     const [openDate, setOpenDate] = useState(false);
     const [options, setOptions] = useState(location.state.options);
+    const [searchResult, setSearchResult] = useState([]);
 
+    const keepDiacritics = (str) => {
+        return str.normalize("NFD");
+    };
+
+    const getData = async () => {
+        try {
+            const reponse = await axios.get("http://meokool-001-site1.ltempurl.com/api/Realestates/GetAll");
+            if (reponse.data.data === null) {
+                throw new Error("Network response was not ok");
+            }
+
+            const normalizedDestination = keepDiacritics(destination.toLowerCase());
+            const filteredResults = reponse.data.data.filter((item) =>
+                keepDiacritics(item.location.toLowerCase()).includes(normalizedDestination),
+            );
+            setSearchResult(filteredResults);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getData();
+    }, [destination]);
+
+    const handleSearch = () => {
+        getData();
+    };
     return (
         <div>
             <Navbar />
@@ -24,7 +55,11 @@ const List = () => {
                         <h1 className="lsTitle">Search</h1>
                         <div className="lsItem">
                             <label>Destination</label>
-                            <input placeholder={destination} type="text" />
+                            <input
+                                placeholder={destination}
+                                type="text"
+                                onChange={(e) => setDestination(e.target.value)}
+                            />
                         </div>
                         <div className="lsItem">
                             <label>Check-in Date</label>
@@ -79,18 +114,12 @@ const List = () => {
                                 </div>
                             </div>
                         </div>
-                        <button>Search</button>
+                        <button onClick={handleSearch}>Search</button>
                     </div>
                     <div className="listResult">
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
+                        {/* <SearchItem /> */}
+                        {console.log(searchResult)}
+                        {searchResult.map((result) => result.location)}
                     </div>
                 </div>
             </div>
