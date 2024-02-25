@@ -9,18 +9,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { MenuItem, Select, TextField } from "@mui/material";
 
 import PopupStatus from "./PopupStatus";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 
-import {
-  DeleteAccount,
-  GetAllAccounts,
-  UpdateStatus,
-} from "../../API/APIConfigure";
+import { GetAllAccounts, UpdateStatus } from "../../API/APIConfigure";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -72,20 +67,6 @@ const Dashboard = () => {
       console.error(err);
     }
     handleClose();
-  };
-  const RemoveFunction = async (id) => {
-    if (window.confirm(`Xóa: ${id}`)) {
-      try {
-        await DeleteAccount(id);
-        toast.success(`Xóa tài khoản thành công!`);
-        setUsers((users) => users.filter((user) => user.id !== id));
-      } catch (err) {
-        toast.error(err.message || "Xóa không thành công.");
-        console.error(err);
-      }
-    } else {
-      toast.warning("Hủy bỏ xóa");
-    }
   };
 
   const filteredStatus = users.filter((user) => {
@@ -231,16 +212,6 @@ const Dashboard = () => {
                         onClick={() => handleClickOpen(user)}
                       >
                         <EditIcon sx={{ fontSize: 25 }} />
-                      </Button>
-                      <Button
-                        variant="outlined"
-                        color="error"
-                        className="delete-btn"
-                        onClick={() => {
-                          RemoveFunction(user.id);
-                        }}
-                      >
-                        <DeleteIcon sx={{ fontSize: 25 }} />
                       </Button>
                     </TableCell>
                   </TableRow>

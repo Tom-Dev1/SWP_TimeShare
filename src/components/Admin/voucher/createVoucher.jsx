@@ -3,7 +3,7 @@ import { TextField, Button, Select, MenuItem } from "@mui/material";
 
 import { CreateVouchers } from "../../API/APIConfigure";
 import { toast } from "react-toastify";
-const CreateVoucher = ({ isOpen, onClose }) => {
+const CreateVoucher = ({ isOpen, onClose, fetchUser }) => {
   const [voucher, setVoucher] = useState({
     name: "",
     amount: 0,
@@ -32,6 +32,7 @@ const CreateVoucher = ({ isOpen, onClose }) => {
       } else {
         toast.success("Tạo thành công!");
         onClose();
+        fetchUser();
       }
     } catch (error) {
       console.error("Đã xảy ra lỗi:", error);

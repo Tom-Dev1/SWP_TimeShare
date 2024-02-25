@@ -133,7 +133,11 @@ const Dashboard = () => {
               Tạo mã giảm giá
             </DialogTitle>
             <DialogContent>
-              <CreateVoucher isOpen={open} onClose={handleClose} />
+              <CreateVoucher
+                isOpen={open}
+                onClose={handleClose}
+                fetchUser={fetchUsers}
+              />
             </DialogContent>
           </Dialog>
           <TableContainer component={Paper} className="dashboard-container">

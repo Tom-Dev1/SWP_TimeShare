@@ -14,10 +14,12 @@ import UserPage from "./pages/user/userPage";
 import Booking from "./pages/admin/Booking";
 import Voucher from "./pages/admin/Voucher";
 import Realestates from "./pages/admin/Realestates";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
     <Routes>
+      <Route path="/*" element={<ErrorPage />} />
       <Route path="/admin/trade" element={<Trade />} />
       <Route path="/" element={<Home />} />
       <Route path="/login-register" element={<Form />} />
