@@ -48,18 +48,42 @@ const PopupStatus = ({
         Chỉnh sửa
       </DialogTitle>
       <DialogContent style={{ backgroundColor: "#fff" }}>
-        <Typography variant="h6">
-          Username: {currentUserId?.username}
+        <Typography
+          variant="h6"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p style={{ fontWeight: "bold", marginRight: "10px" }}>Tài khoản:</p>
+          {currentUserId?.username}
         </Typography>
-        <Typography variant="h6">
-          Giới tính: {currentUserId?.sex === true ? "Nam" : "Nữ"}
+        <Typography
+          variant="h6"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p style={{ fontWeight: "bold", marginRight: "10px" }}>Giới tính:</p>{" "}
+          {currentUserId?.sex === true ? "Nam" : "Nữ"}
         </Typography>
-        <Typography variant="h6">
-          Full Name: {currentUserId?.fullName}
+        <Typography
+          variant="h6"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p style={{ fontWeight: "bold", marginRight: "10px" }}>Họ và tên:</p>{" "}
+          {currentUserId?.fullName}
         </Typography>
-        <Typography variant="h6">Địa chỉ: {currentUserId?.address}</Typography>
-        <Typography variant="h6">
-          Số điện thoại: {currentUserId?.phone}
+        <Typography
+          variant="h6"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p style={{ fontWeight: "bold", marginRight: "10px" }}>Địa chỉ:</p>{" "}
+          {currentUserId?.address}
+        </Typography>
+        <Typography
+          variant="h6"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <p style={{ fontWeight: "bold", marginRight: "10px" }}>
+            Số điện thoại:
+          </p>{" "}
+          {currentUserId?.phone}
         </Typography>
         <InputLabel id="demo-simple-select-label">Chọn Trạng Thái</InputLabel>
         <Select
