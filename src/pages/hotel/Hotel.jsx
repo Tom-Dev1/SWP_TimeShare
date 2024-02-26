@@ -42,9 +42,11 @@ const Hotel = () => {
     let newSlideNumber;
 
     if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+      newSlideNumber =
+        slideNumber === 0 ? photoUrls.length - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+      newSlideNumber =
+        slideNumber === photoUrls.length - 1 ? 0 : slideNumber + 1;
     }
 
     setSlideNumber(newSlideNumber);
@@ -70,7 +72,7 @@ const Hotel = () => {
             <div className="sliderWrapper">
               {data && (
                 <img
-                  src={data.photos[slideNumber]}
+                  src={BASE_URL + photoUrls[slideNumber]}
                   alt=""
                   className="sliderImg"
                 />
