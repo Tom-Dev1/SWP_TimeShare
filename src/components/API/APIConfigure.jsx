@@ -1,5 +1,7 @@
 import instance, { customAxios } from "../setUp/axios";
 
+export const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
+
 const SignInAccount = (userData) => {
   return instance.post(`api/Accounts/Signin?${userData}`);
 };
@@ -37,6 +39,11 @@ const GetUserByID = (userID) => {
 };
 const CreateVouchers = (voucherData) => {
   return instance.post(`api/Vouchers/Createvoucher`, voucherData);
+};
+export const GetbyRealestateID = (realetatesID) => {
+  return customAxios.get(
+    `api/Realestates/GetbyRealestateID?id=${realetatesID}`
+  );
 };
 export {
   SignInAccount,

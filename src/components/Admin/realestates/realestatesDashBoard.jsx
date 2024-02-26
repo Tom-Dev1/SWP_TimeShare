@@ -17,12 +17,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GetAllRealestates } from "../../API/APIConfigure";
+import { useNavigate } from "react-router-dom";
+import Hotel from "../../../pages/hotel/Hotel";
 
 const Dashboard = () => {
   const [feedback, setFeedback] = useState([]);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRealestates = async () => {
@@ -149,6 +152,7 @@ const Dashboard = () => {
                       variant="outlined"
                       color="success"
                       className="edit-btn"
+                      onClick={() => navigate(`/hotels/${item.id}`)}
                     >
                       <VisibilityIcon sx={{ fontSize: 25 }} />
                     </Button>
