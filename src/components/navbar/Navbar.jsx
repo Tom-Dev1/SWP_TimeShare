@@ -37,16 +37,17 @@ function Navbar() {
         confirmButtonText: 'Yes, logout!',
       });
 
-      if (result.isConfirmed) {
-        await logout();
-        handleMenuClose();
-        Swal.fire('Logged Out!', 'You have been logged out.', 'success');
-      }
-    } catch (error) {
-      console.error('Error during logout:', error);
-      Swal.fire('Error', 'An error occurred during logout.', 'error');
-    }
-  };
+            if (result.isConfirmed) {
+                await logout();
+                navigate("/");
+                handleMenuClose();
+                Swal.fire("Logged Out!", "You have been logged out.", "success");
+            }
+        } catch (error) {
+            console.error("Error during logout:", error);
+            Swal.fire("Error", "An error occurred during logout.", "error");
+        }
+    };
 
   const renderMenu = (
     <Menu

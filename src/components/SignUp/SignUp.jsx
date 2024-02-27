@@ -246,7 +246,7 @@ const SignUp = ({ handleToggleForm }) => {
                 </div>
                 <div className="error-box">{errors.phone && <span className="error-message">{errors.phone}</span>}</div>
             </div>
-            <button className="btn-form">Sign Up</button>
+            <button className="btn-form">Đăng Ký</button>
         </form>
     );
 };

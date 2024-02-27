@@ -1,4 +1,4 @@
-.hotelContainer {
+/* .hotelContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,4 +148,104 @@
   font-size: 50px;
   color: lightgray;
   cursor: pointer;
+} */
+
+.hotel-container {
+    position: relative;
+
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    background: #fafafa;
+    /* background: #b28787; */
+    display: flex;
+}
+
+.hotel-section {
+    /* height: 50vh; */
+    margin: 0 auto;
+    max-width: 71.25rem;
+    width: 100%;
+}
+
+.hotel-columns {
+    position: relative;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+}
+
+.hotel-column-left {
+    position: relative;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    float: left;
+    width: 66.6666666667%;
+}
+.hotel-column-right {
+    box-shadow: 0 0.0714285714rem 0.2142857143rem 0 rgba(0, 0, 0, 0.2);
+    background: #fff;
+    padding: 1.25rem;
+    float: right;
+    width: 33.3333333333%;
+}
+.hotel-title {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-top: 0.2rem;
+}
+.h4-rating {
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
+}
+.hotel-column-small {
+    position: relative;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    float: left;
+    margin: 0 -0.625rem;
+    max-width: none;
+    width: auto;
+    margin-top: 1.5rem !important;
+}
+.hotel-descript-p {
+    /* font-family: "Roboto", Helvetica, Arial, sans-serif; */
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+.hotel-column-hr {
+    margin: 2rem 0;
+    border: solid #e6e6e6;
+    border-width: 1px 0 0;
+    clear: both;
+    height: 0;
+}
+.hotel-column {
+    position: relative;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    float: left;
+}
+.bold {
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
+    line-height: 1.15;
+}
+.column-4 {
+    list-style-type: disc;
+    margin-left: 1.25rem;
+    margin-bottom: 0.625rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    column-count: 4;
+}
+.gutter {
+    margin-top: 1.25rem !important;
 }

@@ -1,67 +1,34 @@
-// import "./searchItem.css";
+import { Link } from "react-router-dom";
+import "./searchItem.css";
+import { Rating } from "@mui/material";
+import React from "react";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
-
-// const SearchItem = () => {
-//     return (
-//         <div className="searchItem">
-//             <img
-//                 src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
-//                 alt=""
-//                 className="siImg"
-//             />
-//             <div className="siDesc">
-//                 <h1 className="siTitle">Tower Street Apartments</h1>
-//                 <span className="siDistance">500m from center</span>
-//                 <span className="siTaxiOp">Free airport taxi</span>
-//                 <span className="siSubtitle">Studio Apartment with Air conditioning</span>
-//                 <span className="siFeatures">Entire studio • 1 bathroom • 21m² 1 full bed</span>
-//                 <span className="siCancelOp">Free cancellation </span>
-//                 <span className="siCancelOpSubtitle">You can cancel later, so lock in this great price today!</span>
-//             </div>
-//             <div className="siDetails">
-//                 <div className="siRating">
-//                     <span>Excellent</span>
-//                     <button>8.9</button>
-//                 </div>
-//                 <div className="siDetailTexts">
-//                     <span className="siPrice">$112</span>
-//                     <span className="siTaxOp">Includes taxes and fees</span>
-//                     <button className="siCheckButton">See availability</button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default SearchItem;
-
-const SearchItem = () => {
-    const [timeshares, setTimeshares] = useState();
-
-    useEffect(() => {
-        const fetchTimeShare = async () => {
-            try {
-                const response = await axios.get("http://meokool-001-site1.ltempurl.com/api/Realestates/GetAll");
-                if (response.data.data === null) {
-                    throw new Error("Network response was not ok");
-                }
-
-                setTimeshares(response.data.data);
-            } catch (error) {
-                console.error("Error fetching timeshares:", error.message);
-            }
-        };
-        fetchTimeShare();
-    }, []);
-    // console.log(timeshares);
+const SearchItem = ({ searchResult }) => {
+    const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
+    console.log(searchResult);
+    const [value, setValue] = React.useState(4);
     return (
-        <div>
-            {timeshares?.map((timeshare) => (
-                <div key={timeshare.id}>
-                    <h3>{timeshare.name}</h3>
-                    <p>{timeshare.location}</p>
+        <div className="search-result-content search-result-list search-result-card-list">
+            {searchResult.map((item) => (
+                <div key={item.id} className="result-card-wrapper small-12">
+                    <Link to={`/hotels/${item.id}`}>
+                        <div className="result-card">
+                            <img className="result-card--photo" src={BASE_URL + item.photo} alt={item.name} />
+                            <div className="result-card--info">
+                                <h2 className="title-h2">
+                                    <p>{item.name}</p>
+                                </h2>
+                                <div className="result-card--info_location">{item.location}</div>
+
+                                <Rating name="simple-controlled" value={value} readOnly />
+                            </div>
+                            <div className="result-card--cta">
+                                <div className="result-card--cta_item">
+                                    <span>{item.price}/Night</span>
+                                </div>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             ))}
         </div>
@@ -69,3 +36,40 @@ const SearchItem = () => {
 };
 
 export default SearchItem;
+// import { CardActionArea, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+// import { Link } from "react-router-dom";
+
+// const SearchItem = ({ searchResult }) => {
+//     const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
+//     return (
+//         <div className="columns-right">
+//             <Grid container spacing={2}>
+//                 {searchResult.map((realestate) => (
+//                     <Grid item key={realestate.id} xs={12}>
+//                         <div>
+//                             <CardActionArea
+//                                 component={Link}
+//                                 to={`/hotels/${realestate.id}`}
+//                                 style={{ display: "flex", justifyContent: "space-between" }}
+//                             >
+//                                 <CardMedia
+//                                     component="img"
+//                                     image={BASE_URL + realestate.photo}
+//                                     alt={realestate.name}
+//                                     style={{ width: "200px", marginRight: "16px" }}
+//                                 />
+//                                 <CardContent>
+//                                     <Typography variant="h6">{realestate.name}</Typography>
+//                                     <Typography variant="body2">{realestate.location}</Typography>
+//                                 </CardContent>
+//                                 <Typography variant="body2">{realestate.price}/night</Typography>
+//                             </CardActionArea>
+//                         </div>
+//                     </Grid>
+//                 ))}
+//             </Grid>
+//         </div>
+//     );
+// };
+
+// export default SearchItem;
