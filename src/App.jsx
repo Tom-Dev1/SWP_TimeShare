@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
@@ -16,28 +16,105 @@ import Voucher from "./pages/admin/Voucher";
 import Realestates from "./pages/admin/Realestates";
 import ErrorPage from "./pages/ErrorPage";
 
+const AdminWrapper = ({ children }) => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const isAdmin = userInfo?.isAdmin;
+  return isAdmin ? children : <ErrorPage />;
+};
+
 function App() {
   return (
     <Routes>
       <Route path="/*" element={<ErrorPage />} />
-      <Route path="/admin/trade" element={<Trade />} />
       <Route path="/" element={<Home />} />
       <Route path="/login-register" element={<Form />} />
       <Route path="/hotels" element={<List />} />
       <Route path="/hotels/:id" element={<Hotel />} />
-      <Route path="/admin" element={<Admin />} />
-      <Route path="/admin/about" element={<About />} />
-      <Route path="/admin/user" element={<User />} />
-      <Route path="/admin/account" element={<Account />} />
-      <Route path="/admin/wallet" element={<Wallet />} />
-      <Route path="/admin/feedback" element={<Feedback />} />
-      <Route path="/admin/booking" element={<Booking />} />
-      <Route path="/admin/voucher" element={<Voucher />} />
-      <Route path="/admin/realetates" element={<Realestates />} />
       <Route path="/user/*" element={<UserPage />} />
+
+      {/* ProtectRouterAdmin */}
+      <Route
+        path="/admin/trade"
+        element={
+          <AdminWrapper>
+            <Trade />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <AdminWrapper>
+            <Admin />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/about"
+        element={
+          <AdminWrapper>
+            <About />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/user"
+        element={
+          <AdminWrapper>
+            <User />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/account"
+        element={
+          <AdminWrapper>
+            <Account />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/wallet"
+        element={
+          <AdminWrapper>
+            <Wallet />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/feedback"
+        element={
+          <AdminWrapper>
+            <Feedback />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/booking"
+        element={
+          <AdminWrapper>
+            <Booking />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/voucher"
+        element={
+          <AdminWrapper>
+            <Voucher />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/realetates"
+        element={
+          <AdminWrapper>
+            <Realestates />
+          </AdminWrapper>
+        }
+      />
     </Routes>
   );
-
 }
 
 export default App;
