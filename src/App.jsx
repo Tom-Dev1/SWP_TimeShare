@@ -16,6 +16,7 @@ import Voucher from "./pages/admin/Voucher";
 import Realestates from "./pages/admin/Realestates";
 import TimeShare from "./pages/hotel/TimeShare";
 
+
 function App() {
     return (
         <Routes>
@@ -37,6 +38,7 @@ function App() {
             <Route path="/user/*" element={<UserPage />} />
         </Routes>
     );
+
 }
 
 export default App;

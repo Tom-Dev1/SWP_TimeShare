@@ -1,4 +1,6 @@
-import instance, { customAxios } from "../setUp/axios";
+import instance, { customAxios } from '../setUp/axios';
+
+export const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
 
 const SignInAccount = (userData) => {
   return instance.post(`api/Accounts/Signin?${userData}`);
@@ -20,6 +22,16 @@ const UpdateStatus = (userID, newStatus) => {
     status: newStatus,
   });
 };
+export const UpdateAccountByID = (userID, newUserData) => {
+  return customAxios.put(`api/Accounts/UpdateAccount?id=${userID}`, {
+    ...newUserData,
+  });
+};
+export const UpdatePasswordByID = (userID, newPassword) => {
+  return customAxios.put(`api/Accounts/UpdateAccount?id=${userID}`, {
+    password: newPassword,
+  });
+};
 const GetAllBookings = () => {
   return customAxios.get(`api/Bookings/GetAll`);
 };
@@ -35,6 +47,14 @@ const GetAllRealestates = () => {
 const GetUserByID = (userID) => {
   return customAxios.get(`api/Accounts/GetbyID?id=${userID}`);
 };
+const CreateVouchers = (voucherData) => {
+  return instance.post(`api/Vouchers/Createvoucher`, voucherData);
+};
+export const GetbyRealestateID = (realetatesID) => {
+  return customAxios.get(
+    `api/Realestates/GetbyRealestateID?id=${realetatesID}`
+  );
+};
 export {
   SignInAccount,
   SignUpAccount,
@@ -46,4 +66,5 @@ export {
   GetAllFeedback,
   GetUserByID,
   GetAllRealestates,
+  CreateVouchers,
 };
