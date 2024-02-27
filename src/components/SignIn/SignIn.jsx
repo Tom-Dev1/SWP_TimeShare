@@ -63,7 +63,7 @@ const SignIn = () => {
                     });
                 } else if (response.status === false) {
                     Swal.fire({
-                        icon: "error",
+                        icon: "warning",
                         title: "Tài khoản đã bị vô hiệu hoá",
                     });
                 } else {
@@ -79,7 +79,6 @@ const SignIn = () => {
                                 accessToken: response.accessToken,
                                 isAdmin: response.isAdmin,
                             };
-
                             login(userInfo);
 
                             if (userInfo.isAdmin === true) {
