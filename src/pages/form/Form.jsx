@@ -23,18 +23,20 @@ const Form = () => {
                     <div className="overlay-container" id="overlayCon">
                         <div className="overlay">
                             <div className="overlay-panel overlay-left">
-                                <h1 className="sign-up-title">Welcome Back!</h1>
-                                <p className="intro-text">
-                                    To keep connected with us please login with your personal info
-                                </p>
-                                <button className="btn-form">Sign In</button>
+                                <h1 className="sign-up-title">Chào mừng!</h1>
+
+                                <p className="intro-text">Vui lòng đăng nhập để kết nối với chúng tôi</p>
+                                <button className="btn-form">Đăng Nhập</button>
                             </div>
                             <div className="overlay-panel overlay-right">
-                                <h1 className="sign-up-title">Hello, Friend!</h1>
-                                <p className="intro-text">Enter your personal details and start journey with us</p>
-                                <button className="btn-form">Sign Up</button>
+                                <h1 className="sign-up-title">Xin chào bạn!</h1>
+                                <p className="intro-text">
+                                    Nhập thông tin cá nhân của bạn và bắt đầu hành trình với chúng tôi
+                                </p>
+                                <button className="btn-form">Đăng Ký</button>
                             </div>
                         </div>
+
                         <button className="btn-form" id="overlayBtn" onClick={handleToggleForm}></button>
                     </div>
                 </div>

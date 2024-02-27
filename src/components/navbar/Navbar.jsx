@@ -39,6 +39,7 @@ function Navbar() {
 
             if (result.isConfirmed) {
                 await logout();
+                navigate("/");
                 handleMenuClose();
                 Swal.fire("Logged Out!", "You have been logged out.", "success");
             }
