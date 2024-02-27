@@ -1,9 +1,9 @@
 const Dashboard = () => {
-    return (
-        <>
-            <h1 className="profile-title">Dashboard</h1>
-        </>
-    );
+  return (
+    <>
+      <h2 className="profile-title">Khách sạn đã đặt</h2>
+    </>
+  );
 };
 
 export default Dashboard;

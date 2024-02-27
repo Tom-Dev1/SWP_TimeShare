@@ -1,4 +1,4 @@
-import instance, { customAxios } from "../setUp/axios";
+import instance, { customAxios } from '../setUp/axios';
 
 export const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
 
@@ -20,6 +20,16 @@ const DeleteAccount = (userID) => {
 const UpdateStatus = (userID, newStatus) => {
   return customAxios.put(`api/Accounts/UpdateAccountStatus?id=${userID}`, {
     status: newStatus,
+  });
+};
+export const UpdateAccountByID = (userID, newUserData) => {
+  return customAxios.put(`api/Accounts/UpdateAccount?id=${userID}`, {
+    ...newUserData,
+  });
+};
+export const UpdatePasswordByID = (userID, newPassword) => {
+  return customAxios.put(`api/Accounts/UpdateAccount?id=${userID}`, {
+    password: newPassword,
   });
 };
 const GetAllBookings = () => {
