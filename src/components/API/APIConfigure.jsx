@@ -1,4 +1,4 @@
-import instance, { customAxios } from '../setUp/axios';
+import instance, { customAxios } from "../setUp/axios";
 
 export const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
 
@@ -54,6 +54,11 @@ export const GetbyRealestateID = (realetatesID) => {
   return customAxios.get(
     `api/Realestates/GetbyRealestateID?id=${realetatesID}`
   );
+};
+export const UpdateRealestateStatus = (realID, newStatus) => {
+  return customAxios.put(`API/Realestates/UpdateRealestateSta?id=${realID}`, {
+    status: newStatus,
+  });
 };
 export {
   SignInAccount,

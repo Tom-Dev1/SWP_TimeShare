@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
+import Dashboard from "../../components/User/Realeste/DashBoard";
 
 function MyPost() {
   return (
     <div>
-      <h1>My Post</h1>
+      <Dashboard />
     </div>
   );
 }
