@@ -21,6 +21,7 @@ function CreateReal({ onCreateSuccess }) {
   const [previewImages, setPreviewImages] = useState([]);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState("xl");
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const handleImageChange = (e) => {
     setImageFiles(Array.from(e.target.files));
@@ -38,6 +39,7 @@ function CreateReal({ onCreateSuccess }) {
     formData.append("Description", description);
     formData.append("Facility", facility);
     formData.append("Price", price);
+    formData.append("memberID", userInfo.id);
     imageFiles.forEach((file) => {
       formData.append("imageFiles", file);
     });

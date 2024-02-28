@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { GetAllFeedback, GetUserByID } from "../API/APIConfigure";
+import { GetAllFeedback, GetUserByID } from "../../API/APIConfigure";
 import TableFeedback from "./TableFeedBack";
 
 const Feedback = () => {
