@@ -70,13 +70,7 @@ const Dashboard = () => {
     2: "Đã xác nhận",
     3: "Tạm dừng",
     4: "Vô hiệu hóa",
-  };
-
-  const statusColors = {
-    1: "orange",
-    2: "green",
-    3: "gray",
-    4: "red",
+    5: "Từ chối",
   };
 
   const handleStatusChange = async (status, id) => {

@@ -80,7 +80,7 @@ const UserPage = () => {
                       to="/user/mypost"
                       onClick={() => handleMenuClick("mypost")}
                     >
-                      Bài Viết Của Tôi
+                      Bất động sản
                     </MenuItem>
                   </div>
                 </div>
