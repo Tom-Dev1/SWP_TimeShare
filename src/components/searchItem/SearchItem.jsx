@@ -10,7 +10,7 @@ const SearchItem = ({ searchResult }) => {
   return (
     <div className="search-result-content search-result-list search-result-card-list">
       {searchResult
-        .filter((item) => item.status === "1")
+        .filter((item) => item.status === "2")
         .map((item) => {
           const photoUrls = item.photo ? item.photo.split(",") : [];
           return (

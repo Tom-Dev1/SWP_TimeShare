@@ -21,7 +21,6 @@ import {
   UpdateRealestateStatus,
 } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
-import Hotel from "../../../pages/hotel/Hotel";
 
 const Dashboard = () => {
   const [feedback, setFeedback] = useState([]);
@@ -53,14 +52,14 @@ const Dashboard = () => {
     setPage(0);
   };
 
-  const filteredFeedback = feedback.filter((item) => {
+  const filtered = feedback.filter((item) => {
     return (
       selectedStatusFilter === "all" ||
       item.status.toString() === selectedStatusFilter
     );
   });
 
-  const slicedFeedback = filteredFeedback.slice(
+  const slicedFeedback = filtered.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
@@ -175,19 +174,14 @@ const Dashboard = () => {
                   <TableCell align="center">{item.name}</TableCell>
                   <TableCell align="center">{item.location}</TableCell>
                   <TableCell align="center">{item.price}</TableCell>
-                  <TableCell align="center">
-                    <Select
-                      value={item.status.toString()}
-                      onChange={(e) =>
-                        handleStatusChange(e.target.value, item.id)
-                      }
-                    >
-                      {Object.keys(statusTexts).map((status) => (
-                        <MenuItem key={status} value={status}>
-                          {statusTexts[status]}
-                        </MenuItem>
-                      ))}
-                    </Select>
+                  <TableCell
+                    align="center"
+                    style={{
+                      color: statusColors[item.status],
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {statusTexts[item.status]}
                   </TableCell>
                   <TableCell align="center">
                     <Button
@@ -206,7 +200,7 @@ const Dashboard = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={filteredFeedback.length}
+            count={filtered.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

@@ -15,7 +15,11 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import StarRatings from "react-star-ratings";
-import { GetAllFeedback, GetUserByID } from "../../API/APIConfigure";
+import {
+  GetAllFeedback,
+  GetUserByID,
+  GetbyRealestateID,
+} from "../../API/APIConfigure";
 
 const Dashboard = () => {
   const [feedback, setFeedback] = useState([]);
@@ -23,6 +27,7 @@ const Dashboard = () => {
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const fetchFeedback = async () => {
@@ -65,6 +70,30 @@ const Dashboard = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  useEffect(() => {
+    const realIds = feedback.map((item) => item.realestateID);
+    const uniqueRealIds = Array.from(new Set(realIds));
+
+    const fetchRealDetails = async () => {
+      uniqueRealIds.forEach(async (id) => {
+        try {
+          const realData = await GetbyRealestateID(id);
+          setName((prevDetails) => ({
+            ...prevDetails,
+            [id]: realData.name,
+          }));
+        } catch (error) {
+          console.error("Failed to fetch real details", error);
+          toast.error(`Failed to fetch real details for ID: ${id}`);
+        }
+      });
+    };
+
+    if (uniqueRealIds.length > 0) {
+      fetchRealDetails();
+    }
+  }, [feedback]);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -159,7 +188,9 @@ const Dashboard = () => {
                   <TableCell align="center">
                     {userDetails[item.memberId] || item.memberId}
                   </TableCell>
-                  <TableCell align="center">{item.text}</TableCell>
+                  <TableCell align="center">
+                    {name[item.realestateID] || item.realestateID}
+                  </TableCell>
                   <TableCell align="center">{item.text}</TableCell>
                   <TableCell align="center">
                     <StarRatings
