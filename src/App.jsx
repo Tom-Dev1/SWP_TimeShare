@@ -33,6 +33,7 @@ function App() {
       <Route path="/login-register" element={<Form />} />
       <Route path="/hotels" element={<List />} />
       <Route path="/hotels/:id" element={<Hotel />} />
+      {/* ProtectRouterUser */}
       <Route
         path="/user/*"
         element={
@@ -41,10 +42,49 @@ function App() {
           </UserWrapper>
         }
       />
-
       {/* ProtectRouterAdmin */}
       <Route
-        path="/admin/*"
+        path="/admin"
+        element={
+          <AdminWrapper>
+            <Admin />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/about"
+        element={
+          <AdminWrapper>
+            <Admin />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/booking"
+        element={
+          <AdminWrapper>
+            <Booking />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/realetates"
+        element={
+          <AdminWrapper>
+            <Realestates />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/user"
+        element={
+          <AdminWrapper>
+            <User />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/trade"
         element={
           <AdminWrapper>
             <Trade />
@@ -52,10 +92,34 @@ function App() {
         }
       />
       <Route
-        path="/admin"
+        path="/admin/wallet"
         element={
           <AdminWrapper>
-            <Admin />
+            <Wallet />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/voucher"
+        element={
+          <AdminWrapper>
+            <Voucher />
+          </AdminWrapper>
+        }
+      />{" "}
+      <Route
+        path="/admin/feedback"
+        element={
+          <AdminWrapper>
+            <Feedback />
+          </AdminWrapper>
+        }
+      />
+      <Route
+        path="/admin/account"
+        element={
+          <AdminWrapper>
+            <Account />
           </AdminWrapper>
         }
       />

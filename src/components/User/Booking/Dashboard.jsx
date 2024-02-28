@@ -16,28 +16,28 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllBookings, UpdateRealestateStatus } from "../../API/APIConfigure";
+import { GetAllBookings } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const [feedback, setFeedback] = useState([]);
+  const [booking, setBooking] = useState([]);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
 
-  const fetchRealestates = async () => {
+  const fetchBooking = async () => {
     try {
       const response = await GetAllBookings();
-      setFeedback(Array.isArray(response) ? response : []);
+      setBooking(Array.isArray(response) ? response : []);
     } catch (err) {
-      toast.error("Failed to fetch Realestates");
+      toast.error("Lỗi lấy thông tin Booking");
       console.error(err);
     }
   };
 
   useEffect(() => {
-    fetchRealestates();
+    fetchBooking();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -49,43 +49,30 @@ const Dashboard = () => {
     setPage(0);
   };
 
-  const filtered = feedback.filter((item) => {
+  const filtered = booking.filter((item) => {
     return (
       selectedStatusFilter === "all" ||
       item.status.toString() === selectedStatusFilter
     );
   });
 
-  const slicedFeedback = filtered.slice(
+  const sliced = filtered.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   const statusTexts = {
-    1: "Chờ xác nhận",
+    1: "Chờ thanh toán",
     2: "Đã xác nhận",
-    3: "Tạm dừng",
-    4: "Vô hiệu hóa",
+    3: "Đã hủy",
   };
 
   const statusColors = {
     1: "orange",
     2: "green",
-    3: "gray",
-    4: "red",
+    3: "red",
   };
 
-  const handleStatusChange = async (status, id) => {
-    try {
-      console.log(status);
-      await UpdateRealestateStatus(id, status);
-      toast.success("Cập nhật thành công");
-      fetchRealestates();
-    } catch (err) {
-      toast.error("Cập nhật thất bại");
-      console.error(err);
-    }
-  };
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
@@ -114,7 +101,7 @@ const Dashboard = () => {
               fontWeight: "bold",
             }}
           >
-            Bất Động Sản
+            Timeshare Booking
           </h2>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -135,7 +122,7 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
-                  Địa điểm
+                  Số Ngày
                 </TableCell>
                 <TableCell
                   style={{
@@ -162,16 +149,21 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
-                  Hành động
+                  Xem chi tiết
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {slicedFeedback.map((item) => (
+              {sliced.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell align="center">{item.name}</TableCell>
-                  <TableCell align="center">{item.location}</TableCell>
-                  <TableCell align="center">{item.price}</TableCell>
+                  <TableCell align="center">{item.timeshareId}</TableCell>
+                  <TableCell align="center">
+                    {Math.ceil(
+                      (new Date(item.endDay) - new Date(item.startDay)) /
+                        (1000 * 60 * 60 * 24)
+                    )}
+                  </TableCell>
+                  <TableCell align="center">{item.amount}</TableCell>
                   <TableCell
                     align="center"
                     style={{
@@ -186,7 +178,7 @@ const Dashboard = () => {
                       variant="outlined"
                       color="success"
                       className="edit-btn"
-                      onClick={() => navigate(`/hotels/${item.id}`)}
+                      onClick={() => navigate(`/hotels/${item.timeshareId}`)}
                     >
                       <VisibilityIcon sx={{ fontSize: 25 }} />
                     </Button>
