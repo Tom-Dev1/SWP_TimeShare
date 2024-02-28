@@ -23,7 +23,10 @@ const AdminWrapper = ({ children }) => {
     const isAdmin = userInfo?.isAdmin;
     return isAdmin ? children : <ErrorPage />;
 };
-
+const UserWrapper = ({ children }) => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  return userInfo ? children : <ErrorPage />;
+};
 function App() {
     return (
         <Routes>
@@ -119,6 +122,5 @@ function App() {
             />
         </Routes>
     );
-}
 
 export default App;

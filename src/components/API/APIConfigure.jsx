@@ -57,6 +57,11 @@ export const GetbyRealestateID = (realetatesID) => {
 const CreateBooking = (data) => {
     return customAxios.post(`api/Bookings/Createbooking`, data);
 };
+export const UpdateRealestateStatus = (realID, newStatus) => {
+  return customAxios.put(`API/Realestates/UpdateRealestateSta?id=${realID}`, {
+    status: newStatus,
+  });
+};
 export {
     SignInAccount,
     SignUpAccount,

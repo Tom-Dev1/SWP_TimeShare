@@ -16,7 +16,10 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllRealestates } from "../../API/APIConfigure";
+import {
+  GetAllRealestates,
+  UpdateRealestateStatus,
+} from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 import Hotel from "../../../pages/hotel/Hotel";
 
@@ -27,17 +30,17 @@ const Dashboard = () => {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRealestates = async () => {
-      try {
-        const response = await GetAllRealestates();
-        setFeedback(Array.isArray(response) ? response : []);
-      } catch (err) {
-        toast.error("Failed to fetch Realestates");
-        console.error(err);
-      }
-    };
+  const fetchRealestates = async () => {
+    try {
+      const response = await GetAllRealestates();
+      setFeedback(Array.isArray(response) ? response : []);
+    } catch (err) {
+      toast.error("Failed to fetch Realestates");
+      console.error(err);
+    }
+  };
 
+  useEffect(() => {
     fetchRealestates();
   }, []);
 
@@ -53,7 +56,7 @@ const Dashboard = () => {
   const filteredFeedback = feedback.filter((item) => {
     return (
       selectedStatusFilter === "all" ||
-      item.rate.toString() === selectedStatusFilter
+      item.status.toString() === selectedStatusFilter
     );
   });
 
@@ -62,6 +65,25 @@ const Dashboard = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+  const statusTexts = {
+    1: "Chờ xác nhận",
+    2: "Đã xác nhận",
+    3: "Tạm dừng",
+    4: "Vô hiệu hóa",
+    5: "Từ chối",
+  };
+
+  const handleStatusChange = async (status, id) => {
+    try {
+      console.log(status);
+      await UpdateRealestateStatus(id, status);
+      toast.success("Cập nhật thành công");
+      fetchRealestates();
+    } catch (err) {
+      toast.error("Cập nhật thất bại");
+      console.error(err);
+    }
+  };
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
@@ -71,9 +93,9 @@ const Dashboard = () => {
           style={{ marginTop: "30px", marginBottom: "20px" }}
         >
           <MenuItem value="all">Tất cả</MenuItem>
-          {[5, 4, 3, 2, 1].map((rating) => (
-            <MenuItem key={rating} value={rating.toString()}>
-              {rating} sao
+          {Object.keys(statusTexts).map((status) => (
+            <MenuItem key={status} value={status}>
+              {statusTexts[status]}
             </MenuItem>
           ))}
         </Select>
@@ -119,6 +141,15 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
+                  Giá
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontSize: "20px",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                  align="center"
+                >
                   Status
                 </TableCell>
                 <TableCell
@@ -137,15 +168,20 @@ const Dashboard = () => {
                 <TableRow key={item.id}>
                   <TableCell align="center">{item.name}</TableCell>
                   <TableCell align="center">{item.location}</TableCell>
-                  <TableCell
-                    style={{
-                      fontSize: "15px",
-                      color: item.status ? "green" : "red",
-                      fontWeight: "bold",
-                    }}
-                    align="center"
-                  >
-                    {item.status ? "Hoạt động" : "Vô hiệu hóa"}
+                  <TableCell align="center">{item.price}</TableCell>
+                  <TableCell align="center">
+                    <Select
+                      value={item.status.toString()}
+                      onChange={(e) =>
+                        handleStatusChange(e.target.value, item.id)
+                      }
+                    >
+                      {Object.keys(statusTexts).map((status) => (
+                        <MenuItem key={status} value={status}>
+                          {statusTexts[status]}
+                        </MenuItem>
+                      ))}
+                    </Select>
                   </TableCell>
                   <TableCell align="center">
                     <Button

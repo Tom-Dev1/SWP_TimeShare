@@ -11,122 +11,101 @@ import {
   TablePagination,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import StarRatings from "react-star-ratings";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
-  GetAllFeedback,
-  GetUserByID,
-  GetbyRealestateID,
+  GetAllRealestates,
+  UpdateRealestateStatus,
 } from "../../API/APIConfigure";
+import { useNavigate } from "react-router-dom";
+import CreateReal from "./CreateReal";
 
 const Dashboard = () => {
   const [feedback, setFeedback] = useState([]);
-  const [userDetails, setUserDetails] = useState({});
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      try {
-        const response = await GetAllFeedback();
-        setFeedback(Array.isArray(response) ? response : []);
-      } catch (err) {
-        toast.error("Failed to fetch feedback");
-        console.error(err);
-      }
-    };
-
-    fetchFeedback();
-  }, []);
-
-  useEffect(() => {
-    const userIds = feedback.map((item) => item.memberId);
-    const uniqueUserIds = Array.from(new Set(userIds));
-
-    const fetchUserDetails = async () => {
-      uniqueUserIds.forEach(async (id) => {
-        try {
-          const userData = await GetUserByID(id);
-          setUserDetails((prevDetails) => ({
-            ...prevDetails,
-            [id]: userData.username,
-          }));
-        } catch (error) {
-          console.error("Failed to fetch user details", error);
-          toast.error(`Failed to fetch user details for ID: ${id}`);
-        }
-      });
-    };
-
-    if (uniqueUserIds.length > 0) {
-      fetchUserDetails();
+  const fetchRealestates = async () => {
+    try {
+      const response = await GetAllRealestates();
+      setFeedback(Array.isArray(response) ? response : []);
+    } catch (err) {
+      toast.error("Failed to fetch Realestates");
+      console.error(err);
     }
-  }, [feedback]);
+  };
+
+  useEffect(() => {
+    fetchRealestates();
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
-  useEffect(() => {
-    const realIds = feedback.map((item) => item.realestateID);
-    const uniqueRealIds = Array.from(new Set(realIds));
-
-    const fetchRealDetails = async () => {
-      uniqueRealIds.forEach(async (id) => {
-        try {
-          const realData = await GetbyRealestateID(id);
-          setName((prevDetails) => ({
-            ...prevDetails,
-            [id]: realData.name,
-          }));
-        } catch (error) {
-          console.error("Failed to fetch real details", error);
-          toast.error(`Failed to fetch real details for ID: ${id}`);
-        }
-      });
-    };
-
-    if (uniqueRealIds.length > 0) {
-      fetchRealDetails();
-    }
-  }, [feedback]);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const filteredFeedback = feedback.filter((item) => {
+  const filtered = feedback.filter((item) => {
     return (
       selectedStatusFilter === "all" ||
-      item.rate.toString() === selectedStatusFilter
+      item.status.toString() === selectedStatusFilter
     );
   });
 
-  const slicedFeedback = filteredFeedback.slice(
+  const slicedFeedback = filtered.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
+  const statusTexts = {
+    1: "Chờ xác nhận",
+    2: "Đã xác nhận",
+    3: "Tạm dừng",
+    4: "Vô hiệu hóa",
+    5: "Từ chối",
+  };
+
+  const statusColors = {
+    1: "orange",
+    2: "green",
+    3: "gray",
+    4: "red",
+    5: "red",
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
-        <Select
-          value={selectedStatusFilter}
-          onChange={(e) => setSelectedStatusFilter(e.target.value)}
-          style={{ marginTop: "30px", marginBottom: "20px" }}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "30px",
+            marginBottom: "20px",
+            justifyContent: "space-between",
+          }}
         >
-          <MenuItem value="all">Tất cả</MenuItem>
-          {[5, 4, 3, 2, 1].map((rating) => (
-            <MenuItem key={rating} value={rating.toString()}>
-              {rating} sao
-            </MenuItem>
-          ))}
-        </Select>
+          <Select
+            value={selectedStatusFilter}
+            onChange={(e) => setSelectedStatusFilter(e.target.value)}
+          >
+            <MenuItem value="all">Tất cả</MenuItem>
+            {Object.keys(statusTexts).map((status) => (
+              <MenuItem key={status} value={status}>
+                {statusTexts[status]}
+              </MenuItem>
+            ))}
+          </Select>
+          <CreateReal onCreateSuccess={fetchRealestates} />
+        </Box>
         <TableContainer component={Paper}>
           <h2
             style={{
@@ -139,7 +118,7 @@ const Dashboard = () => {
               fontWeight: "bold",
             }}
           >
-            Đánh giá
+            Bất Động Sản
           </h2>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -151,7 +130,7 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
-                  Tên tài khoản
+                  Realestes
                 </TableCell>
                 <TableCell
                   style={{
@@ -160,7 +139,7 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
-                  Bất động sản
+                  Địa điểm
                 </TableCell>
                 <TableCell
                   style={{
@@ -169,7 +148,7 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
-                  Feedback
+                  Giá
                 </TableCell>
                 <TableCell
                   style={{
@@ -178,27 +157,43 @@ const Dashboard = () => {
                   }}
                   align="center"
                 >
-                  Bình chọn
+                  Status
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontSize: "20px",
+                    fontFamily: "Arial, sans-serif",
+                  }}
+                  align="center"
+                >
+                  Hành động
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {slicedFeedback.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell align="center">
-                    {userDetails[item.memberId] || item.memberId}
+                  <TableCell align="center">{item.name}</TableCell>
+                  <TableCell align="center">{item.location}</TableCell>
+                  <TableCell align="center">{item.price}</TableCell>
+                  <TableCell
+                    align="center"
+                    style={{
+                      color: statusColors[item.status],
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {statusTexts[item.status]}
                   </TableCell>
                   <TableCell align="center">
-                    {name[item.realestateID] || item.realestateID}
-                  </TableCell>
-                  <TableCell align="center">{item.text}</TableCell>
-                  <TableCell align="center">
-                    <StarRatings
-                      rating={item.rate}
-                      starDimension="20px"
-                      starSpacing="2px"
-                      starRatedColor="orange"
-                    />
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      className="edit-btn"
+                      onClick={() => navigate(`/hotels/${item.id}`)}
+                    >
+                      <VisibilityIcon sx={{ fontSize: 25 }} />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -207,7 +202,7 @@ const Dashboard = () => {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={filteredFeedback.length}
+            count={filtered.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
