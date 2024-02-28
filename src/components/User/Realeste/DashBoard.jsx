@@ -21,6 +21,7 @@ import {
   UpdateRealestateStatus,
 } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
+import CreateReal from "./CreateReal";
 
 const Dashboard = () => {
   const [feedback, setFeedback] = useState([]);
@@ -69,6 +70,7 @@ const Dashboard = () => {
     2: "Đã xác nhận",
     3: "Tạm dừng",
     4: "Vô hiệu hóa",
+    5: "Từ chối",
   };
 
   const statusColors = {
@@ -76,34 +78,34 @@ const Dashboard = () => {
     2: "green",
     3: "gray",
     4: "red",
+    5: "red",
   };
 
-  const handleStatusChange = async (status, id) => {
-    try {
-      console.log(status);
-      await UpdateRealestateStatus(id, status);
-      toast.success("Cập nhật thành công");
-      fetchRealestates();
-    } catch (err) {
-      toast.error("Cập nhật thất bại");
-      console.error(err);
-    }
-  };
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
-        <Select
-          value={selectedStatusFilter}
-          onChange={(e) => setSelectedStatusFilter(e.target.value)}
-          style={{ marginTop: "30px", marginBottom: "20px" }}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "30px",
+            marginBottom: "20px",
+            justifyContent: "space-between",
+          }}
         >
-          <MenuItem value="all">Tất cả</MenuItem>
-          {Object.keys(statusTexts).map((status) => (
-            <MenuItem key={status} value={status}>
-              {statusTexts[status]}
-            </MenuItem>
-          ))}
-        </Select>
+          <Select
+            value={selectedStatusFilter}
+            onChange={(e) => setSelectedStatusFilter(e.target.value)}
+          >
+            <MenuItem value="all">Tất cả</MenuItem>
+            {Object.keys(statusTexts).map((status) => (
+              <MenuItem key={status} value={status}>
+                {statusTexts[status]}
+              </MenuItem>
+            ))}
+          </Select>
+          <CreateReal onCreateSuccess={fetchRealestates} />
+        </Box>
         <TableContainer component={Paper}>
           <h2
             style={{

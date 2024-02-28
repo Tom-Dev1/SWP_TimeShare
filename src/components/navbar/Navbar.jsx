@@ -1,11 +1,11 @@
-import { AccountCircle } from '@mui/icons-material';
-import { IconButton, Menu, MenuItem } from '@mui/material';
-import { useAuth } from '../../hook/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import './navbar.css';
-import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { AccountCircle } from "@mui/icons-material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import { useAuth } from "../../hook/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import "./navbar.css";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 function Navbar() {
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
@@ -14,12 +14,12 @@ function Navbar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
   const handleLogin = () => {
-    navigate('/login-register');
+    navigate("/login-register");
   };
   const handleMyAccount = () => {
-    navigate('/user/profile');
+    navigate("/user/profile");
     handleMenuClose();
   };
   const handleProfileMenuOpen = (event) => {
@@ -28,23 +28,24 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       const result = await Swal.fire({
-        title: 'Logout',
-        text: 'Are you sure you want to logout?',
-        icon: 'question',
+        title: "Logout",
+        text: "Are you sure you want to logout?",
+        icon: "question",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, logout!',
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!",
       });
 
       if (result.isConfirmed) {
         await logout();
         handleMenuClose();
-        Swal.fire('Logged Out!', 'You have been logged out.', 'success');
+        Swal.fire("Logged Out!", "You have been logged out.", "success");
+        navigate("/");
       }
     } catch (error) {
-      console.error('Error during logout:', error);
-      Swal.fire('Error', 'An error occurred during logout.', 'error');
+      console.error("Error during logout:", error);
+      Swal.fire("Error", "An error occurred during logout.", "error");
     }
   };
 
@@ -52,14 +53,14 @@ function Navbar() {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
+        vertical: "bottom",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
