@@ -106,6 +106,7 @@ const SignUp = ({ handleToggleForm }) => {
                         title: response.messageError,
                     });
                 } else {
+                    console.log(response);
                     Swal.fire({
                         icon: "success",
                         title: "Tạo tài khoản thành công !!!",

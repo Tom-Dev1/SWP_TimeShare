@@ -4,8 +4,8 @@ import { Rating } from "@mui/material";
 import React from "react";
 
 const SearchItem = ({ searchResult }) => {
-  const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
-  const [value, setValue] = React.useState(4);
+    const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
+    const [value, setValue] = React.useState(4);
 
   return (
     <div className="search-result-content search-result-list search-result-card-list">
@@ -30,20 +30,20 @@ const SearchItem = ({ searchResult }) => {
                       {item.location}
                     </div>
 
-                    <Rating name="simple-controlled" value={value} readOnly />
-                  </div>
-                  <div className="result-card--cta">
-                    <div className="result-card--cta_item">
-                      <span>{item.price}/Night</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          );
-        })}
-    </div>
-  );
+                                        <Rating name="simple-controlled" value={value} readOnly />
+                                    </div>
+                                    <div className="result-card--cta">
+                                        <div className="result-card--cta_item">
+                                            <span>{item.price}/Night</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    );
+                })}
+        </div>
+    );
 };
 
 export default SearchItem;

@@ -1,0 +1,110 @@
+.main-content {
+    position: relative;
+    min-height: 50vh;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+}
+.medium-push-8 {
+    left: 66.6666666667%;
+    right: auto;
+}
+.medium-4 {
+    width: 33.3333333333333%;
+}
+
+.inquiry-sidebar .sidebar-wrapper {
+    position: sticky;
+    top: 10px;
+}
+
+.featured-posting {
+    height: 100%;
+    padding: 1.25rem;
+    background: #fff;
+    box-shadow: 0 0.0714285714rem 0.2142857143rem 0 rgba(0, 0, 0, 0.2);
+}
+
+.columns:last-child {
+    float: right;
+}
+.medium-8 {
+    width: 66.6666666667%;
+}
+.medium-pull-4 {
+    position: relative;
+    right: 33.3333333333%;
+    left: auto;
+}
+.no-padding-right {
+    padding-right: 0 !important;
+}
+
+.no-padding-left {
+    padding-left: 0 !important;
+}
+.row .row {
+    margin: 0 -0.625rem;
+    max-width: none;
+    width: auto;
+}
+.row .row.guests-count {
+    margin-bottom: 1rem;
+}
+.bold {
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    font-size: 1.8rem;
+    line-height: 1.15;
+    margin-top: 0.2rem;
+}
+.content-container {
+    margin: 0 0 1.25rem 0;
+    padding: 1.25rem;
+    box-shadow: unset;
+    /* box-shadow: 0 0.0714285714rem 0.2142857143rem 0 rgba(0, 0, 0, 0.2); */
+    background: #fff;
+    /* padding: 0.625rem; */
+    position: relative;
+}
+.content-container::before {
+    content: " ";
+    display: table;
+}
+.content-container::before {
+    box-shadow: 0 0.0714285714rem 0.2142857143rem 0 rgba(0, 0, 0, 0.2);
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    display: unset;
+}
+.content-container:after {
+    clear: both;
+}
+.content-container:after {
+    content: " ";
+    display: table;
+}
+.title-p {
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.guest-primary {
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+    font-size: 1.35rem;
+}
+
+.form .columns {
+    margin-bottom: 0.7142857143rem;
+}
+.large-3 {
+    width: 25%;
+}

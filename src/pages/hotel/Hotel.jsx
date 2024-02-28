@@ -13,8 +13,9 @@ import {
 import { useState, useEffect } from "react";
 import FeatureProperties from "../../components/featureProperties/FeatureProperties";
 import { GetbyRealestateID, BASE_URL } from "../../components/API/APIConfigure";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import FeedBack from "../../components/Feedback/Feedback";
+
 const Hotel = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
