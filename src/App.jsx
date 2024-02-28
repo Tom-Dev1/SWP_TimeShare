@@ -28,6 +28,7 @@ const UserWrapper = ({ children }) => {
   return userInfo ? children : <ErrorPage />;
 };
 function App() {
+
     return (
         <Routes>
             <Route path="/*" element={<ErrorPage />} />
