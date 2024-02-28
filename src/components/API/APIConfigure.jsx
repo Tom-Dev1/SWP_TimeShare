@@ -50,6 +50,9 @@ const GetUserByID = (userID) => {
 export const GetAllRealestatesByMemberID = (userID) => {
   return customAxios.get(`api/Realestates/GetbyMemberID?id=${userID}`);
 };
+export const GetAllBookingsByMemberID = (userID) => {
+  return customAxios.get(`api/Bookings/GetbyMemberID?id=${userID}`);
+};
 const CreateVouchers = (voucherData) => {
   return instance.post(`api/Vouchers/Createvoucher`, voucherData);
 };

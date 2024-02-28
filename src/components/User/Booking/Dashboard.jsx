@@ -16,7 +16,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllBookings } from "../../API/APIConfigure";
+import { GetAllBookingsByMemberID } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
@@ -25,11 +25,12 @@ const Dashboard = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   const fetchBooking = async () => {
     try {
-      const response = await GetAllBookings();
-      setBooking(Array.isArray(response) ? response : []);
+      const response = await GetAllBookingsByMemberID(userInfo.id);
+      setBooking(response ? [response] : []);
     } catch (err) {
       toast.error("Lỗi lấy thông tin Booking");
       console.error(err);

@@ -120,7 +120,7 @@ function App() {
         }
       />
       <Route
-        path="/admin/realestates"
+        path="/admin/realetates"
         element={
           <AdminWrapper>
             <Realestates />

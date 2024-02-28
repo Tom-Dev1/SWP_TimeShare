@@ -177,8 +177,7 @@ const Dashboard = () => {
                 {slicedBookings.map((booking) => (
                   <TableRow key={booking.id}>
                     <TableCell style={{ fontSize: "13px" }} align="center">
-                      {userDetails[booking.memberId] || booking.memberId}{" "}
-                      {/* Hiển thị userName hoặc memberId nếu chưa có thông tin */}
+                      {userDetails[booking.memberId] || booking.memberId}
                     </TableCell>
 
                     <TableCell style={{ fontSize: "13px" }} align="center">
