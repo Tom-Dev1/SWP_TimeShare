@@ -7,7 +7,6 @@ import "./navbar.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 function Navbar() {
-  
   const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -97,8 +96,11 @@ function Navbar() {
                 Sign In
               </button>
             </div>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Navbar;
