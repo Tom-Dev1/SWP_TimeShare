@@ -8,7 +8,7 @@ import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } f
 import { useState, useEffect } from "react";
 import FeatureProperties from "../../components/featureProperties/FeatureProperties";
 import { GetbyRealestateID, BASE_URL } from "../../components/API/APIConfigure";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 const Hotel = () => {
     const { id } = useParams();
     const [data, setData] = useState(null);
@@ -33,18 +33,18 @@ const Hotel = () => {
         setOpen(true);
     };
 
-    const handleMove = (direction) => {
-        let newSlideNumber;
+    // const handleMove = (direction) => {
+    //     let newSlideNumber;
 
-        if (direction === "l") {
-            newSlideNumber = slideNumber === 0 ? photoUrls.length - 1 : slideNumber - 1;
-        } else {
-            newSlideNumber = slideNumber === photoUrls.length - 1 ? 0 : slideNumber + 1;
-        }
+    //     if (direction === "l") {
+    //         newSlideNumber = slideNumber === 0 ? photoUrls.length - 1 : slideNumber - 1;
+    //     } else {
+    //         newSlideNumber = slideNumber === photoUrls.length - 1 ? 0 : slideNumber + 1;
+    //     }
 
-        setSlideNumber(newSlideNumber);
-    };
-    const photoUrls = data ? data.photo.split(",") : [];
+    //     setSlideNumber(newSlideNumber);
+    // };
+    // const photoUrls = data ? data.photo.split(",") : [];
     return (
         <div>
             <Navbar />
@@ -55,14 +55,16 @@ const Hotel = () => {
                         <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={() => setOpen(false)} />
                         <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={() => handleMove("l")} />
                         <div className="sliderWrapper">
-                            {data && <img src={BASE_URL + photoUrls[slideNumber]} alt="" className="sliderImg" />}
+                            {/* {data && <img src={BASE_URL + photoUrls[slideNumber]} alt="" className="sliderImg" />} */}
                         </div>
                         <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick={() => handleMove("r")} />
                     </div>
                 )}
                 {data && (
                     <div className="hotelWrapper">
-                        <button className="bookNow">Reserve or Book Now!</button>
+                        <button className="bookNow">
+                            <Link to={`/timeshare/${data.id}`}>Reserve or Book Now!</Link>
+                        </button>
                         <h1 className="hotelTitle">{data.name}</h1>
                         <div className="hotelAddress">
                             <FontAwesomeIcon icon={faLocationDot} />
@@ -72,7 +74,7 @@ const Hotel = () => {
                         <span className="hotelPriceHighlight">
                             Book a stay over $114 at this property and get a free airport taxi
                         </span>
-                        <div className="hotelImages">
+                        {/* <div className="hotelImages">
                             {photoUrls.map((photoUrl, i) => (
                                 <div className="hotelImgWrapper" key={i}>
                                     <img
@@ -83,7 +85,7 @@ const Hotel = () => {
                                     />
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
                         <div className="hotelDetails">
                             <div className="hotelDetailsTexts">
                                 <h1 className="hotelTitle">Stay in the heart of City</h1>

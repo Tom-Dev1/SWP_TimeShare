@@ -1,16 +1,17 @@
 .body-container {
-    height: 110vh;
+    /* height: 110vh; */
     display: grid;
     place-content: center;
 }
 
 .container {
-    position: relative;
+    position: sticky;
     width: 850px;
     height: 800px;
     box-shadow: 25px 30px 55px #5557;
     border-radius: 13px;
     overflow: hidden;
+    margin: 20px 0;
 }
 .form-box-container {
     position: absolute;
