@@ -89,7 +89,9 @@ const Hotel = () => {
         )}
         {data && (
           <div className="hotelWrapper">
-            <button className="bookNow">Reserve or Book Now!</button>
+            <button className="bookNow">
+              <Link to={`/timeshare/${data.id}`}>Reserve or Book Now!</Link>
+            </button>
             <h1 className="hotelTitle">{data.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
