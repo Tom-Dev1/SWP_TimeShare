@@ -16,12 +16,10 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import {
-  GetAllRealestatesByMemberID,
-  UpdateRealestateStatus,
-} from "../../API/APIConfigure";
+import { GetAllRealestatesByMemberID } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 import CreateReal from "./CreateReal";
+import CreateTimeShare from "../Timeshare/CreateTimeShare";
 
 const Dashboard = () => {
   const [realestates, setRealestates] = useState([]);
@@ -30,11 +28,12 @@ const Dashboard = () => {
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [selectedRealestateId, setSelectedRealestateId] = useState(null);
 
   const fetchRealestates = async () => {
     try {
       const response = await GetAllRealestatesByMemberID(userInfo.id);
-      setRealestates(response ? [response] : []);
+      setRealestates(response || []);
     } catch (err) {
       toast.error("Failed to fetch Realestates");
       console.error(err);
@@ -44,8 +43,6 @@ const Dashboard = () => {
   useEffect(() => {
     fetchRealestates();
   }, []);
-
-  useEffect(() => {}, [realestates]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -197,6 +194,7 @@ const Dashboard = () => {
                     >
                       <VisibilityIcon sx={{ fontSize: 25 }} />
                     </Button>
+                    <CreateTimeShare realestateId={item.id} />
                   </TableCell>
                 </TableRow>
               ))}

@@ -30,7 +30,7 @@ const Dashboard = () => {
   const fetchBooking = async () => {
     try {
       const response = await GetAllBookingsByMemberID(userInfo.id);
-      setBooking(response ? [response] : []);
+      setBooking(response || []);
     } catch (err) {
       toast.error("Lỗi lấy thông tin Booking");
       console.error(err);
@@ -159,10 +159,12 @@ const Dashboard = () => {
                 <TableRow key={item.id}>
                   <TableCell align="center">{item.timeshareId}</TableCell>
                   <TableCell align="center">
-                    {Math.ceil(
-                      (new Date(item.endDay) - new Date(item.startDay)) /
-                        (1000 * 60 * 60 * 24)
-                    )}
+                    {item.endDay && item.startDay
+                      ? Math.ceil(
+                          (new Date(item.endDay) - new Date(item.startDay)) /
+                            (1000 * 60 * 60 * 24)
+                        )
+                      : "Invalid date"}
                   </TableCell>
                   <TableCell align="center">{item.amount}</TableCell>
                   <TableCell
