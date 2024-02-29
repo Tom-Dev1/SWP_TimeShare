@@ -83,6 +83,20 @@ const UserPage = () => {
                       Bất động sản
                     </MenuItem>
                   </div>
+                  <div
+                    className={`${
+                      activeMenu === "mytrade" ? "user-active" : ""
+                    }`}
+                  >
+                    <MenuItem
+                      className="user-item"
+                      component={Link}
+                      to="/user/trade"
+                      onClick={() => handleMenuClick("mytrade")}
+                    >
+                      Trao Đổi
+                    </MenuItem>
+                  </div>
                 </div>
               </div>
             </div>
