@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import { GetAllFeedback, GetUserByID } from "../../API/APIConfigure";
+import { GetFeebackbyRealestate, GetUserByID } from "../../API/APIConfigure";
 import TableFeedback from "./TableFeedBack";
 
-const Feedback = () => {
+const Feedback = ({ realetatesID }) => {
   const [feedback, setFeedback] = useState([]);
   const [userDetails, setUserDetails] = useState([]);
+
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
-        const response = await GetAllFeedback();
-        setFeedback(Array.isArray(response) ? response : []);
+        const response = await GetFeebackbyRealestate(realetatesID);
+        setFeedback(response ? response : []);
       } catch (err) {
         toast.error("Failed to fetch feedback");
         console.error(err);

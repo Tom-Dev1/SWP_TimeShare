@@ -32,7 +32,7 @@ function CreateTimeShare({
       memberId: userInfo.id,
       startDay,
       endDay,
-      status,
+      status: "true",
     };
 
     try {
@@ -59,7 +59,7 @@ function CreateTimeShare({
   return (
     <div className="create-time-share">
       <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-        Tạo mới
+        Tạo timeshare
       </Button>
       <Dialog
         open={open}
