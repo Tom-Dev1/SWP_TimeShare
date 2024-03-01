@@ -32,7 +32,7 @@ function CreateTimeShare({
       memberId: userInfo.id,
       startDay,
       endDay,
-      status,
+      status: "true",
     };
 
     try {

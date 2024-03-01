@@ -61,7 +61,9 @@ export const GetbyRealestateID = (realetatesID) => {
     `api/Realestates/GetbyRealestateID?id=${realetatesID}`
   );
 };
-
+export const GetFeebackbyRealestate = (realetatesID) => {
+  return customAxios.get(`api/Feedbacks/GetbyRealestateID?id=${realetatesID}`);
+};
 const CreateBooking = (data) => {
   return customAxios.post(`api/Bookings/Createbooking`, data);
 };

@@ -17,6 +17,7 @@ import Realestates from "./pages/admin/Realestates";
 import ErrorPage from "./pages/ErrorPage";
 import Timeshare from "./pages/timeshare/Timeshare";
 import Posting from "./pages/posting/Posting";
+import CheckOut from "./pages/user/CheckOut";
 
 const AdminWrapper = ({ children }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -45,7 +46,14 @@ function App() {
           </UserWrapper>
         }
       />
-
+      <Route
+        path="/user/checkout"
+        element={
+          <UserWrapper>
+            <CheckOut />
+          </UserWrapper>
+        }
+      />
       {/* ProtectRouterAdmin */}
       <Route
         path="/admin/trade"
