@@ -1,4 +1,3 @@
-import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import "./posting.css";
 import { BASE_URL, CreateBooking } from "../../components/API/APIConfigure";
