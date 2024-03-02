@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
@@ -25,8 +25,8 @@ const AdminWrapper = ({ children }) => {
   return isAdmin ? children : <ErrorPage />;
 };
 const UserWrapper = ({ children }) => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    return userInfo ? children : <ErrorPage />;
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  return userInfo ? children : <ErrorPage />;
 };
 function App() {
   return (
@@ -47,7 +47,15 @@ function App() {
         }
       />
       <Route
-        path="/user/checkout"
+        path="/user/booking/:id"
+        element={
+          <UserWrapper>
+            <ErrorPage />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/user/checkout/:id"
         element={
           <UserWrapper>
             <CheckOut />
