@@ -1,3 +1,7 @@
+.search-result-content {
+    height: 200vh;
+}
+
 .columns-right {
     position: relative;
     padding-left: 0.625rem;

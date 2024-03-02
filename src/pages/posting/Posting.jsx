@@ -1,13 +1,12 @@
-import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import "./posting.css";
 import { CreateBooking } from "../../components/API/APIConfigure";
 import { useState } from "react";
 import { useParams } from "react-router";
-import { string } from "prop-types";
 import { TextField } from "@mui/material";
 const Posting = () => {
     const { id } = useParams();
+    console.log(id);
 
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     const [bookData, setBookData] = useState({
@@ -17,7 +16,7 @@ const Posting = () => {
         memberId: userInfo.id,
         deposit: 0,
         amount: 0,
-        adult: 0, // Sửa giá trị mặc định của adult thành 0
+        adult: 0,
         children: 0,
 
         room: 0,
