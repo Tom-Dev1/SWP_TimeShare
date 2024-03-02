@@ -4,6 +4,7 @@ import {
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 // This value is from the props in the UI
 const style = { layout: "vertical" };
@@ -40,10 +41,14 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
         }
         onApprove={(data, action) =>
           action.order.capture().then(async (response) => {
-            console.log(response);
-            // // if (response.status === "") {
-            // //   console.log(response);
-            // }
+            if (response.status === "COMPLETED") {
+              console.log(response);
+              Swal.fire({
+                title: "Thanh toán thành công",
+                text: "Chúc bạn có kỳ nghỉ vui vẻ",
+                icon: "success",
+              });
+            }
           })
         }
       />

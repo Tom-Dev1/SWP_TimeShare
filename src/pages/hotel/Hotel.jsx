@@ -138,7 +138,7 @@ const Hotel = () => {
                 <button>Reserve or Book Now!</button>
               </div>
             </div>
-            <FeedBack />
+            <FeedBack realetatesID={id} />
           </div>
         )}
         <FeatureProperties />
