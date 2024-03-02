@@ -43,13 +43,16 @@ const Dashboard = () => {
   const fetchUserDetails = async (memberIds) => {
     memberIds.forEach(async (id) => {
       if (!userDetails[id]) {
-        // Tránh gọi lại nếu đã có thông tin
         try {
           const response = await GetUserByID(id);
-          setUserDetails((prevDetails) => ({
-            ...prevDetails,
-            [id]: response.username,
-          }));
+          if (response && response.username) {
+            setUserDetails((prevDetails) => ({
+              ...prevDetails,
+              [id]: response.username,
+            }));
+          } else {
+            console.error(`User with id ${id} does not have a username`);
+          }
         } catch (err) {
           console.error(err);
           toast.error(`Failed to fetch user details for memberId: ${id}`);
@@ -177,8 +180,7 @@ const Dashboard = () => {
                 {slicedBookings.map((booking) => (
                   <TableRow key={booking.id}>
                     <TableCell style={{ fontSize: "13px" }} align="center">
-                      {userDetails[booking.memberId] || booking.memberId}{" "}
-                      {/* Hiển thị userName hoặc memberId nếu chưa có thông tin */}
+                      {userDetails[booking.memberId] || booking.memberId}
                     </TableCell>
 
                     <TableCell style={{ fontSize: "13px" }} align="center">

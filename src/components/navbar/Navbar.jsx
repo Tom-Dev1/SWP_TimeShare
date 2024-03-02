@@ -7,19 +7,39 @@ import "./navbar.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 function Navbar() {
-    const navigate = useNavigate();
-    const { isLoggedIn, logout } = useAuth();
-    const [anchorEl, setAnchorEl] = useState(null);
-    const isMenuOpen = Boolean(anchorEl);
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-    };
-    const menuId = "primary-search-account-menu";
-    const handleLogin = () => {
-        navigate("/login-register");
-    };
-    const handleMyAccount = () => {
-        navigate("/user/profile");
+  
+  const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const menuId = "primary-search-account-menu";
+  const handleLogin = () => {
+    navigate("/login-register");
+  };
+  const handleMyAccount = () => {
+    navigate("/user/profile");
+    handleMenuClose();
+  };
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleLogout = async () => {
+    try {
+      const result = await Swal.fire({
+        title: "Logout",
+        text: "Are you sure you want to logout?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!",
+      });
+
+      if (result.isConfirmed) {
+        await logout();
         handleMenuClose();
     };
     const handleProfileMenuOpen = (event) => {
@@ -99,8 +119,11 @@ function Navbar() {
                     )}
                 </div>
             </div>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Navbar;

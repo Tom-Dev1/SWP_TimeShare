@@ -16,24 +16,24 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import {
-  GetAllRealestates,
-  UpdateRealestateStatus,
-} from "../../API/APIConfigure";
+import { GetAllRealestatesByMemberID } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 import CreateReal from "./CreateReal";
+import CreateTimeShare from "../Timeshare/CreateTimeShare";
 
 const Dashboard = () => {
-  const [feedback, setFeedback] = useState([]);
+  const [realestates, setRealestates] = useState([]);
   const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [selectedRealestateId, setSelectedRealestateId] = useState(null);
 
   const fetchRealestates = async () => {
     try {
-      const response = await GetAllRealestates();
-      setFeedback(Array.isArray(response) ? response : []);
+      const response = await GetAllRealestatesByMemberID(userInfo.id);
+      setRealestates(response || []);
     } catch (err) {
       toast.error("Failed to fetch Realestates");
       console.error(err);
@@ -53,7 +53,7 @@ const Dashboard = () => {
     setPage(0);
   };
 
-  const filtered = feedback.filter((item) => {
+  const filtered = realestates.filter((item) => {
     return (
       selectedStatusFilter === "all" ||
       item.status.toString() === selectedStatusFilter
@@ -118,7 +118,7 @@ const Dashboard = () => {
               fontWeight: "bold",
             }}
           >
-            Bất Động Sản
+            Bất Động Sản Của Bạn
           </h2>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -194,6 +194,7 @@ const Dashboard = () => {
                     >
                       <VisibilityIcon sx={{ fontSize: 25 }} />
                     </Button>
+                    <CreateTimeShare realestateId={item.id} />
                   </TableCell>
                 </TableRow>
               ))}
