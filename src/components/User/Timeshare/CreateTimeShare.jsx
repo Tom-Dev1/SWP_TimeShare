@@ -13,12 +13,11 @@ function CreateTimeShare({
   realestateId: initialRealestateId,
 }) {
   const [open, setOpen] = useState(false);
-  const [realestateId, setRealestateId] = useState("");
-  const [memberId, setMemberId] = useState("");
+  const [realestatId, setRealestateId] = useState("");
   const [startDay, setStartDay] = useState("");
   const [endDay, setEndDay] = useState("");
-  const [status, setStatus] = useState("");
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [price, setPrice] = useState(""); // Added price state
 
   useEffect(() => {
     setRealestateId(initialRealestateId || "");
@@ -33,6 +32,7 @@ function CreateTimeShare({
       startDay,
       endDay,
       status: "true",
+      price,
     };
 
     try {
@@ -42,7 +42,7 @@ function CreateTimeShare({
       );
       Swal.fire({
         icon: "success",
-        title: "Tạo mới thành công, vui lòng chờ xác nhận !!!",
+        title: "Tạo mới thành công !!!",
       });
       setOpen(false);
       if (onCreateSuccess) {
@@ -88,6 +88,16 @@ function CreateTimeShare({
                 type="date"
                 value={endDay}
                 onChange={(e) => setEndDay(e.target.value)}
+              />
+            </Typography>
+            <Typography variant="h6" className="form-field">
+              <label htmlFor="price" className="form-label">
+                Price:
+              </label>
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </Typography>
             <Button

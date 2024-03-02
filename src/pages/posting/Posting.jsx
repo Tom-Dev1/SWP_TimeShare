@@ -4,7 +4,7 @@ import { BASE_URL, CreateBooking } from "../../components/API/APIConfigure";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
-
+import axios from "axios";
 const Posting = () => {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -15,16 +15,16 @@ const Posting = () => {
   const [total, setTotal] = useState(Realestate.price);
 
   const [bookData, setBookData] = useState({
+    phone: "",
+    fullName: "",
+    paymentID: "",
     timeshareId: id,
     startDay: "",
     endDay: "",
     memberId: userInfo.id,
-    deposit: 0,
-    amount: 0,
-    adult: 0,
-    children: 0,
-    room: 0,
-    fullName: "",
+    amount: total,
+    adult: "",
+    children: "",
     status: "1",
   });
   const handleVoucherChange = (event) => {
@@ -33,7 +33,7 @@ const Posting = () => {
   const handleAddVoucher = async () => {
     try {
       const response = await axios.get(
-        `http://meokool-001-site1.ltempurl.com/api/Vouchers/GetbyID?id=${voucher}`
+        `http://meokool-001-site1.ltempurl.com/api/Vouchers/GetbyName?name=${voucher}`
       );
       if (response.data && response.data.data != null) {
         setVoucherData(response.data);
