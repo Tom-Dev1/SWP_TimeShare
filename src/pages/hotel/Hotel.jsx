@@ -34,7 +34,9 @@ const Hotel = () => {
 
     fetchData();
   }, [id]);
+
   localStorage.setItem("Realestate", JSON.stringify(data));
+
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -54,6 +56,7 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber);
   };
+
   const photoUrls = data ? data.photo.split(",") : [];
   localStorage.setItem("imageReal", JSON.stringify(photoUrls));
 
