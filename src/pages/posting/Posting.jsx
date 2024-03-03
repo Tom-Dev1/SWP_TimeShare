@@ -1,36 +1,41 @@
-import Navbar from '../../components/navbar/Navbar';
-import './posting.css';
-import { BASE_URL, CreateBooking } from '../../components/API/APIConfigure';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import MailList from '../../components/mailList/MailList';
-import Footer from '../../components/footer/Footer';
-import Swal from 'sweetalert2';
+import Navbar from "../../components/navbar/Navbar";
+import "./posting.css";
+import {
+  BASE_URL,
+  CreateBooking,
+  GetTimeShareById,
+} from "../../components/API/APIConfigure";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { toast } from "react-toastify";
+import axios from "axios";
+import MailList from "../../components/mailList/MailList";
+import Footer from "../../components/footer/Footer";
+import Swal from "sweetalert2";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 const Posting = () => {
   const { id } = useParams();
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const Realestate = JSON.parse(localStorage.getItem('Realestate'));
-  const imageReal = JSON.parse(localStorage.getItem('imageReal'));
-  const [voucher, setVoucher] = useState('');
-  const [voucherData, setVoucherData] = useState('');
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const Realestate = JSON.parse(localStorage.getItem("Realestate"));
+  const imageReal = JSON.parse(localStorage.getItem("imageReal"));
+  const [voucher, setVoucher] = useState("");
+  const [voucherData, setVoucherData] = useState("");
   const navigate = useNavigate();
-  const [total, setTotal] = useState(Realestate.price);
+  const [timeshare, setTimeshare] = useState("");
+  const [total, setTotal] = useState(0);
   const [bookData, setBookData] = useState({
-    phone: '',
-    fullName: '',
-    paymentID: '',
+    phone: "",
+    fullName: "",
+    paymentID: "",
     timeshareId: id,
-    startDay: '',
-    endDay: '',
+    startDay: "",
+    endDay: "",
     memberId: userInfo.id,
     amount: total,
-    adult: '',
-    children: '',
-    status: '1',
+    adult: "",
+    children: "",
+    status: "1",
   });
   const handleVoucherChange = (event) => {
     setVoucher(event.target.value);
@@ -43,12 +48,30 @@ const Posting = () => {
       if (response.data && response.data.data != null) {
         setVoucherData(response.data);
       } else {
-        toast.error('Mã giảm giá không hợp lệ');
+        toast.error("Mã giảm giá không hợp lệ");
       }
     } catch (error) {
-      console.error('Error fetching voucher data', error);
+      console.error("Error fetching voucher data", error);
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await GetTimeShareById(id);
+        setTimeshare(response);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  useEffect(() => {
+    if (timeshare) {
+      setTotal(timeshare.price);
+    }
+  }, [timeshare]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedBookData = {
@@ -67,8 +90,8 @@ const Posting = () => {
     try {
       const response = await CreateBooking(updatedBookData);
       Swal.fire({
-        icon: 'success',
-        title: 'Đặt chỗ thành công',
+        icon: "success",
+        title: "Đặt chỗ thành công",
       }).then(() => {
         navigate(`/user/checkout/${response.id}`);
       });
@@ -82,14 +105,16 @@ const Posting = () => {
   };
 
   useEffect(() => {
-    let newTotal = Realestate.price;
+    let newTotal = timeshare.price;
 
     if (voucherData && voucherData.data) {
       if (voucherData.data.status === true) {
-        toast.success('Mã giảm giá hợp lệ');
-        newTotal -= (Realestate.price * voucherData.data.amount) / 100;
+        toast.success("Mã giảm giá hợp lệ");
+        newTotal = Math.round(
+          newTotal - (timeshare.price * voucherData.data.amount) / 100
+        );
       } else {
-        toast.error('Mã đã hết hạn');
+        toast.error("Mã đã hết hạn");
       }
     }
 
@@ -106,8 +131,8 @@ const Posting = () => {
             <form onSubmit={handleSubmit} className="booking-request-form">
               <div className="form-section">
                 <p>
-                  Thông tin liên hệ này sẽ được chia sẻ với chủ sở hữu để hoàn tất việc đặt phòng
-                  của bạn.
+                  Thông tin liên hệ này sẽ được chia sẻ với chủ sở hữu để hoàn
+                  tất việc đặt phòng của bạn.
                 </p>
                 <div className="form-group">
                   <label htmlFor="adults">Người lớn *</label>
@@ -218,7 +243,9 @@ const Posting = () => {
               <h2>Ngày ở: 4 Đêm</h2>
             </div>
             <div className="_line"></div>
-            <h2 className="total-summary">Tổng giá tiền: {total.toLocaleString()}VNĐ</h2>
+            <h2 className="total-summary">
+              Tổng giá tiền: {total ? total.toLocaleString() : 0}VNĐ
+            </h2>
             <div className="form-group">
               <div className="voucherLabel">
                 <label htmlFor="voucher">Voucher giảm giá khi đặt phòng</label>
@@ -232,7 +259,11 @@ const Posting = () => {
                   required
                   className="form-control"
                 />
-                <button type="button" onClick={handleAddVoucher} className="btn btn-primary">
+                <button
+                  type="button"
+                  onClick={handleAddVoucher}
+                  className="btn btn-primary"
+                >
                   Thêm Voucher
                 </button>
               </div>
