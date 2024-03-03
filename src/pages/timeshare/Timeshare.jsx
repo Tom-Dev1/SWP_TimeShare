@@ -45,6 +45,30 @@ const Timeshare = () => {
     return date.toLocaleDateString('en-US', options);
   };
 
+  // sort status of data
+  const sortedData = [...data].sort((a, b) => {
+    // If status is equal, maintain the original order
+    if (a.status === b.status) {
+      return 0;
+    }
+    // If a.status is 1, prioritize it over b.status
+    if (a.status === '1') {
+      return -1;
+    }
+    // If b.status is 1, prioritize b over a
+    if (b.status === '1') {
+      return 1;
+    }
+    // If both statuses are not 1, maintain the original order
+    return 0;
+  });
+
+  // Render sorted data
+  {
+    sortedData.map((item) => {
+      // rest of the code...
+    });
+  }
   return (
     <div>
       <Navbar />
@@ -81,14 +105,20 @@ const Timeshare = () => {
                 <th>Số lượng khách</th>
                 <th></th>
               </tr>
-              {data.map((item) => {
+              {sortedData.map((item) => {
                 // Log item.status
                 console.log('item.status:', item.status);
-                const className = item.status ? 'itemStatus-active' : 'itemStatus-inactive';
+                const isStatus2 = item.status === '2';
+                const className =
+                  item.status === '1'
+                    ? 'itemStatus-active'
+                    : item.status === '2'
+                    ? 'itemStatus-inactive'
+                    : '';
                 console.log('Class name applied:', className);
                 return (
                   <tr key={item.id} className={className}>
-                    <td>{item.status ? <div className="tb_new">Mới!</div> : null}</td>
+                    <td>{item.status === '1' && <div className="tb_new">Mới!</div>}</td>
                     <td>{formatDate(item.startDay)}</td>
                     <td>{formatDate(item.endDay)}</td>
                     <td>
@@ -102,11 +132,15 @@ const Timeshare = () => {
                     <td>{item.price.toLocaleString()}/VNĐ</td>
                     <td>{item.status}</td>
                     <td>
-                      <button className="tb_btn">
-                        <Link className="tb_link" to={`/posting/${item.id}`}>
-                          Bấm để thuê
-                        </Link>
-                      </button>
+                      {isStatus2 ? ( // Render as text if status is 2
+                        <div style={{ padding: '16px 10px' }}>Bấm để thuê</div>
+                      ) : (
+                        <button className="tb_btn">
+                          <Link className="tb_link" to={`/posting/${item.id}`}>
+                            Bấm để thuê
+                          </Link>
+                        </button>
+                      )}
                     </td>
                   </tr>
                 );

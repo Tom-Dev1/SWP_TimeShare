@@ -1,0 +1,55 @@
+.checkoutContainer {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  height: 590px;
+  display: flex;
+  gap: 20px;
+  max-width: 1180px;
+  width: 100%;
+}
+.checkoutCard {
+  width: 100%;
+
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.image-booking {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.tittle-real {
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 20px;
+}
+.tittle-real h1 {
+  margin-bottom: 10px;
+}
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.paymentConfirm {
+  padding: 20px;
+  max-width: 100%;
+  display: flex;
+  margin-bottom: 100px;
+}
+.paymentConfirm h1 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+.paymentConfirm h1:first-child {
+  font-weight: bold;
+  font-size: 20px;
+}

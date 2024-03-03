@@ -8,7 +8,10 @@ import {
   GetbyRealestateID,
 } from '../../API/APIConfigure';
 import { toast } from 'react-toastify';
-
+import Navbar from '../../navbar/Navbar';
+import MailList from '../../mailList/MailList';
+import Footer from '../../footer/Footer';
+import './checkout.css';
 const Checkout = () => {
   const { id } = useParams();
   const [booking, setBookings] = useState();
@@ -83,30 +86,59 @@ const Checkout = () => {
     }
   };
   return (
-    <div className="checkout">
-      <h1 style={{ fontSize: '50px' }}>Thanh toán</h1>
-      <img
-        className="image-booking"
-        src={BASE_URL + (photoUrls.length > 0 ? photoUrls[0] : '')}
-        alt=""
-      />
-      <div className="tittle-real">
-        <h1>{realestate ? realestate.name : ''}</h1>
-        <h1>{realestate ? realestate.location : ''}</h1>
-      </div>
-      <div className="title-booking">
-        <h1>Họ và tên:{booking ? booking.fullName : ''}</h1>
-        <h1>Số điện thoại:{booking ? booking.phone : ''}</h1>
-        <h1>Ngày checkin: {booking ? new Date(booking.startDay).toLocaleDateString() : ''}</h1>
-        <h1>Ngày checkout: {booking ? new Date(booking.endDay).toLocaleDateString() : ''}</h1>
-        <h1>Trạng thái: {booking ? getStatusString(booking.status) : ''}</h1>
-      </div>
-      {booking && booking.status !== '2' && (
-        <div className="payment-booking">
-          <PayPal amount={total} />
+    <>
+      <Navbar />
+      <div>
+        <div className="main-content">
+          <div className="checkoutContainer">
+            <div className="checkoutCard">
+              <img
+                className="image-booking"
+                src={BASE_URL + (photoUrls.length > 0 ? photoUrls[0] : '')}
+                alt=""
+              />
+              <div className="tittle-real">
+                <h1>Tên khách sạn: {realestate ? realestate.name : ''}</h1>
+                <h1>Địa điểm: {realestate ? realestate.location : ''}</h1>
+              </div>
+            </div>
+
+            {booking && booking.status !== '2' && (
+              <div className="payment-container">
+                <div className="paymentConfirm">
+                  <div className="title-booking">
+                    <h1>Xác nhận thông tin của bạn</h1>
+                    <h1>Họ và tên: {booking ? booking.fullName : ''}</h1>
+                    <h1>Số điện thoại: {booking ? booking.phone : ''}</h1>
+                    <h1>
+                      Ngày checkin: {booking ? new Date(booking.startDay).toLocaleDateString() : ''}
+                    </h1>
+                    <h1>
+                      Ngày checkout: {booking ? new Date(booking.endDay).toLocaleDateString() : ''}
+                    </h1>
+                    <h1>Trạng thái: {booking ? getStatusString(booking.status) : ''}</h1>
+                    <h1>Người lớn: {booking ? booking.adult : ''}</h1>
+                    <h1>Trẻ em: {booking ? booking.children : ''}</h1>
+
+                    <div className="_line"></div>
+                    <h2 className="total-summary">
+                      Tổng giá tiền: {booking.amount.toLocaleString()}VNĐ
+                    </h2>
+                  </div>
+                </div>
+                <div className="payment-booking">
+                  <PayPal amount={total} />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+      <div className="homeContainer">
+        <MailList />
+        <Footer />
+      </div>
+    </>
   );
 };
 
