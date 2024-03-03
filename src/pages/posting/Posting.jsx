@@ -14,8 +14,8 @@ const Posting = () => {
   const imageReal = JSON.parse(localStorage.getItem('imageReal'));
   const [voucher, setVoucher] = useState('');
   const [voucherData, setVoucherData] = useState('');
-  const [total, setTotal] = useState(Realestate.price);
 
+  const [total, setTotal] = useState(Realestate.price);
   const [bookData, setBookData] = useState({
     phone: '',
     fullName: '',
@@ -49,24 +49,28 @@ const Posting = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedBookData = {
+      phone: bookData.phone,
+      fullName: bookData.fullName,
       timeshareId: bookData.timeshareId,
       startDay: bookData.startDay,
       endDay: bookData.endDay,
-      memberId: bookData.memberId,
-      deposit: bookData.deposit,
       amount: total,
+      memberId: bookData.memberId,
       adult: bookData.adult,
       children: bookData.children,
-      room: bookData.room,
       status: bookData.status,
     };
 
     try {
       const response = await CreateBooking(updatedBookData);
-      console.log(response);
+      Swal.fire({
+        icon: "success",
+        title: "Đặt chỗ thành công",
+      }).then(() => {
+        navigate(`/user/checkout/${response.id}`);
+      });
     } catch (err) {
       console.log(err);
-      console.log(updatedBookData);
     }
   };
   const handleInputChange = (event) => {
@@ -95,6 +99,7 @@ const Posting = () => {
         <div className="posting_container">
           <div className="booking-form">
             <h1 className="booking-title">Đặt lịch ở đây</h1>
+
             <form onSubmit={handleSubmit} className="booking-request-form">
               <div className="form-section">
                 <p>
@@ -102,7 +107,9 @@ const Posting = () => {
                   của bạn.
                 </p>
                 <div className="form-group">
+
                   <label htmlFor="adults">Người lớn *</label>
+
                   <select
                     id="adults"
                     name="adult"
@@ -110,7 +117,9 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
+
                     <option value="">- Số người lớn -</option>
+
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -126,18 +135,21 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
+
                     <option value="">- Số trẻ em -</option>
+
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    {/* Add more options as needed */}
                   </select>
                 </div>
               </div>
               <div className="form-section">
                 <h2 className="booking-title">Thông tin liên hệ của bạn </h2>
                 <div className="form-group">
+
                   <label htmlFor="fullName">Họ và tên *</label>
+
                   <input
                     type="text"
                     id="fullName"
@@ -150,13 +162,37 @@ const Posting = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="telephone">Số điện thoại *</label>
+                  <label htmlFor="telephone">Số Điện Thoại *</label>
                   <input
                     type="text"
-                    id="telephone"
-                    name="telephone"
-                    placeholder="Số điện thoại của bạn"
-                    value={bookData.telephone}
+                    id="phone"
+                    name="phone"
+                    value={bookData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="telephone">Ngày bắt đầu *</label>
+                  <input
+                    type="date"
+                    id="startDay"
+                    name="startDay"
+                    value={bookData.startDay}
+                    onChange={handleInputChange}
+                    required
+                    className="form-control"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="telephone">Ngày kết thúc *</label>
+                  <input
+                    type="date"
+                    id="endDay"
+                    name="endDay"
+                    value={bookData.endDay}
+
                     onChange={handleInputChange}
                     required
                     className="form-control"
@@ -169,6 +205,7 @@ const Posting = () => {
               </button>
             </form>
           </div>
+
           <div className="booking-summary">
             <img src={BASE_URL + imageReal[0]} alt={Realestate.name} />
             <div className="text-summary">
@@ -196,6 +233,7 @@ const Posting = () => {
                 </button>
               </div>
             </div>
+
           </div>
         </div>
       </div>
