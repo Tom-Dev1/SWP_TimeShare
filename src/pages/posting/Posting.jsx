@@ -119,7 +119,9 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
-                    <option value="">- Số người lớn -</option>
+                    <option className="from-group-option" value="">
+                      - Số người lớn -
+                    </option>
 
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -136,7 +138,9 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
-                    <option value="">- Số trẻ em -</option>
+                    <option className="from-group-option" value="">
+                      - Số trẻ em -
+                    </option>
 
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -172,29 +176,31 @@ const Posting = () => {
                     className="form-control"
                   />
                 </div>
-                <div className="form-group">
-                  <label htmlFor="telephone">Ngày bắt đầu *</label>
-                  <input
-                    type="date"
-                    id="startDay"
-                    name="startDay"
-                    value={bookData.startDay}
-                    onChange={handleInputChange}
-                    required
-                    className="form-control"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="telephone">Ngày kết thúc *</label>
-                  <input
-                    type="date"
-                    id="endDay"
-                    name="endDay"
-                    value={bookData.endDay}
-                    onChange={handleInputChange}
-                    required
-                    className="form-control"
-                  />
+                <div className="form-group-div-date">
+                  <div className="form-group-date">
+                    <label htmlFor="telephone">Ngày bắt đầu: </label>
+                    <input
+                      type="date"
+                      id="startDay"
+                      name="startDay"
+                      value={bookData.startDay}
+                      onChange={handleInputChange}
+                      required
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="form-group-date">
+                    <label htmlFor="telephone">Ngày kết thúc: </label>
+                    <input
+                      type="date"
+                      id="endDay"
+                      name="endDay"
+                      value={bookData.endDay}
+                      onChange={handleInputChange}
+                      required
+                      className="form-control"
+                    />
+                  </div>
                 </div>
               </div>
 
@@ -220,7 +226,7 @@ const Posting = () => {
                   type="text"
                   id="voucher"
                   name="voucher"
-                  placeholder="Áp dụng Voucher"
+                  placeholder="Voucher của bạn"
                   value={voucher}
                   onChange={handleVoucherChange}
                   required
