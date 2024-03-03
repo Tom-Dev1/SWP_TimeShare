@@ -29,7 +29,7 @@
 }
 
 .booking-summary {
-  width: 300px; /* Adjust the width as needed */
+  width: 300px;
   flex-shrink: 0; /* Prevents the summary from shrinking */
 }
 

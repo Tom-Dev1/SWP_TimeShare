@@ -7,6 +7,9 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
+import Swal from 'sweetalert2';
+
+import { useNavigate } from 'react-router-dom';
 const Posting = () => {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -14,7 +17,7 @@ const Posting = () => {
   const imageReal = JSON.parse(localStorage.getItem('imageReal'));
   const [voucher, setVoucher] = useState('');
   const [voucherData, setVoucherData] = useState('');
-
+  const navigate = useNavigate();
   const [total, setTotal] = useState(Realestate.price);
   const [bookData, setBookData] = useState({
     phone: '',
@@ -64,8 +67,8 @@ const Posting = () => {
     try {
       const response = await CreateBooking(updatedBookData);
       Swal.fire({
-        icon: "success",
-        title: "Đặt chỗ thành công",
+        icon: 'success',
+        title: 'Đặt chỗ thành công',
       }).then(() => {
         navigate(`/user/checkout/${response.id}`);
       });
@@ -107,7 +110,6 @@ const Posting = () => {
                   của bạn.
                 </p>
                 <div className="form-group">
-
                   <label htmlFor="adults">Người lớn *</label>
 
                   <select
@@ -117,7 +119,6 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
-
                     <option value="">- Số người lớn -</option>
 
                     <option value="1">1</option>
@@ -135,7 +136,6 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
-
                     <option value="">- Số trẻ em -</option>
 
                     <option value="0">0</option>
@@ -147,7 +147,6 @@ const Posting = () => {
               <div className="form-section">
                 <h2 className="booking-title">Thông tin liên hệ của bạn </h2>
                 <div className="form-group">
-
                   <label htmlFor="fullName">Họ và tên *</label>
 
                   <input
@@ -192,7 +191,6 @@ const Posting = () => {
                     id="endDay"
                     name="endDay"
                     value={bookData.endDay}
-
                     onChange={handleInputChange}
                     required
                     className="form-control"
@@ -233,7 +231,6 @@ const Posting = () => {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>
