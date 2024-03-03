@@ -240,7 +240,14 @@ const Posting = () => {
             <div className="text-summary">
               <h2>Khách sạn: {Realestate.name}</h2>
               <h2>Địa điểm: {Realestate.location}</h2>
-              <h2>Ngày ở: 4 Đêm</h2>
+              <h2>
+                Ngày ở:{" "}
+                {Math.floor(
+                  (new Date(timeshare.endDay) - new Date(timeshare.startDay)) /
+                    (24 * 60 * 60 * 1000)
+                )}{" "}
+                Đêm
+              </h2>
             </div>
             <div className="_line"></div>
             <h2 className="total-summary">

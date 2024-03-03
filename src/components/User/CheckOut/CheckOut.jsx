@@ -14,6 +14,7 @@ import {
 } from "../../API/APIConfigure";
 
 import "./checkout.css";
+import Cancel from "./Cancel";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -77,6 +78,9 @@ const Checkout = () => {
               alt=""
             />
             <div className="tittle-real">
+              <div className="Cancel-booking">
+                <Cancel status={booking.status} />
+              </div>
               <h1>
                 Tên khách sạn:{" "}
                 {booking.realestate ? booking.realestate.name : ""}
