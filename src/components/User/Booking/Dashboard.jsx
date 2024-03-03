@@ -42,7 +42,6 @@ const Dashboard = () => {
         })
       );
       setBooking(bookingsWithRealestate || []);
-      console.log(bookingsWithRealestate);
     } catch (err) {
       toast.error("Lỗi lấy thông tin Booking");
       console.error(err);
