@@ -16,7 +16,11 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllBookingsByMemberID } from "../../API/APIConfigure";
+import {
+  GetAllBookingsByMemberID,
+  GetbyRealestateID,
+  GetTimeShareById,
+} from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
@@ -30,7 +34,15 @@ const Dashboard = () => {
   const fetchBooking = async () => {
     try {
       const response = await GetAllBookingsByMemberID(userInfo.id);
-      setBooking(response || []);
+      const bookingsWithRealestate = await Promise.all(
+        response.map(async (booking) => {
+          const timeshare = await GetTimeShareById(booking.timeshareId);
+          const realestate = await GetbyRealestateID(timeshare.realestateId);
+          return { ...booking, realestate, timeshare };
+        })
+      );
+      setBooking(bookingsWithRealestate || []);
+      console.log(bookingsWithRealestate);
     } catch (err) {
       toast.error("Lỗi lấy thông tin Booking");
       console.error(err);
@@ -157,7 +169,7 @@ const Dashboard = () => {
             <TableBody>
               {sliced.map((item) => (
                 <TableRow key={item.id}>
-                  <TableCell align="center">{item.timeshareId}</TableCell>
+                  <TableCell align="center">{item.realestate.name}</TableCell>
                   <TableCell align="center">
                     {item.endDay && item.startDay
                       ? Math.ceil(
