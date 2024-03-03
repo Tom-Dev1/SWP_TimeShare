@@ -1,31 +1,31 @@
-import Navbar from "../../components/navbar/Navbar";
-import "./posting.css";
-import { BASE_URL, CreateBooking } from "../../components/API/APIConfigure";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router";
-import { toast } from "react-toastify";
-import axios from "axios";
+import Navbar from '../../components/navbar/Navbar';
+import './posting.css';
+import { BASE_URL, CreateBooking } from '../../components/API/APIConfigure';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 const Posting = () => {
   const { id } = useParams();
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const Realestate = JSON.parse(localStorage.getItem("Realestate"));
-  const imageReal = JSON.parse(localStorage.getItem("imageReal"));
-  const [voucher, setVoucher] = useState("");
-  const [voucherData, setVoucherData] = useState("");
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const Realestate = JSON.parse(localStorage.getItem('Realestate'));
+  const imageReal = JSON.parse(localStorage.getItem('imageReal'));
+  const [voucher, setVoucher] = useState('');
+  const [voucherData, setVoucherData] = useState('');
   const [total, setTotal] = useState(Realestate.price);
 
   const [bookData, setBookData] = useState({
-    phone: "",
-    fullName: "",
-    paymentID: "",
+    phone: '',
+    fullName: '',
+    paymentID: '',
     timeshareId: id,
-    startDay: "",
-    endDay: "",
+    startDay: '',
+    endDay: '',
     memberId: userInfo.id,
     amount: total,
-    adult: "",
-    children: "",
-    status: "1",
+    adult: '',
+    children: '',
+    status: '1',
   });
   const handleVoucherChange = (event) => {
     setVoucher(event.target.value);
@@ -38,10 +38,10 @@ const Posting = () => {
       if (response.data && response.data.data != null) {
         setVoucherData(response.data);
       } else {
-        toast.error("Mã giảm giá không hợp lệ");
+        toast.error('Mã giảm giá không hợp lệ');
       }
     } catch (error) {
-      console.error("Error fetching voucher data", error);
+      console.error('Error fetching voucher data', error);
     }
   };
   const handleSubmit = async (e) => {
@@ -77,10 +77,10 @@ const Posting = () => {
 
     if (voucherData && voucherData.data) {
       if (voucherData.data.status === true) {
-        toast.success("Mã giảm giá hợp lệ");
+        toast.success('Mã giảm giá hợp lệ');
         newTotal -= (Realestate.price * voucherData.data.amount) / 100;
       } else {
-        toast.error("Mã đã hết hạn");
+        toast.error('Mã đã hết hạn');
       }
     }
 
@@ -92,15 +92,15 @@ const Posting = () => {
       <section className="main-content">
         <div className="container">
           <div className="booking-form">
-            <h1>Booking Request</h1>
+            <h1 className="booking-title">Đặt lịch ở đây</h1>
             <form onSubmit={handleSubmit} className="booking-request-form">
               <div className="form-section">
                 <p>
-                  This contact information will be shared with the owner in
-                  order to complete your reservation.
+                  Thông tin liên hệ này sẽ được chia sẻ với chủ sở hữu để hoàn tất việc đặt phòng
+                  của bạn.
                 </p>
                 <div className="form-group">
-                  <label htmlFor="adults">Adults *</label>
+                  <label htmlFor="adults">Người lớn *</label>
                   <select
                     id="adults"
                     name="adult"
@@ -108,7 +108,7 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
-                    <option value="">- select -</option>
+                    <option value="">- Số người lớn -</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -116,7 +116,7 @@ const Posting = () => {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="children">Children (under 18) *</label>
+                  <label htmlFor="children">Trẻ em (Dưới 18 tuổi) *</label>
                   <select
                     id="children"
                     name="children"
@@ -124,7 +124,7 @@ const Posting = () => {
                     onChange={handleInputChange}
                     className="form-control"
                   >
-                    <option value="">- select -</option>
+                    <option value="">- Số trẻ em -</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -132,15 +132,15 @@ const Posting = () => {
                   </select>
                 </div>
               </div>
-
               <div className="form-section">
-                <h2>Primary Guest</h2>
+                <h2 className="booking-title">Thông tin liên hệ của bạn </h2>
                 <div className="form-group">
-                  <label htmlFor="fullName">Full Name *</label>
+                  <label htmlFor="fullName">Họ và tên *</label>
                   <input
                     type="text"
                     id="fullName"
                     name="fullName"
+                    placeholder="Tên của bạn"
                     value={bookData.fullName}
                     onChange={handleInputChange}
                     required
@@ -148,11 +148,12 @@ const Posting = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="telephone">Telephone *</label>
+                  <label htmlFor="telephone">Số điện thoại *</label>
                   <input
                     type="text"
                     id="telephone"
                     name="telephone"
+                    placeholder="Số điện thoại của bạn"
                     value={bookData.telephone}
                     onChange={handleInputChange}
                     required
@@ -162,37 +163,37 @@ const Posting = () => {
               </div>
 
               <button type="submit" className="btn btn-primary">
-                Submit booking
+                Đặt phòng
               </button>
             </form>
           </div>
-        </div>
-        <div className="booking-summary">
-          <img src={BASE_URL + imageReal[0]} alt={Realestate.name} />
-          <h2>{Realestate.name}</h2>
-          <p>{Realestate.location}</p>
-          <ul>
-            <li>Stay: 4 nights</li>
-            <li>Total: {total}</li>
-          </ul>
-          <div className="form-group">
-            <label htmlFor="voucher">Voucher</label>
-            <input
-              type="text"
-              id="voucher"
-              name="voucher"
-              value={voucher}
-              onChange={handleVoucherChange}
-              required
-              className="form-control"
-            />
-            <button
-              type="button"
-              onClick={handleAddVoucher}
-              className="btn btn-primary"
-            >
-              Add Voucher
-            </button>
+          <div className="booking-summary">
+            <img src={BASE_URL + imageReal[0]} alt={Realestate.name} />
+            <div className="text-summary">
+              <h2>Khách sạn: {Realestate.name}</h2>
+              <h2>Địa điểm: {Realestate.location}</h2>
+              <h2>Ngày ở: 4 Đêm</h2>
+            </div>
+            <div className="_line"></div>
+            <h2 className="total-summary">Tổng giá tiền: {total.toLocaleString()}VNĐ</h2>
+            <div className="form-group">
+              <div className="voucherLabel">
+                <label htmlFor="voucher">Voucher giảm giá khi đặt phòng</label>
+                <input
+                  type="text"
+                  id="voucher"
+                  name="voucher"
+                  placeholder="Áp dụng Voucher"
+                  value={voucher}
+                  onChange={handleVoucherChange}
+                  required
+                  className="form-control"
+                />
+                <button type="button" onClick={handleAddVoucher} className="btn btn-primary">
+                  Thêm Voucher
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
