@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import MailList from '../../components/mailList/MailList';
+import Footer from '../../components/footer/Footer';
 const Posting = () => {
   const { id } = useParams();
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -89,8 +91,8 @@ const Posting = () => {
   return (
     <>
       <Navbar />
-      <section className="main-content">
-        <div className="container">
+      <div className="main-content">
+        <div className="posting_container">
           <div className="booking-form">
             <h1 className="booking-title">Đặt lịch ở đây</h1>
             <form onSubmit={handleSubmit} className="booking-request-form">
@@ -196,7 +198,11 @@ const Posting = () => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
+      <div className="homeContainer">
+        <MailList />
+        <Footer />
+      </div>
     </>
   );
 };
