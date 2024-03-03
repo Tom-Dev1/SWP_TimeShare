@@ -13,8 +13,8 @@
 
   padding: 40px;
   border-radius: 30px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
-    rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 .image-booking {
   width: 100%;
@@ -36,8 +36,8 @@
   max-width: 400px;
   border-radius: 30px;
   padding: 20px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
-    rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 .paymentConfirm {
   padding: 20px;
@@ -52,4 +52,7 @@
 .paymentConfirm h1:first-child {
   font-weight: bold;
   font-size: 20px;
+}
+.Cancel-booking {
+  float: right;
 }

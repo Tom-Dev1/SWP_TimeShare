@@ -5,6 +5,7 @@ import {
 } from "@paypal/react-paypal-js";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 // This value is from the props in the UI
 const style = { layout: "vertical" };
@@ -49,6 +50,14 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
                 icon: "success",
               });
             }
+            axios
+              .put("your-api-url/orders/orderId", {
+                status: "2",
+              })
+              .then((res) => {
+                console.log(res.data);
+              })
+              .catch((err) => console.error(err));
           })
         }
       />
