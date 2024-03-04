@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "./Cancel.css";
-
+import { UpdateBookingStatus } from "../../API/APIConfigure";
+import { useParams } from "react-router-dom";
 const Cancel = ({ status }) => {
   const [bookingStatus, setBookingStatus] = useState(status);
-
-  const handleClick = () => {
+  const id = useParams();
+  const handleClick = ({ idBooking, status }) => {
     if (bookingStatus === "2") {
       Swal.fire({
         icon: "error",
@@ -21,18 +22,23 @@ const Cancel = ({ status }) => {
         icon: "question",
       }).then((result) => {
         if (result.isConfirmed) {
-          axios
-            .put("/api/endpoint", { status: "3" })
-            .then((response) => {
-              setBookingStatus(response.data.status);
-              Swal.fire({
-                icon: "success",
-                title: "Hủy thành công",
-              });
-            })
-            .catch((error) => {
-              console.error(error);
+          try {
+            console.log(status);
+            UpdateBookingStatus(idBooking.id, status);
+            console.log(idBooking.id);
+            Swal.fire({
+              icon: "success",
+              title: "Hủy thành công",
+            }).then(() => {
+              window.location.reload();
             });
+          } catch (err) {
+            Swal.fire({
+              icon: "error",
+              title: "Hủy thất bại",
+            });
+            console.error(err);
+          }
         }
       });
     }
@@ -41,7 +47,10 @@ const Cancel = ({ status }) => {
   return (
     <div>
       {bookingStatus !== "3" && (
-        <button className="btn-cancel" onClick={handleClick}>
+        <button
+          className="btn-cancel"
+          onClick={() => handleClick({ idBooking: id, status: "3" })}
+        >
           Hủy đặt
         </button>
       )}

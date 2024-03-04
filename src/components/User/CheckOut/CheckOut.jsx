@@ -92,36 +92,64 @@ const Checkout = () => {
             </div>
           </div>
 
-          {booking && booking.status !== "2" && (
-            <div className="payment-container">
-              <div className="paymentConfirm">
-                <div className="title-booking">
-                  <h1>Xác nhận thông tin của bạn</h1>
-                  <h1>Họ và tên: {booking.fullName}</h1>
-                  <h1>Số điện thoại: {booking.phone}</h1>
-                  <h1>
-                    Ngày checkin:{" "}
-                    {new Date(booking.startDay).toLocaleDateString()}
-                  </h1>
-                  <h1>
-                    Ngày checkout:{" "}
-                    {new Date(booking.endDay).toLocaleDateString()}
-                  </h1>
-                  <h1>Trạng thái: {getStatusString(booking.status)}</h1>
-                  <h1>Người lớn: {booking.adult}</h1>
-                  <h1>Trẻ em: {booking.children}</h1>
+          {booking ? (
+            booking.status !== "2" ? (
+              <div className="payment-container">
+                <div className="paymentConfirm">
+                  <div className="title-booking">
+                    <h1>Xác nhận thông tin của bạn</h1>
+                    <h1>Họ và tên: {booking.fullName}</h1>
+                    <h1>Số điện thoại: {booking.phone}</h1>
+                    <h1>
+                      Ngày checkin:{" "}
+                      {new Date(booking.startDay).toLocaleDateString()}
+                    </h1>
+                    <h1>
+                      Ngày checkout:{" "}
+                      {new Date(booking.endDay).toLocaleDateString()}
+                    </h1>
+                    <h1>Trạng thái: {getStatusString(booking.status)}</h1>
+                    <h1>Người lớn: {booking.adult}</h1>
+                    <h1>Trẻ em: {booking.children}</h1>
 
-                  <div className="_line"></div>
-                  <h2 className="total-summary">
-                    Tổng giá tiền: {booking.amount.toLocaleString()}VNĐ
-                  </h2>
+                    <div className="_line"></div>
+                    <h2 className="total-summary">
+                      Tổng giá tiền: {booking.amount.toLocaleString()}VNĐ
+                    </h2>
+                  </div>
+                </div>
+                <div className="payment-booking">
+                  <PayPal amount={total} />
                 </div>
               </div>
-              <div className="payment-booking">
-                <PayPal amount={total} />
+            ) : (
+              <div className="payment-container">
+                <div className="paymentConfirm">
+                  <div className="title-booking">
+                    <h1>Xác nhận thông tin của bạn</h1>
+                    <h1>Họ và tên: {booking.fullName}</h1>
+                    <h1>Số điện thoại: {booking.phone}</h1>
+                    <h1>
+                      Ngày checkin:{" "}
+                      {new Date(booking.startDay).toLocaleDateString()}
+                    </h1>
+                    <h1>
+                      Ngày checkout:{" "}
+                      {new Date(booking.endDay).toLocaleDateString()}
+                    </h1>
+                    <h1>Trạng thái: {getStatusString(booking.status)}</h1>
+                    <h1>Người lớn: {booking.adult}</h1>
+                    <h1>Trẻ em: {booking.children}</h1>
+
+                    <div className="_line"></div>
+                    <h2 className="total-summary">
+                      Tổng giá tiền: {booking.amount.toLocaleString()}VNĐ
+                    </h2>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
+            )
+          ) : null}
         </div>
       </div>
       <div className="homeContainer">
