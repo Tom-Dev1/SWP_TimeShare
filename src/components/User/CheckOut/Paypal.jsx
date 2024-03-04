@@ -2,17 +2,20 @@ import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
-} from '@paypal/react-paypal-js';
-import { useEffect } from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
 
+} from "@paypal/react-paypal-js";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { UpdateBookingStatus } from "../../API/APIConfigure";
 // This value is from the props in the UI
-const style = { layout: 'vertical' };
+const style = { layout: "vertical" };
 
 // Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({ currency, showSpinner, amount }) => {
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
+  const id = useParams();
   useEffect(() => {
     dispatch({
       type: 'resetOptions',
@@ -47,15 +50,14 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
                 text: 'Chúc bạn có kỳ nghỉ vui vẻ',
                 icon: 'success',
               });
+              UpdateBookingStatus(id.id, "2")
+                .then((res) => {
+                  console.log(res.data);
+                  window.location.reload();
+                })
+                .catch((err) => console.error(err));
             }
-            axios
-              .put('your-api-url/orders/orderId', {
-                status: '2',
-              })
-              .then((res) => {
-                console.log(res.data);
-              })
-              .catch((err) => console.error(err));
+
           })
         }
       />
