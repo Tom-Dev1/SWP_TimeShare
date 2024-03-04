@@ -1,3 +1,10 @@
+.checout_Wapper {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  height: 1660px;
+  max-height: 100%;
+}
 .checkoutContainer {
   margin-top: 50px;
   display: flex;
@@ -7,14 +14,14 @@
   gap: 20px;
   max-width: 1180px;
   width: 100%;
+  height: 990px;
 }
 .checkoutCard {
   width: 100%;
-
   padding: 40px;
   border-radius: 30px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
-    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 .image-booking {
   width: 100%;
@@ -36,16 +43,17 @@
   max-width: 400px;
   border-radius: 30px;
   padding: 20px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
-    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 .paymentConfirm {
   padding: 20px;
-  max-width: 100%;
   display: flex;
-  margin-bottom: 100px;
+  max-width: 680px;
+  width: 100%;
 }
 .paymentConfirm h1 {
+  display: flex;
   margin-bottom: 10px;
   font-size: 18px;
 }
@@ -54,5 +62,24 @@
   font-size: 20px;
 }
 .Cancel-booking {
-  float: right;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: 10px;
+}
+.payment-booking {
+  position: relative;
+}
+.paypal-container {
+  height: auto; /* Thiết lập chiều cao mặc định */
+  transition: height 0.3s ease; /* Thêm hiệu ứng chuyển động */
+}
+.paypal-container.expanded {
+  height: 300px; /* Chiều cao khi được mở rộng */
+}
+._line {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  width: 640px;
 }
