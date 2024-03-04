@@ -115,7 +115,7 @@ const Timeshare = () => {
                 <th>Ngày kết thúc</th>
                 <th>Đêm</th>
                 <th>Giá</th>
-                <th>Số lượng khách</th>
+                {/* <th>Số lượng khách</th> */}
                 <th></th>
               </tr>
               {sortedData.map((item) => {
@@ -145,7 +145,7 @@ const Timeshare = () => {
                         : "Invalid date"}
                     </td>
                     <td>{item.price.toLocaleString()}/VNĐ</td>
-                    <td>{item.status}</td>
+                    {/* <td>{item.status}</td> */}
                     <td>
                       {isStatus2 ? ( // Render as text if status is 2
                         <div style={{ padding: "16px 10px" }}>Bấm để thuê</div>
