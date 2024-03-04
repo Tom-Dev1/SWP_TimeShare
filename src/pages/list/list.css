@@ -435,9 +435,7 @@ strong {
 .opacity-100 {
     opacity: 1;
 }
-.pt-1 {
-    padding-top: 4px;
-}
+
 .z-60 {
     z-index: 60;
 }
@@ -603,7 +601,7 @@ strong {
     border: 0 solid;
 }
 
-.ResultListPage_content {
+/* .ResultListPage_content {
     position: relative;
     padding-top: 8px;
-}
+} */
