@@ -46,7 +46,7 @@
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
     rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
-.paymentConfirm {
+.title-booking {
   padding: 20px;
   display: flex;
   max-width: 680px;
@@ -67,16 +67,7 @@
   align-items: center;
   margin-top: 10px;
 }
-.payment-booking {
-  position: relative;
-}
-.paypal-container {
-  height: auto; /* Thiết lập chiều cao mặc định */
-  transition: height 0.3s ease; /* Thêm hiệu ứng chuyển động */
-}
-.paypal-container.expanded {
-  height: 300px; /* Chiều cao khi được mở rộng */
-}
+
 ._line {
   display: flex;
   justify-content: center;
