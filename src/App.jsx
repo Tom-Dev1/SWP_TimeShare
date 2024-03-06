@@ -23,15 +23,16 @@ import ConfirmTrade from "./pages/trade/ConfirmTrade";
 import DetailsTrade from "./pages/trade/DetailsTrade";
 
 const AdminWrapper = ({ children }) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const isAdmin = userInfo?.isAdmin;
-  return isAdmin ? children : <ErrorPage />;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const isAdmin = userInfo?.isAdmin;
+    return isAdmin ? children : <ErrorPage />;
 };
 const UserWrapper = ({ children }) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  return userInfo ? children : <ErrorPage />;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    return userInfo ? children : <ErrorPage />;
 };
 function App() {
+
   return (
     <Routes>
       <Route path="/*" element={<ErrorPage />} />
@@ -172,6 +173,7 @@ function App() {
       />
     </Routes>
   );
+
 }
 
 export default App;

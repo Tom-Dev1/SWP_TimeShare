@@ -8,6 +8,7 @@ import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
 import { BASE_URL } from "../../components/API/APIConfigure";
 const Timeshare = () => {
+
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [realEstateData, setRealEstateData] = useState(null);
@@ -40,37 +41,50 @@ const Timeshare = () => {
     setRealEstateData(realData);
   }, [id]);
 
-  const imageReal = JSON.parse(localStorage.getItem("imageReal"));
 
-  //format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    return date.toLocaleDateString("en-US", options);
-  };
+                if (response.data.data === null) {
+                    throw new Error("Network response was not ok");
+                } else {
+                    setData(response.data.data);
+                    console.log(data);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        // Fetch data
+        fetchData();
+        // Retrieve real estate data from localStorage only once when the component mounts
+        const realEstateDataString = localStorage.getItem("Realestate");
+        const realData = JSON.parse(realEstateDataString);
+        setRealEstateData(realData);
+    }, [id]);
 
-  // sort status of data
-  const sortedData = [...data].sort((a, b) => {
-    // If status is equal, maintain the original order
-    if (a.status === b.status) {
-      return 0;
-    }
-    // If a.status is 1, prioritize it over b.status
-    if (a.status === "1") {
-      return -1;
-    }
-    // If b.status is 1, prioritize b over a
-    if (b.status === "1") {
-      return 1;
-    }
-    // If both statuses are not 1, maintain the original order
-    return 0;
-  });
+    const imageReal = JSON.parse(localStorage.getItem("imageReal"));
 
-  // Render sorted data
-  {
-    sortedData.map((item) => {
-      // rest of the code...
+    //format date
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { year: "numeric", month: "numeric", day: "numeric" };
+        return date.toLocaleDateString("en-US", options);
+    };
+
+    // sort status of data
+    const sortedData = [...data].sort((a, b) => {
+        // If status is equal, maintain the original order
+        if (a.status === b.status) {
+            return 0;
+        }
+        // If a.status is 1, prioritize it over b.status
+        if (a.status === "1") {
+            return -1;
+        }
+        // If b.status is 1, prioritize b over a
+        if (b.status === "1") {
+            return 1;
+        }
+        // If both statuses are not 1, maintain the original order
+        return 0;
     });
   }
   return (
@@ -178,12 +192,9 @@ const Timeshare = () => {
               </tbody>
             </table>
           </div>
+
         </div>
-        <MailList />
-        <Footer />
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Timeshare;

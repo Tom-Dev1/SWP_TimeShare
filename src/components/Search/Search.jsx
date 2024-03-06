@@ -217,7 +217,7 @@ const Search = ({ onSearch, searchValue, setSearchValue }) => {
                                 </div>
                                 <button onClick={handleSearch} className="searchButton_button">
                                     <span className="AnimatedContent">
-                                        <span>Search</span>
+                                        <span>Tìm</span>
                                     </span>
                                 </button>
                             </div>

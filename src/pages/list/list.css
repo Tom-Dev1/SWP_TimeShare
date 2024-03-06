@@ -413,13 +413,39 @@ strong {
     border: 1px solid rgba(19, 145, 210, 1);
 }
 /* Dropdown */
-
+.headerIcon {
+    padding: 0 10px;
+}
+.headerSearchText {
+    /* color: lightgray; */
+    cursor: pointer;
+}
+.dateWrapper {
+    box-shadow: 0 0 transparent, 0 0 transparent, 0 0 transparent, 0 0 transparent, 0 10px 30px rgba(41, 51, 57, 0.75);
+}
+.date {
+    will-change: transform;
+    transform: translate(253px, 78px);
+    position: absolute;
+    top: 0;
+    z-index: 60;
+    left: 0;
+    /* padding: 4px; */
+    border-radius: 8px;
+    box-shadow: 0 0 transparent, 0 0 transparent, 0 0 transparent, 0 0 transparent, 0 10px 30px rgba(41, 51, 57, 0.75);
+}
+.rdrDateDisplayWrapper {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: rgba(0, 124, 194, 1) !important;
+}
 .flyout_container {
     will-change: transform;
     position: absolute;
     top: 0px;
     left: 0px;
-    transform: translate(258px, 65px);
+    /* transform: translate(258px, 65px); */
+    transform: translate(480px, 78px);
 }
 .durian-200 {
     transition-duration: 0.2s;
