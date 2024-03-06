@@ -274,7 +274,7 @@ const Header = () => {
                     <div className="bann-des">Trải nghiệm cảm giác với mọi giác quan!</div>
                     <div>
                         <button>
-                            <Link>Khám phoá</Link>
+                            <Link to="/hotels">Khám phá</Link>
                         </button>
                     </div>
                 </div>

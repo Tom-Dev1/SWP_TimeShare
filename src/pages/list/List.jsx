@@ -744,9 +744,9 @@ const List = () => {
                                                                                         <input
                                                                                             className="PriceInput_input"
                                                                                             type="number"
-                                                                                            // min="2"
-                                                                                            // max="600"
-                                                                                            // value=""
+                                                                                            min="2"
+                                                                                            max="600"
+                                                                                            value=""
                                                                                         />
                                                                                         <span className="PriceInput_label">
                                                                                             $2

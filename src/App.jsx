@@ -20,131 +20,131 @@ import Posting from "./pages/posting/Posting";
 import CheckOut from "./pages/user/CheckOut";
 
 const AdminWrapper = ({ children }) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const isAdmin = userInfo?.isAdmin;
-  return isAdmin ? children : <ErrorPage />;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const isAdmin = userInfo?.isAdmin;
+    return isAdmin ? children : <ErrorPage />;
 };
 const UserWrapper = ({ children }) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  return userInfo ? children : <ErrorPage />;
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    return userInfo ? children : <ErrorPage />;
 };
 function App() {
-  return (
-    <Routes>
-      <Route path="/*" element={<ErrorPage />} />
-      <Route path="/" element={<Home />} />
-      <Route path="/login-register" element={<Form />} />
-      <Route path="/hotels" element={<List />} />
-      <Route path="/hotels/:id" element={<Hotel />} />
-      <Route path="/timeshare/:id" element={<Timeshare />} />
-      <Route path="/posting/:id" element={<Posting />} />
-      <Route
-        path="/user/*"
-        element={
-          <UserWrapper>
-            <UserPage />
-          </UserWrapper>
-        }
-      />
-      <Route
-        path="/user/booking/:id"
-        element={
-          <UserWrapper>
-            <ErrorPage />
-          </UserWrapper>
-        }
-      />
-      <Route
-        path="/user/checkout/:id"
-        element={
-          <UserWrapper>
-            <CheckOut />
-          </UserWrapper>
-        }
-      />
-      {/* ProtectRouterAdmin */}
-      <Route
-        path="/admin/trade"
-        element={
-          <AdminWrapper>
-            <Trade />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin"
-        element={
-          <AdminWrapper>
-            <Admin />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/about"
-        element={
-          <AdminWrapper>
-            <About />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/user"
-        element={
-          <AdminWrapper>
-            <User />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/account"
-        element={
-          <AdminWrapper>
-            <Account />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/wallet"
-        element={
-          <AdminWrapper>
-            <Wallet />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/feedback"
-        element={
-          <AdminWrapper>
-            <Feedback />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/booking"
-        element={
-          <AdminWrapper>
-            <Booking />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/voucher"
-        element={
-          <AdminWrapper>
-            <Voucher />
-          </AdminWrapper>
-        }
-      />
-      <Route
-        path="/admin/realetates"
-        element={
-          <AdminWrapper>
-            <Realestates />
-          </AdminWrapper>
-        }
-      />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/*" element={<ErrorPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login-register" element={<Form />} />
+            <Route path="/hotels" element={<List />} />
+            <Route path="/hotels/:id" element={<Hotel />} />
+            <Route path="/timeshare/:id" element={<Timeshare />} />
+            <Route path="/posting/:id" element={<Posting />} />
+            <Route
+                path="/user/*"
+                element={
+                    <UserWrapper>
+                        <UserPage />
+                    </UserWrapper>
+                }
+            />
+            <Route
+                path="/user/booking/:id"
+                element={
+                    <UserWrapper>
+                        <ErrorPage />
+                    </UserWrapper>
+                }
+            />
+            <Route
+                path="/user/checkout/:id"
+                element={
+                    <UserWrapper>
+                        <CheckOut />
+                    </UserWrapper>
+                }
+            />
+            {/* ProtectRouterAdmin */}
+            <Route
+                path="/admin/trade"
+                element={
+                    <AdminWrapper>
+                        <Trade />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin"
+                element={
+                    <AdminWrapper>
+                        <Admin />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/about"
+                element={
+                    <AdminWrapper>
+                        <About />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/user"
+                element={
+                    <AdminWrapper>
+                        <User />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/account"
+                element={
+                    <AdminWrapper>
+                        <Account />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/wallet"
+                element={
+                    <AdminWrapper>
+                        <Wallet />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/feedback"
+                element={
+                    <AdminWrapper>
+                        <Feedback />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/booking"
+                element={
+                    <AdminWrapper>
+                        <Booking />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/voucher"
+                element={
+                    <AdminWrapper>
+                        <Voucher />
+                    </AdminWrapper>
+                }
+            />
+            <Route
+                path="/admin/realetates"
+                element={
+                    <AdminWrapper>
+                        <Realestates />
+                    </AdminWrapper>
+                }
+            />
+        </Routes>
+    );
 }
 
 export default App;
