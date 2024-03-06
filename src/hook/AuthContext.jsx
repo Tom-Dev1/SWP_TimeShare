@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
         dispatch({ type: "LOGIN", payload: { user } });
     };
     const logout = () => {
-        localStorage.removeItem("userInfo");
+        localStorage.clear();
         dispatch({ type: "LOGOUT" });
     };
 

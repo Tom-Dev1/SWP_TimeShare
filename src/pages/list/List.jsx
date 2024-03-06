@@ -550,16 +550,57 @@ import Navbar from "../../components/navbar/Navbar";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SearchItem from "../../components/searchItem/SearchItem";
 import { Slider } from "@mui/material";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { format } from "date-fns";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css";
 const List = () => {
     const [searchResult, setSearchResult] = useState([]);
     const [searchValue, setSearchValue] = useState("");
     const [priceRange, setPriceRange] = useState([0, 1000]);
-    const [showDropdown, setShowDropdown] = useState(false);
     const [isSearchValueLoaded, setIsSearchValueLoaded] = useState(false);
+    const [dateDropdown, setDateDropdown] = useState(false);
+    const [priceDropdown, setPricePropdown] = useState(false);
+
     const dropdownRef = useRef(null);
-    const toggleDropdown = () => {
-        setShowDropdown(!showDropdown);
+    const dateDropdownRef = useRef(null);
+
+    const [date, setDate] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: "selection",
+        },
+    ]);
+    const toggleDropdown = (dropdown) => {
+        if (dropdown === "date") {
+            setDateDropdown(!dateDropdown);
+            setPricePropdown(false);
+        } else if (dropdown === "price") {
+            setPricePropdown(!priceDropdown);
+            setDateDropdown(false);
+        }
     };
+    const handleClickOutside = (event) => {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target) &&
+            dateDropdownRef.current &&
+            !dateDropdownRef.current.contains(event.target)
+        ) {
+            setPricePropdown(false);
+            setDateDropdown(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     const handlePriceChange = (event, newValue) => {
         setPriceRange(newValue);
     };
@@ -618,19 +659,54 @@ const List = () => {
                             <div className="RefinementRow_placeholder ">
                                 <div className="RowItems_itemList">
                                     <div className="RowItems_priceFilter">
+                                        <div className="RefinementRowElement" ref={dateDropdownRef}>
+                                            <button
+                                                className="RefinementRowElement_RowBtn"
+                                                onClick={() => toggleDropdown("date")}
+                                            >
+                                                <strong className="RefinementRowElement_titleItem block">Date</strong>
+                                                <span className="RefinementRowElement_optionItem border-grey-300">
+                                                    <span className="truncate w-full lsItem">
+                                                        <span></span>
+                                                        <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
+                                                        <span className="headerSearchText">{`${format(
+                                                            date[0].startDate,
+                                                            "MM/dd/yyyy",
+                                                        )} to  ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+                                                    </span>
+                                                    <span className="optionItem_plus rotate-90 transform">
+                                                        <KeyboardArrowDownIcon />
+                                                    </span>
+                                                </span>
+                                            </button>
+                                            {dateDropdown && (
+                                                <DateRange
+                                                    editableDateInputs={true}
+                                                    onChange={(item) => setDate([item.selection])}
+                                                    moveRangeOnFirstSelection={false}
+                                                    ranges={date}
+                                                    className="date"
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="RowItems_rowItem">
                                         <div className="RefinementRowElement" ref={dropdownRef}>
-                                            <button className="RefinementRowElement_RowBtn" onClick={toggleDropdown}>
+                                            <button
+                                                className="RefinementRowElement_RowBtn"
+                                                onClick={() => toggleDropdown("price")}
+                                            >
                                                 <strong className="RefinementRowElement_titleItem block">
                                                     Price: <span className="font-normal">per night</span>
                                                 </strong>
                                                 <span
                                                     className={`RefinementRowElement_optionItem ${
-                                                        showDropdown ? "border-blue-700" : "border-grey-300"
+                                                        priceDropdown ? "border-blue-700" : "border-grey-300"
                                                     }`}
-                                                    ref={dropdownRef}
                                                 >
                                                     <span className="truncate w-full">
                                                         <span></span>
+
                                                         <span>$2 - $600 +</span>
                                                     </span>
                                                     <span className="optionItem_plus rotate-90 transform">
@@ -638,8 +714,7 @@ const List = () => {
                                                     </span>
                                                 </span>
                                             </button>
-
-                                            {showDropdown && (
+                                            {priceDropdown && (
                                                 <div className="flyout_container z-60 absolute top-0 pt-1 Flyout_fadeIn opacity-0 transition-opacity durian-200 opacity-100">
                                                     <div className="Flyout_wrapper bg-white shadow-popover rounded rounded-sm">
                                                         <div className="text-m rounded-sm overflow-hidden RefinementRowElement_elementContent RefinementRowElement_extended">
@@ -669,9 +744,9 @@ const List = () => {
                                                                                         <input
                                                                                             className="PriceInput_input"
                                                                                             type="number"
-                                                                                            min="2"
-                                                                                            max="600"
-                                                                                            value="2"
+                                                                                            // min="2"
+                                                                                            // max="600"
+                                                                                            // value=""
                                                                                         />
                                                                                         <span className="PriceInput_label">
                                                                                             $2
@@ -689,7 +764,7 @@ const List = () => {
                                                                                             type="number"
                                                                                             min="2"
                                                                                             max="600"
-                                                                                            value="600"
+                                                                                            // value="600"
                                                                                         />
                                                                                         <span className="PriceInput_label">
                                                                                             1000000vnd
@@ -713,22 +788,6 @@ const List = () => {
                                                     </div>
                                                 </div>
                                             )}
-                                        </div>
-                                    </div>
-                                    <div className="RowItems_rowItem">
-                                        <div className="RefinementRowElement">
-                                            <button className="RefinementRowElement_RowBtn">
-                                                <strong className="RefinementRowElement_titleItem block">Filter</strong>
-                                                <span className="RefinementRowElement_optionItem border-grey-300">
-                                                    <span className="truncate w-full">
-                                                        <span></span>
-                                                        <span>Select</span>
-                                                    </span>
-                                                    <span className="optionItem_plus rotate-90 transform">
-                                                        <KeyboardArrowDownIcon />
-                                                    </span>
-                                                </span>
-                                            </button>
                                         </div>
                                     </div>
                                     <div className="RowItems_rowItem">

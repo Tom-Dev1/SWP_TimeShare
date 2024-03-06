@@ -259,21 +259,28 @@
 // };
 
 // export default Header;
-
-import { useNavigate } from "react-router-dom";
-import Search from "../Search/Search";
-
+import { Link } from "react-router-dom";
+import bg1 from "../../assets/img/banner.png";
+import "./header.css";
 const Header = () => {
-    const navigate = useNavigate();
-
-    const handleSearch = (searchValue) => {
-        const searchTerm = {
-            destination: searchValue,
-        };
-        localStorage.setItem("searchkey", JSON.stringify(searchTerm));
-        navigate("/hotels");
-    };
-    return <div className="header">{/* <Search onSearch={handleSearch} /> */}</div>;
+    return (
+        <div className="header-element-contain">
+            <div className="header-img-bg">
+                <img src={bg1} alt="bg" width={"100%"} height={"100%"} />
+                <div className="banner-container">
+                    <div className="banner-info">
+                        <div className="banner-tit">Chào mừng đến với bình nguyên vô tận</div>
+                    </div>
+                    <div className="bann-des">Trải nghiệm cảm giác với mọi giác quan!</div>
+                    <div>
+                        <button>
+                            <Link>Khám phoá</Link>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Header;
