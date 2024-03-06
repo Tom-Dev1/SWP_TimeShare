@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -6,11 +6,16 @@ import Rating from "@mui/material/Rating";
 import "./TimeShare.css";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
+import { BASE_URL } from "../../components/API/APIConfigure";
 const Timeshare = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
   const [realEstateData, setRealEstateData] = useState(null);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/trade/${id}`);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +27,6 @@ const Timeshare = () => {
           throw new Error("Network response was not ok");
         } else {
           setData(response.data.data);
-          console.log(data);
         }
       } catch (err) {
         console.log(err);
@@ -101,7 +105,9 @@ const Timeshare = () => {
             </div>
             <div className="siDetails">
               <div className="siDetailTexts">
-                <button className="siCheckButton">Trao đổi kỳ nghỉ</button>
+                <button className="siCheckButton" onClick={handleClick}>
+                  Trao đổi kỳ nghỉ
+                </button>
               </div>
             </div>
           </div>
@@ -109,57 +115,67 @@ const Timeshare = () => {
         <div className="table-container">
           <div>
             <table className="table">
-              <tr>
-                <th></th>
-                <th>Ngày bắt đầu</th>
-                <th>Ngày kết thúc</th>
-                <th>Đêm</th>
-                <th>Giá</th>
-                {/* <th>Số lượng khách</th> */}
-                <th></th>
-              </tr>
-              {sortedData.map((item) => {
-                // Log item.status
-                const isStatus2 = item.status === "2";
-                const className =
-                  item.status === "1"
-                    ? "itemStatus-active"
-                    : item.status === "2"
-                    ? "itemStatus-inactive"
-                    : "";
-                return (
-                  <tr key={item.id} className={className}>
-                    <td>
-                      {item.status === "1" && (
-                        <div className="tb_new">Mới!</div>
-                      )}
-                    </td>
-                    <td>{formatDate(item.startDay)}</td>
-                    <td>{formatDate(item.endDay)}</td>
-                    <td>
-                      {item.endDay && item.startDay
-                        ? Math.ceil(
-                            (new Date(item.endDay) - new Date(item.startDay)) /
-                              (1000 * 60 * 60 * 24)
-                          )
-                        : "Invalid date"}
-                    </td>
-                    <td>{item.price.toLocaleString()}/VNĐ</td>
-                    {/* <td>{item.status}</td> */}
-                    <td>
-                      {isStatus2 ? ( // Render as text if status is 2
-                        <div style={{ padding: "16px 10px" }}>Bấm để thuê</div>
-                      ) : (
-                        <button className="tb_btn">
-                          <Link className="tb_link" to={`/posting/${item.id}`}>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Ngày bắt đầu</th>
+                  <th>Ngày kết thúc</th>
+                  <th>Đêm</th>
+                  <th>Giá</th>
+                  {/* <th>Số lượng khách</th> */}
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedData.map((item) => {
+                  // Log item.status
+                  const isStatus2 = item.status === "2";
+                  const className =
+                    item.status === "1"
+                      ? "itemStatus-active"
+                      : item.status === "2"
+                      ? "itemStatus-inactive"
+                      : "";
+                  return (
+                    <tr key={item.id} className={className}>
+                      <td>
+                        {item.status === "1" && (
+                          <div className="tb_new">Mới!</div>
+                        )}
+                      </td>
+                      <td>{formatDate(item.startDay)}</td>
+                      <td>{formatDate(item.endDay)}</td>
+                      <td>
+                        {item.endDay && item.startDay
+                          ? Math.ceil(
+                              (new Date(item.endDay) -
+                                new Date(item.startDay)) /
+                                (1000 * 60 * 60 * 24)
+                            )
+                          : "Invalid date"}
+                      </td>
+                      <td>{item.price.toLocaleString()}/VNĐ</td>
+                      {/* <td>{item.status}</td> */}
+                      <td>
+                        {isStatus2 ? ( // Render as text if status is 2
+                          <div style={{ padding: "16px 10px" }}>
                             Bấm để thuê
-                          </Link>
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
+                          </div>
+                        ) : (
+                          <button className="tb_btn">
+                            <Link
+                              className="tb_link"
+                              to={`/posting/${item.id}`}
+                            >
+                              Bấm để thuê
+                            </Link>
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           </div>
         </div>

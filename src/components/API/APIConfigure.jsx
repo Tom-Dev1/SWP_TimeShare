@@ -83,6 +83,29 @@ export const GetAllBookingsByID = (bookingID) => {
 export const GetTimeShareById = (timeshareID) => {
   return customAxios.get(`api/Timeshares/GetbyID?id=${timeshareID}`);
 };
+
+//Trade
+export const GetAllTrade = () => {
+  return customAxios.get(`api/Exchange/GetAll`);
+};
+export const GetTradeByID = (tradeID) => {
+  return customAxios.get(`api/Exchange/GetExchangebyID?id=${tradeID}`);
+};
+export const GetTradeByMemberID = (memberID) => {
+  return customAxios.get(
+    `api/Exchange/GetExchangebymemberID?memberid=${memberID}`
+  );
+};
+export const UpdateTradeStatus = (tradeID, newStatus) => {
+  return customAxios.put(`api/Exchange/Updatestatus?id==${tradeID}`, {
+    status: newStatus,
+  });
+};
+
+export const CreateTrade = (tradeData) => {
+  return instance.post(`api/Exchange/CreateExchange`, tradeData);
+};
+
 export {
   SignInAccount,
   SignUpAccount,
