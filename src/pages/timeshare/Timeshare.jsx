@@ -7,13 +7,11 @@ import './TimeShare.css';
 import MailList from '../../components/mailList/MailList';
 import Footer from '../../components/footer/Footer';
 import { BASE_URL } from '../../components/API/APIConfigure';
-
 const Timeshare = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [realEstateData, setRealEstateData] = useState(null);
   const navigate = useNavigate();
-
   const handleClick = () => {
     navigate(`/trade/${id}`);
   };
@@ -34,10 +32,8 @@ const Timeshare = () => {
         console.log(err);
       }
     };
-
     // Fetch data
     fetchData();
-
     // Retrieve real estate data from localStorage only once when the component mounts
     const realEstateDataString = localStorage.getItem('Realestate');
     const realData = JSON.parse(realEstateDataString);
@@ -71,6 +67,12 @@ const Timeshare = () => {
     return 0;
   });
 
+  // Render sorted data
+  {
+    sortedData.map((item) => {
+      // rest of the code...
+    });
+  }
   return (
     <div>
       <Navbar />
@@ -90,14 +92,15 @@ const Timeshare = () => {
             </div>
             <div className="siDetails">
               <div className="siDetailTexts">
-                <button className="siCheckButton" onClick={handleClick}>
-                  Trao đổi kỳ nghỉ
+                <button className="siCheckButton">
+                  <Link to={`/trade/${id}`} className="siCheckButton">
+                    Trao đổi kỳ nghỉ
+                  </Link>
                 </button>
               </div>
             </div>
           </div>
         )}
-
         <div className="table-container">
           <div>
             <table className="table">
@@ -114,6 +117,7 @@ const Timeshare = () => {
               </thead>
               <tbody>
                 {sortedData.map((item) => {
+                  // Log item.status
                   const isStatus2 = item.status === '2';
                   const className =
                     item.status === '1'
@@ -135,8 +139,9 @@ const Timeshare = () => {
                           : 'Invalid date'}
                       </td>
                       <td>{item.price.toLocaleString()}/VNĐ</td>
+                      {/* <td>{item.status}</td> */}
                       <td>
-                        {isStatus2 ? (
+                        {isStatus2 ? ( // Render as text if status is 2
                           <div style={{ padding: '16px 10px' }}>Bấm để thuê</div>
                         ) : (
                           <button className="tb_btn">
@@ -153,9 +158,9 @@ const Timeshare = () => {
             </table>
           </div>
         </div>
+        <MailList />
+        <Footer />
       </div>
-      <MailList />
-      <Footer />
     </div>
   );
 };

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { BASE_URL, GetAllRealestatesByMemberID } from "../../API/APIConfigure";
-import "./tabletrade.css";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { BASE_URL, GetAllRealestatesByMemberID } from '../../API/APIConfigure';
+import './tabletrade.css';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import Rating from '@mui/material/Rating';
+
 const TableTrade = ({ idUser }) => {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -12,42 +14,45 @@ const TableTrade = ({ idUser }) => {
         const response = await GetAllRealestatesByMemberID(idUser);
         setData(response);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
   }, [id]);
 
-  const handleRowClick = (itemId) => {
+  const handleClick = (itemId) => {
     navigate(`/trade/confirm/${itemId}`);
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Hình ảnh</th>
-          <th>Tên</th>
-          <th>Địa điểm</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={index} onClick={() => handleRowClick(item.id)}>
-            <td>
-              <img
-                className="img-trade"
-                src={BASE_URL + item.photo.split(",")[0]}
-                alt={item.name}
-              />
-            </td>
-            <td>{item.name}</td>
-            <td>{item.location}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="homeContainer">
+      <div className="tradeTitle">
+        <h1>Bất động sản của bạn đang sở hữu</h1>
+      </div>
+      {data.map((item, index) => (
+        <div key={item.id} className="searchItem">
+          <img src={BASE_URL + item.photo.split(',')[0]} alt="Time Share" className="siImg" />
+
+          <div className="siDesc">
+            <h1 className="siTitle">{item.name}</h1>
+            <span className="siDistance">Cách 500m tới trung tâm thành phố</span>
+            <span className="siLocation">Địa chỉ: {item.location}</span>
+            <span className="siRating">
+              <div className="siValue">Đánh giá:</div>
+              <Rating name="size-large" defaultValue={5} precision={0.5} readOnly />
+            </span>
+          </div>
+          <div className="siDetails">
+            <div className="siDetailTexts">
+              <button className="siCheckButton" onClick={() => handleClick(item.id)}>
+                Chọn bất động sản
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
