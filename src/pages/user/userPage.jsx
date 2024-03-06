@@ -10,6 +10,8 @@ import Footer from "../../components/footer/Footer";
 import "./userPage.css";
 import { GetUserByID } from "../../components/API/APIConfigure";
 import MyPost from "./MyPost";
+import MyTrade from "./MyTrade";
+
 import MailList from "../../components/mailList/MailList";
 import FeatureProperties from "../../components/featureProperties/FeatureProperties";
 const UserPage = () => {
@@ -105,6 +107,7 @@ const UserPage = () => {
               {activeMenu === "dashboard" && <Dashboard />}
               {activeMenu === "order" && <Order />}
               {activeMenu === "mypost" && <MyPost />}
+              {activeMenu === "mytrade" && <MyTrade />}
             </div>
           </div>
         </div>
