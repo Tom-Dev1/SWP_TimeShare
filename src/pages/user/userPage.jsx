@@ -105,6 +105,7 @@ const UserPage = () => {
               {activeMenu === "dashboard" && <Dashboard />}
               {activeMenu === "order" && <Order />}
               {activeMenu === "mypost" && <MyPost />}
+              {/* {activeMenu === "mytrade" && <MyPost />} */}
             </div>
           </div>
         </div>

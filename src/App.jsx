@@ -20,6 +20,7 @@ import Posting from "./pages/posting/Posting";
 import CheckOut from "./pages/user/CheckOut";
 import TradeTimeShare from "./pages/trade/TradeTimeShare";
 import ConfirmTrade from "./pages/trade/ConfirmTrade";
+import DetailsTrade from "./pages/trade/DetailsTrade";
 
 const AdminWrapper = ({ children }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -65,14 +66,6 @@ function App() {
         }
       />
       <Route
-        path="/user/checkout/:id"
-        element={
-          <UserWrapper>
-            <CheckOut />
-          </UserWrapper>
-        }
-      />
-      <Route
         path="/trade/:id"
         element={
           <UserWrapper>
@@ -85,6 +78,14 @@ function App() {
         element={
           <UserWrapper>
             <ConfirmTrade />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/trade/detail/:id"
+        element={
+          <UserWrapper>
+            <DetailsTrade />
           </UserWrapper>
         }
       />

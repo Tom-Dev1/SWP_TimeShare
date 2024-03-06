@@ -1,9 +1,19 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { CreateTrade } from "../../API/APIConfigure";
+
 function ConfirmTrade({ yourReal, theirReal, startDay, endDay }) {
+  const navigate = useNavigate();
   const handleSubmit = async () => {
+    if (yourReal.memberID === theirReal.memberID) {
+      Swal.fire({
+        icon: "error",
+        title: "Lỗi",
+        text: "Không thể tạo yêu cầu trao đổi với địa điểm bạn sở hữu",
+      });
+      return;
+    }
     try {
       const tradeData = {
         memberId1: yourReal.memberID,
@@ -14,12 +24,13 @@ function ConfirmTrade({ yourReal, theirReal, startDay, endDay }) {
         endDay: endDay,
         status: "1",
       };
-      console.log(tradeData);
       const response = await CreateTrade(tradeData);
       Swal.fire({
         icon: "success",
         title: "Thành công",
         text: "Đã tạo yêu cầu trao đổi",
+      }).then(() => {
+        navigate(`/trade/detail/${response.exchangeId}`);
       });
     } catch (error) {
       console.error(error);
