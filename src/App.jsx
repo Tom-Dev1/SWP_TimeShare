@@ -18,6 +18,8 @@ import ErrorPage from "./pages/ErrorPage";
 import Timeshare from "./pages/timeshare/Timeshare";
 import Posting from "./pages/posting/Posting";
 import CheckOut from "./pages/user/CheckOut";
+import TradeTimeShare from "./pages/trade/TradeTimeShare";
+import ConfirmTrade from "./pages/trade/ConfirmTrade";
 
 const AdminWrapper = ({ children }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -59,6 +61,30 @@ function App() {
         element={
           <UserWrapper>
             <CheckOut />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/user/checkout/:id"
+        element={
+          <UserWrapper>
+            <CheckOut />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/trade/:id"
+        element={
+          <UserWrapper>
+            <TradeTimeShare />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/trade/confirm/:id"
+        element={
+          <UserWrapper>
+            <ConfirmTrade />
           </UserWrapper>
         }
       />
