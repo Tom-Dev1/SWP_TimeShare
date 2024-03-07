@@ -78,7 +78,7 @@ const SearchItem = ({ searchResult }) => {
                                                             <div className="flex-col-reverse ClickoutArea_priceWrapper__1EX1i flex flex-col justify-between flex-shrink flex-grow">
                                                                 <div className="ClickoutArea_price__eFQrA">
                                                                     <span className="flex flex-wrap-reverse items-baseline gap-x-1">
-                                                                        <p className="font-bold text-grey-900 text-xl">
+                                                                        <p className="font-bold text-grey-900 text-sm">
                                                                             {item.price.toLocaleString()}VND/Đêm
                                                                         </p>
                                                                     </span>

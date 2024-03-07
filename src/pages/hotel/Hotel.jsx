@@ -11,7 +11,7 @@ import { GetbyRealestateID, BASE_URL } from "../../components/API/APIConfigure";
 import { Link, useParams } from "react-router-dom";
 import FeedBack from "../../components/User/Feedback/Feedback";
 
-const Hotel = () => {
+const Hotel = ({}) => {
     const { id } = useParams();
     const [data, setData] = useState(null);
     const [slideNumber, setSlideNumber] = useState(0);
@@ -54,7 +54,7 @@ const Hotel = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar isListNavbar={true} />
             {/* <Header type="list" /> */}
             <div className="hotelContainer">
                 {open && (

@@ -19,6 +19,7 @@ function Home() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isHomeTitleVisible, setIsHomeTitleVisible] = useState(false);
     const homeTitleRef = useRef(null);
+    const [isHomePage] = useState(true);
     useEffect(() => {
         const handleScroll = () => {
             // const currentScrollPos = window.pageYOffset;
@@ -46,7 +47,7 @@ function Home() {
     console.log(isHomeTitleVisible);
     return (
         <div className={`path-frontpage ${isScrolled ? "header-scroll" : ""} ${isHomeTitleVisible ? "fixed-bs" : ""}`}>
-            <Navbar />
+            <Navbar className={isHomePage ? "home-navbar" : ""} />
             <Header />
             <Search onSearch={handleSearch} searchValue={searchValue} setSearchValue={setSearchValue} />
 

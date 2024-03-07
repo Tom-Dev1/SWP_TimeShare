@@ -117,7 +117,7 @@ import "./navbar.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import imgLogo from "../../assets/img/logo.png";
-function Navbar() {
+function Navbar({ className }) {
     const navigate = useNavigate();
     const { isLoggedIn, logout } = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -186,7 +186,7 @@ function Navbar() {
         localStorage.removeItem("searchkey");
     };
     return (
-        <div className="navbar-wrapper new-navbar-wrapper">
+        <div className={`navbar-wrapper new-navbar-wrapper ${className}`}>
             <div className="ht_tablet_hide">
                 <div className="navbar-container">
                     <div className="navbar-left">

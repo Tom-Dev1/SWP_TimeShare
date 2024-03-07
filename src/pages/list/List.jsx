@@ -650,7 +650,7 @@ const List = () => {
 
     return (
         <div className="main-section">
-            <Navbar />
+            <Navbar listNavbar={true} />
             <Search onSearch={handleSearch} searchValue={searchValue} setSearchValue={setSearchValue} />
             <div className="top-0 sticky z-20 transition-transform durian-400 transform bg-white search-form_condition px-5 ">
                 <div>
