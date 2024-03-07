@@ -262,20 +262,24 @@
 import { Link } from "react-router-dom";
 import bg1 from "../../assets/img/banner.png";
 import "./header.css";
-const Header = () => {
+const Header = ({ isUnVisible }) => {
     return (
-        <div className="header-element-contain">
-            <div className="header-img-bg">
-                <img src={bg1} alt="bg" width={"100%"} height={"100%"} />
-                <div className="banner-container">
-                    <div className="banner-info">
-                        <div className="banner-tit">Chào mừng đến với bình nguyên vô tận</div>
-                    </div>
-                    <div className="bann-des">Trải nghiệm cảm giác với mọi giác quan!</div>
-                    <div>
-                        <button>
-                            <Link to="/hotels">Khám phá</Link>
-                        </button>
+        <div className={`header-element-contain ${isUnVisible ? "visible" : ""}`}>
+            <div className="block block-vinpearl-content block-homepage-banner-block">
+                <div className="block-content">
+                    <div className="banner-block ht_relative">
+                        <div className="banner-wrapper">
+                            <img src={bg1} alt="bg" width={"100%"} height={"100%"} style={{ objectFit: "cover" }} />
+                            <div className="banner-container">
+                                <div className="banner-info">
+                                    <div className="banner-tit">Chào mừng đến với bình nguyên vô tận</div>
+                                    <div className="banner-des">Trải nghiệm cảm giác với mọi giác quan!</div>
+                                    <div className="banner-cta">
+                                        <Link to="/hotels">Khám phá</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

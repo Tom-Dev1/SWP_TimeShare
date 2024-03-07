@@ -116,12 +116,13 @@ import { useState } from "react";
 import "./navbar.css";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import imgLogo from "../../assets/img/homelogo.png";
+import imgLogo from "../../assets/img/logo.png";
 function Navbar() {
     const navigate = useNavigate();
     const { isLoggedIn, logout } = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
+
     const handleMenuClose = () => {
         setAnchorEl(null);
     };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FavLocations from "../../components/Components_LandingPages/favLocation/FavLocations";
 import FindByPlace from "../../components/Components_LandingPages/findByPlace/FindByPlace";
 import TrendPlace from "../../components/Components_LandingPages/trendPlace/TrendPlace";
@@ -16,6 +16,25 @@ import { useNavigate } from "react-router-dom";
 function Home() {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState("");
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isHomeTitleVisible, setIsHomeTitleVisible] = useState(false);
+    const homeTitleRef = useRef(null);
+    useEffect(() => {
+        const handleScroll = () => {
+            // const currentScrollPos = window.pageYOffset;
+            const currentScrollPos = window.scrollY;
+            setIsScrolled(currentScrollPos > 0);
+
+            const homeTitleTop = homeTitleRef.current.getBoundingClientRect().top;
+            setIsHomeTitleVisible(homeTitleTop <= window.innerHeight / 2);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     const handleSearch = (searchValue) => {
         const searchTerm = {
@@ -24,14 +43,14 @@ function Home() {
         localStorage.setItem("searchkey", JSON.stringify(searchTerm));
         navigate("/hotels");
     };
-
+    console.log(isHomeTitleVisible);
     return (
-        <div>
+        <div className={`path-frontpage ${isScrolled ? "header-scroll" : ""} ${isHomeTitleVisible ? "fixed-bs" : ""}`}>
             <Navbar />
             <Header />
             <Search onSearch={handleSearch} searchValue={searchValue} setSearchValue={setSearchValue} />
 
-            <div className="homeContainer">
+            <div className="homeContainer" ref={homeTitleRef}>
                 <Featured />
                 <div className="homeTitle">Điểm đến đang thịnh hành</div>
                 <div className="homeTitle litle">Các lựa chọn phổ biến nhất cho du khách từ Việt Nam</div>
