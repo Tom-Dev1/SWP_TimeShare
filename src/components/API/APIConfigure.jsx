@@ -83,7 +83,14 @@ export const GetAllBookingsByID = (bookingID) => {
 export const GetTimeShareById = (timeshareID) => {
   return customAxios.get(`api/Timeshares/GetbyID?id=${timeshareID}`);
 };
-
+export const UpdateTimeShareStatus = (timeshareID, newStatus) => {
+  return customAxios.put(
+    `api/Timeshares/UpdateTimeshareSta?id=${timeshareID}`,
+    {
+      status: newStatus,
+    }
+  );
+};
 //Trade
 export const GetAllTrade = () => {
   return customAxios.get(`api/Exchange/GetAll`);
