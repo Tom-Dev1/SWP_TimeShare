@@ -78,6 +78,7 @@
     justify-content: center;
     position: relative;
     background-color: #ffffff00;
+    /* right: 9px; */
 }
 .navbar-link {
     display: flex;
