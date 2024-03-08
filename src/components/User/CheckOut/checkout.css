@@ -1,23 +1,24 @@
 .checout_Wapper {
-  margin-top: 50px;
   display: flex;
   justify-content: center;
-  height: 1660px;
+  height: auto;
   max-height: 100%;
+  min-height: 1280px;
+  height: auto;
 }
 .checkoutContainer {
+  display: flex;
+  justify-content: space-around;
   margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-  height: 590px;
-  display: flex;
   gap: 20px;
-  max-width: 1180px;
+  max-width: 1200px;
   width: 100%;
-  height: 990px;
+  max-width: auto;
+  height: auto;
 }
 .checkoutCard {
   width: 100%;
+  max-height: 1000px;
   padding: 40px;
   border-radius: 30px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
@@ -36,26 +37,19 @@
 .tittle-real h1 {
   margin-bottom: 10px;
 }
-.payment-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  border-radius: 30px;
-  padding: 20px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
-    rgba(17, 17, 26, 0.1) 0px 24px 80px;
-}
+
 .title-booking {
   padding: 20px;
   display: flex;
   max-width: 680px;
   width: 100%;
 }
+
 .paymentConfirm h1 {
   display: flex;
   margin-bottom: 10px;
   font-size: 18px;
+  height: auto;
 }
 .paymentConfirm h1:first-child {
   font-weight: bold;
@@ -73,4 +67,26 @@
   justify-content: center;
   margin: 20px 0;
   width: 640px;
+}
+.payment-container {
+  max-width: 600px;
+  height: 1000px;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.totalCheckoutAndCancel {
+  display: flex;
+  justify-content: space-between;
+}
+.total-summary {
+  margin-top: 20px;
+  align-items: center;
+}
+.Cancel-booking {
+  margin-bottom: 8px;
 }

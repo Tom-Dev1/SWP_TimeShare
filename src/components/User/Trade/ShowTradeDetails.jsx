@@ -108,9 +108,9 @@ const ShowTradeDetails = () => {
           <button className={`statusTradeDetail ${getStatus(trade && trade.status).className}`}>
             {trade && getStatus(trade.status).text}
           </button>
-        </div>
-        <div>
-          <UpdateStatus idTrade={id} status={trade && trade.status} datamem2={member2} />
+          <button>
+            <UpdateStatus idTrade={id} status={trade && trade.status} datamem2={member2} />
+          </button>
         </div>
       </div>
     </div>
