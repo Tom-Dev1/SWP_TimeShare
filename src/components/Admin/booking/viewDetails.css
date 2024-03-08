@@ -1,0 +1,41 @@
+.checkoutCard {
+  width: 100%;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+    rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.image-booking {
+  width: 150%;
+  height: auto;
+}
+.tittle-real {
+  margin-bottom: 10px;
+  font-weight: 300;
+  font-size: 20px;
+}
+.tittle-real h1 {
+  margin-bottom: 10px;
+}
+
+.title-booking {
+  padding: 20px;
+  display: flex;
+  max-width: 780px;
+  width: 100%;
+}
+
+._line {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  width: 540px;
+}
+.checkoutContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkoutText {
+  flex: 2;
+}

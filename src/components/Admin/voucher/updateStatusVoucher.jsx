@@ -24,9 +24,9 @@ const UpdateStatusVoucher = ({ voucherId, currentStatus }) => {
       <Button
         variant="contained"
         onClick={handleUpdateStatus}
-        style={{ backgroundColor: status ? "red" : "green", color: "white" }}
+        style={{ backgroundColor: status ? "green" : "red", color: "white" }}
       >
-        {status ? "Vô hiệu hóa" : "Kích hoạt"}
+        {status ? "Kích hoạt" : "Vô hiệu hóa"}
       </Button>
     </div>
   );
