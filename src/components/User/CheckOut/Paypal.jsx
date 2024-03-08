@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import {
-  GetAllBookingsByID,
   UpdateBookingStatus,
+  UpdatePaymentStatus,
   UpdateTimeShareStatus,
 } from '../../API/APIConfigure';
 // This value is from the props in the UI
@@ -53,8 +53,11 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
                 text: 'Chúc bạn có kỳ nghỉ vui vẻ',
                 icon: 'success',
               }).then(() => {
-                UpdateBookingStatus(id.id, '2').then((res) => {
-                  UpdateTimeShareStatus(timeshareId, '2').then((res) => {
+
+                UpdateBookingStatus(id.id, "2").then((res) => {
+                  // UpdatePaymentStatus(id.id, "2");
+                  UpdateTimeShareStatus(timeshareId, "2").then((res) => {
+
                     window.location.reload();
                   });
                 });

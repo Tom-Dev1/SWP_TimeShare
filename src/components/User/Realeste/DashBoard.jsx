@@ -16,10 +16,14 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllRealestatesByMemberID } from "../../API/APIConfigure";
+import {
+  GetAllRealestatesByMemberID,
+  GetUserByID,
+} from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 import CreateReal from "./CreateReal";
 import CreateTimeShare from "../Timeshare/CreateTimeShare";
+import Swal from "sweetalert2";
 
 const Dashboard = () => {
   const [realestates, setRealestates] = useState([]);
@@ -29,7 +33,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const [selectedRealestateId, setSelectedRealestateId] = useState(null);
-
+  const [userData, setUserData] = useState([]);
   const fetchRealestates = async () => {
     try {
       const response = await GetAllRealestatesByMemberID(userInfo.id);
@@ -42,6 +46,20 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchRealestates();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await GetUserByID(userInfo.id);
+      setUserData(response || []);
+    } catch (err) {
+      toast.error("Failed to fetch Realestates");
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -104,7 +122,10 @@ const Dashboard = () => {
               </MenuItem>
             ))}
           </Select>
-          <CreateReal onCreateSuccess={fetchRealestates} />
+          <CreateReal
+            Premium={userData.isPremium}
+            onCreateSuccess={fetchRealestates}
+          />
         </Box>
         <TableContainer component={Paper}>
           <h2
@@ -114,8 +135,6 @@ const Dashboard = () => {
               fontSize: "40px",
               marginTop: "20px",
               marginBottom: "20px",
-              fontFamily: "Arial, sans-serif",
-              fontWeight: "bold",
             }}
           >
             Bất Động Sản Của Bạn
