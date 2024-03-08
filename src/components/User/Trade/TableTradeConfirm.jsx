@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { BASE_URL, GetbyRealestateID } from '../../API/APIConfigure';
-import './tabletrade.css';
-import { useParams } from 'react-router-dom';
-import ConfirmTrade from '../Trade/ConfirmTrade';
-import './tableTradeConfirm.css';
+import React, { useEffect, useState } from "react";
+import { BASE_URL, GetbyRealestateID } from "../../API/APIConfigure";
+import "./tabletrade.css";
+import { useParams } from "react-router-dom";
+import ConfirmTrade from "../Trade/ConfirmTrade";
+import "./tableTradeConfirm.css";
 const TableTradeConfirm = () => {
   const { id } = useParams();
   const [dataReal, setDataReal] = useState(null);
-  const [startDay, setStartDay] = useState('');
-  const [endDay, setEndDay] = useState('');
-  const Realestate = JSON.parse(localStorage.getItem('Realestate'));
+  const [startDay, setStartDay] = useState("");
+  const [endDay, setEndDay] = useState("");
+  const Realestate = JSON.parse(localStorage.getItem("Realestate"));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +17,7 @@ const TableTradeConfirm = () => {
         const response = await GetbyRealestateID(id);
         setDataReal(response);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -26,9 +26,9 @@ const TableTradeConfirm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'startDay') {
+    if (name === "startDay") {
       setStartDay(value);
-    } else if (name === 'endDay') {
+    } else if (name === "endDay") {
       setEndDay(value);
     }
   };
@@ -45,7 +45,7 @@ const TableTradeConfirm = () => {
                   <h2>Bất động sản của bạn</h2>
                   <img
                     className="img-trade"
-                    src={BASE_URL + dataReal.photo.split(',')[0]}
+                    src={BASE_URL + dataReal.photo.split(",")[0]}
                     alt={dataReal.name}
                   />
                 </div>
@@ -59,7 +59,7 @@ const TableTradeConfirm = () => {
               <h2>Bất động sản muốn trao đổi</h2>
               <img
                 className="img-trade"
-                src={BASE_URL + Realestate.photo.split(',')[0]}
+                src={BASE_URL + Realestate.photo.split(",")[0]}
                 alt={Realestate.name}
               />
             </div>
@@ -70,7 +70,7 @@ const TableTradeConfirm = () => {
         <div className="tradeTime">
           <div className="formTrade">
             <label htmlFor="startDay" className="formTradeTitle">
-              Ngày bắt đầu:{' '}
+              Ngày bắt đầu:{" "}
             </label>
             <input
               type="date"
@@ -84,7 +84,7 @@ const TableTradeConfirm = () => {
           </div>
           <div className="formTrade">
             <label htmlFor="endDay" className="formTradeTitle">
-              Ngày kết thúc:{' '}
+              Ngày kết thúc:{" "}
             </label>
             <input
               type="date"

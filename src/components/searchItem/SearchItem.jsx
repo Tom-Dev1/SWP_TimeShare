@@ -5,49 +5,58 @@ import { Rating } from "@mui/material";
 import React from "react";
 
 const SearchItem = ({ searchResult }) => {
-    const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
-    const [value, setValue] = React.useState(4);
+  const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
+  const [value, setValue] = React.useState(4);
 
-    return (
-        <div className="ResultListPage_content">
-            <section className="pb-3 max-w-screen-2xl ItemListWrapper_reponsive">
-                <div className="relative min-h-screen pt-1">
-                    <div className="flex flex-col gap-y-2">
-                        {searchResult
-                            // .filter((item) => item.status === "2")
-                            .map((item) => {
-                                const photoUrls = item.photo ? item.photo.split(",") : [];
-                                return (
-                                    <div key={item.id} className="bg-white rounded-md shadow-nux-15">
-                                        <article className="flex  text-grey-900 relative rounded-md">
-                                            <Link
-                                                to={`/hotels/${item.id}`}
-                                                className="AccommodationItem_infoWrapper AccommodationItem_infoSection flex-1"
-                                            >
-                                                <div className="relative overflow-hidden min-h-full rounded-l-md ImageSectionWrapper_imageSectionFull__ZDCP6 w-full">
-                                                    <button className="bg-white group w-full h-full inset-0 absolute cursor-pointer">
-                                                        <img
-                                                            className="ItemImage_itemImage__cs2RU object-cover"
-                                                            src={BASE_URL + photoUrls[0]}
-                                                            alt={item.name}
-                                                        />
-                                                    </button>
-                                                </div>
-                                                <div className="w-1/2 flex-1">
-                                                    <div className="ItemNameSection_itemNameSection__OY3p3">
-                                                        <h2 className="Heading_heading__xct3h Heading_h-m__bqwg0 ItemNameSection_nameWithFav__mi6zT">
-                                                            <div className="ItemNameSection_itemNameButton__sWjFo">
-                                                                <span>{item.name}</span>
-                                                            </div>
-                                                        </h2>
-                                                    </div>
-                                                    <div className="ItemLocatonSection">{item.location}</div>
+  return (
+    <div className="ResultListPage_content">
+      <section className="pb-3 max-w-screen-2xl ItemListWrapper_reponsive">
+        <div className="relative min-h-screen pt-1">
+          <div className="flex flex-col gap-y-2">
+            {searchResult
+              .filter((item) => item.status === "2")
+              .map((item) => {
+                const photoUrls = item.photo ? item.photo.split(",") : [];
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-white rounded-md shadow-nux-15"
+                  >
+                    <article className="flex  text-grey-900 relative rounded-md">
+                      <Link
+                        to={`/hotels/${item.id}`}
+                        className="AccommodationItem_infoWrapper AccommodationItem_infoSection flex-1"
+                      >
+                        <div className="relative overflow-hidden min-h-full rounded-l-md ImageSectionWrapper_imageSectionFull__ZDCP6 w-full">
+                          <button className="bg-white group w-full h-full inset-0 absolute cursor-pointer">
+                            <img
+                              className="ItemImage_itemImage__cs2RU object-cover"
+                              src={BASE_URL + photoUrls[0]}
+                              alt={item.name}
+                            />
+                          </button>
+                        </div>
+                        <div className="w-1/2 flex-1">
+                          <div className="ItemNameSection_itemNameSection__OY3p3">
+                            <h2 className="Heading_heading__xct3h Heading_h-m__bqwg0 ItemNameSection_nameWithFav__mi6zT">
+                              <div className="ItemNameSection_itemNameButton__sWjFo">
+                                <span>{item.name}</span>
+                              </div>
+                            </h2>
+                          </div>
+                          <div className="ItemLocatonSection">
+                            {item.location}
+                          </div>
 
-                                                    <div className="ItemRatingSection">
-                                                        <Rating name="simple-controlled" value={value} readOnly />
-                                                    </div>
-                                                </div>
-                                            </Link>
+                          <div className="ItemRatingSection">
+                            <Rating
+                              name="simple-controlled"
+                              value={value}
+                              readOnly
+                            />
+                          </div>
+                        </div>
+                      </Link>
 
                                             <div className="flex flex-col justify-between DealAreaWrapper_clickoutSectionWide__cT8ZT DealAreaWrapper_clickoutSectionFull__iYkvL w-2/5">
                                                 <div className="clickout-area">
@@ -110,8 +119,11 @@ const SearchItem = ({ searchResult }) => {
                     </div>
                 </div>
             </section>
+
         </div>
-    );
+      </section>
+    </div>
+  );
 };
 
 export default SearchItem;
