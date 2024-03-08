@@ -123,47 +123,46 @@ function Navbar({ className }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
 
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-  const menuId = "primary-search-account-menu";
-  const handleLogin = () => {
-    navigate("/login-register");
-  };
-  const handleMyAccount = () => {
-    navigate("/user/profile");
-    handleMenuClose();
-  };
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleLogout = async () => {
-    try {
-      const result = await Swal.fire({
-        title: "Đăng xuất",
-        text: "Bạn có muốn đăng xuất?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Có, đăng xuất!",
-        cancelButtonText: "Không",
-      });
-
-      if (result.isConfirmed) {
-        await logout();
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+    const menuId = "primary-search-account-menu";
+    const handleLogin = () => {
+        navigate("/login-register");
+    };
+    const handleMyAccount = () => {
+        navigate("/user/profile");
         handleMenuClose();
-        Swal.fire("Đăng xuất!", "Bạn đã đăng xuất.", "success");
-        navigate("/");
-        localStorage.clear();
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-      Swal.fire("Lỗi", "Lỗi khi đăng xuất.", "error");
-    }
-  };
+    };
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleLogout = async () => {
+        try {
+            const result = await Swal.fire({
+                title: "Đăng xuất",
+                text: "Bạn có muốn đăng xuất?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Có, đăng xuất!",
+                cancelButtonText: "Không",
+            });
+
+            if (result.isConfirmed) {
+                await logout();
+                handleMenuClose();
+                Swal.fire("Đăng xuất!", "Bạn đã đăng xuất.", "success");
+                navigate("/");
+                localStorage.clear();
+            }
+        } catch (error) {
+            console.error("Error during logout:", error);
+            Swal.fire("Lỗi", "Lỗi khi đăng xuất.", "error");
+        }
+    };
 
     const renderMenu = (
         <Menu
@@ -225,39 +224,10 @@ function Navbar({ className }) {
                             </div>
                         )}
                     </div>
-
                 </div>
-                <span className="nav-logo_signature"> Booking</span>
-              </Link>
-            </button>
-          </div>
-          <div className="navbar-right">
-            {isLoggedIn ? (
-              <div className="btn-icon">
-                <IconButton
-                  edge="end"
-                  aria-label="account of current user"
-                  aria-controls={menuId}
-                  aria-haspopup="true"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                {renderMenu}
-              </div>
-            ) : (
-              <div className="btn-div">
-                <button className="navButton" onClick={handleLogin}>
-                  Đăng nhập
-                </button>
-              </div>
-            )}
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Navbar;
