@@ -109,13 +109,21 @@ export const GetTradeByMemberID = (memberID) => {
   );
 };
 export const UpdateTradeStatus = (tradeID, newStatus) => {
-  return customAxios.put(`api/Exchange/Updatestatus?id==${tradeID}`, {
+  return customAxios.put(`api/Exchange/Updatestatus?id=${tradeID}`, {
     status: newStatus,
   });
 };
 
 export const CreateTrade = (tradeData) => {
-  return instance.post(`api/Exchange/CreateExchange`, tradeData);
+  return customAxios.post(`api/Exchange/CreateExchange`, tradeData);
+};
+export const CreatePayment = (PaymentData) => {
+  return customAxios.post(`api/Payment/CreatePayment`, PaymentData);
+};
+export const UpdatePaymentStatus = (PaymentID, newStatus) => {
+  return customAxios.put(`API/Payment/UpdatePaymentSta?id=${PaymentID}`, {
+    status: newStatus,
+  });
 };
 
 export {
