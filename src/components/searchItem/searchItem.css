@@ -308,6 +308,9 @@ button {
 .font-bold {
     font-weight: 700;
 }
+.text-sm {
+    font-size: 16px;
+}
 .viewTS_btn {
     height: 36px;
     max-width: 100%;

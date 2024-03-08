@@ -42,11 +42,12 @@
 
 .navbar-wrapper.new-navbar-wrapper {
     height: 136px;
-    position: fixed;
     width: 100%;
+    position: relative;
     z-index: 100;
     top: 0;
     left: 0;
+    background-color: #ffffff; /* Thêm màu nền mới */
     transition: 0.5s;
 }
 .navbar-container {
@@ -113,4 +114,23 @@
     margin-bottom: -21px;
     text-transform: capitalize;
     cursor: pointer;
+}
+.navbar-wrapper.new-navbar-wrapper.home-navbar {
+    /* height: 136px;
+    width: 100%;
+    position: relative;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background-color: #ffffff; /* Thêm màu nền mới */
+    /* transition: 0.5s; */
+
+    height: 136px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+    background: none;
 }
