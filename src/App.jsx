@@ -22,6 +22,7 @@ import TradeTimeShare from "./pages/trade/TradeTimeShare";
 import ConfirmTrade from "./pages/trade/ConfirmTrade";
 import DetailsTrade from "./pages/trade/DetailsTrade";
 import DetailsBooking from "./pages/admin/DetailsBooking";
+import Premium from "./pages/user/Premium";
 
 const AdminWrapper = ({ children }) => {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -87,6 +88,14 @@ function App() {
         element={
           <UserWrapper>
             <DetailsTrade />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/premium"
+        element={
+          <UserWrapper>
+            <Premium />
           </UserWrapper>
         }
       />

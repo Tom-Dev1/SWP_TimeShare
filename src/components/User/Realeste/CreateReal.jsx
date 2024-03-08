@@ -1,28 +1,27 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
-import { toast } from 'react-toastify';
-import './CreateReal.css';
-import { BASE_URL } from '../../API/APIConfigure';
-import Swal from 'sweetalert2';
-
-function CreateReal({ onCreateSuccess }) {
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import { Typography } from "@mui/material";
+import "./CreateReal.css";
+import { BASE_URL } from "../../API/APIConfigure";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+const CreateReal = ({ Premium, onCreateSuccess }) => {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
-  const [facility, setFacility] = useState('');
-  const [price, setPrice] = useState('');
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [facility, setFacility] = useState("");
+  const [price, setPrice] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('xl');
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
+  const [maxWidth, setMaxWidth] = React.useState("xl");
+  const navigate = useNavigate();
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   const handleImageChange = (e) => {
     setImageFiles(Array.from(e.target.files));
     let files = Array.from(e.target.files);
@@ -34,25 +33,29 @@ function CreateReal({ onCreateSuccess }) {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('Name', name);
-    formData.append('Location', location);
-    formData.append('Description', description);
-    formData.append('Facility', facility);
-    formData.append('Price', price);
-    formData.append('memberID', userInfo.id);
+    formData.append("Name", name);
+    formData.append("Location", location);
+    formData.append("Description", description);
+    formData.append("Facility", facility);
+    formData.append("Price", price);
+    formData.append("memberID", userInfo.id);
     imageFiles.forEach((file) => {
-      formData.append('imageFiles', file);
+      formData.append("imageFiles", file);
     });
 
     try {
-      const response = await axios.post(BASE_URL + 'API/Realestates/CreateRealestate', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        BASE_URL + "API/Realestates/CreateRealestate",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       Swal.fire({
-        icon: 'success',
-        title: 'Tạo mới thành công, vui lòng chờ xác nhận !!!',
+        icon: "success",
+        title: "Tạo mới thành công, vui lòng chờ xác nhận !!!",
       });
       setOpen(false);
       if (onCreateSuccess) {
@@ -61,17 +64,41 @@ function CreateReal({ onCreateSuccess }) {
     } catch (error) {
       console.error(error);
       Swal.fire({
-        icon: 'error',
-        title: 'Tạo mới thất bại, vui lòng thử lại!!!',
+        icon: "error",
+        title: "Tạo mới thất bại, vui lòng thử lại!!!",
       });
     }
   };
   return (
     <div className="create-real-estate">
-      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => {
+          if (!Premium) {
+            Swal.fire({
+              icon: "error",
+              title: "Bạn phải mua gói thành viên để có thể tạo mới!!!",
+              showCancelButton: true,
+              confirmButtonText: "Mua gói thành viên",
+              cancelButtonText: "Hủy",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate("/premium");
+              }
+            });
+            return;
+          }
+          setOpen(true);
+        }}
+      >
         Tạo mới
       </Button>
-      <Dialog open={open} onClose={() => setOpen(false)} className="dialog-form">
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        className="dialog-form"
+      >
         <h1 className="createRealTitle">Create Real Estate</h1>
         <DialogContent className="dialog-content">
           <form onSubmit={handleSubmit} className="createRealTitle_Form">
@@ -80,7 +107,11 @@ function CreateReal({ onCreateSuccess }) {
                 <label htmlFor="name" className="form-label">
                   Tên:
                 </label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
 
                 <label htmlFor="name" className="form-label">
                   Địa điểm
@@ -127,12 +158,17 @@ function CreateReal({ onCreateSuccess }) {
                     key={index}
                     src={preview}
                     alt="preview"
-                    style={{ width: '200px', height: '100px' }}
+                    style={{ width: "200px", height: "100px" }}
                   />
                 ))}
               </>
             }
-            <Button className="form-field" type="submit" variant="contained" color="primary">
+            <Button
+              className="form-field"
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               Gửi
             </Button>
           </form>
@@ -140,6 +176,6 @@ function CreateReal({ onCreateSuccess }) {
       </Dialog>
     </div>
   );
-}
+};
 
 export default CreateReal;
