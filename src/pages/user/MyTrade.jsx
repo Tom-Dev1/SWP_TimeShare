@@ -4,7 +4,7 @@ import Dashboard from '../../components/User/Trade/DashBoard';
 function MyTrade() {
   return (
     <div>
-      <h1>Trao đổi kỳ nghỉ của bạn</h1>
+      <h2 className="profile-title">Trao đổi kỳ nghỉ của bạn</h2>
       <Dashboard />
     </div>
   );
