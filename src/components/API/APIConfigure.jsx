@@ -56,6 +56,11 @@ export const GetAllBookingsByMemberID = (userID) => {
 const CreateVouchers = (voucherData) => {
   return instance.post(`api/Vouchers/Createvoucher`, voucherData);
 };
+export const UpdateStatusVoucherByID = (voucherID, newStatus) => {
+  return customAxios.put(`api/Vouchers/Updatevoucherstatus?id=${voucherID}`, {
+    status: newStatus,
+  });
+};
 export const GetbyRealestateID = (realetatesID) => {
   return customAxios.get(
     `api/Realestates/GetbyRealestateID?id=${realetatesID}`

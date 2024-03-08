@@ -20,6 +20,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import CreateVoucher from "./CreateVoucher";
 import { GetAllVoucher } from "../../API/APIConfigure";
+import UpdateStatusVoucher from "./updateStatusVoucher";
 
 const Dashboard = () => {
   const [voucher, setVoucher] = useState([]);
@@ -241,7 +242,10 @@ const Dashboard = () => {
                       }}
                       align="center"
                     >
-                      {voucher.status ? "Hoạt động" : "Vô hiệu hóa"}
+                      <UpdateStatusVoucher
+                        voucherId={voucher.id}
+                        currentStatus={voucher.status}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
