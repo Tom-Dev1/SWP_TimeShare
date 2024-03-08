@@ -58,68 +58,65 @@ const SearchItem = ({ searchResult }) => {
                         </div>
                       </Link>
 
-                                            <div className="flex flex-col justify-between DealAreaWrapper_clickoutSectionWide__cT8ZT DealAreaWrapper_clickoutSectionFull__iYkvL w-2/5">
-                                                <div className="clickout-area">
-                                                    <div className="p-2 flex flex-col h-full">
-                                                        <div className="flex mb-1 justify-between flex-wrap-reverse items-baseline gap-x-1">
-                                                            <div className="ClickoutArea_advertiserDetailsWrapper__g2ijy">
-                                                                <strong className="advertiser-name-placeholder text-m">
-                                                                    Booking
-                                                                </strong>
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex pb-2 gap-x-1 text-green-900 flex-wrap">
-                                                            <li style={{ listStyle: "none" }}>
-                                                                <div className="RateAttribute_rateAttribute__WgkCk RateAttribute_bold__4cCjF">
-                                                                    <span className="leading-none inline-flex Icon_s__HT6ei transform">
-                                                                        <CheckIcon
-                                                                            style={{ width: "18px", height: "18px" }}
-                                                                            fontSize="small"
-                                                                        />
-                                                                    </span>
-                                                                    <span className="RateAttribute_label__daekR">
-                                                                        Bao gồm ăn sáng
-                                                                    </span>
-                                                                </div>
-                                                            </li>
-                                                        </div>
-                                                        <div className="flex items-center max-w-full flex-row justify-between mt-auto gap-x-2">
-                                                            <div className="flex-col-reverse ClickoutArea_priceWrapper__1EX1i flex flex-col justify-between flex-shrink flex-grow">
-                                                                <div className="ClickoutArea_price__eFQrA">
-                                                                    <span className="flex flex-wrap-reverse items-baseline gap-x-1">
-                                                                        <p className="font-bold text-grey-900 text-sm">
-                                                                            {item.price.toLocaleString()}VND/Đêm
-                                                                        </p>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="ClickoutAreaCTASection_buttonWrapper__BgcvI ">
-                                                                <button className="viewTS_btn">
-                                                                    <Link
-                                                                        to={`/timeshare/${item.id}`}
-                                                                        className="viewTS_link"
-                                                                    >
-                                                                        <span className="flex items-center justify-center">
-                                                                            Xem timeshare
-                                                                        </span>
-                                                                    </Link>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="IntroSection_wrapper">
-                                                        <p>{item.description}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                );
-                            })}
-                    </div>
-                </div>
-            </section>
-
+                      <div className="flex flex-col justify-between DealAreaWrapper_clickoutSectionWide__cT8ZT DealAreaWrapper_clickoutSectionFull__iYkvL w-2/5">
+                        <div className="clickout-area">
+                          <div className="p-2 flex flex-col h-full">
+                            <div className="flex mb-1 justify-between flex-wrap-reverse items-baseline gap-x-1">
+                              <div className="ClickoutArea_advertiserDetailsWrapper__g2ijy">
+                                <strong className="advertiser-name-placeholder text-m">
+                                  Booking
+                                </strong>
+                              </div>
+                            </div>
+                            <div className="flex pb-2 gap-x-1 text-green-900 flex-wrap">
+                              <li style={{ listStyle: "none" }}>
+                                <div className="RateAttribute_rateAttribute__WgkCk RateAttribute_bold__4cCjF">
+                                  <span className="leading-none inline-flex Icon_s__HT6ei transform">
+                                    <CheckIcon
+                                      style={{ width: "18px", height: "18px" }}
+                                      fontSize="small"
+                                    />
+                                  </span>
+                                  <span className="RateAttribute_label__daekR">
+                                    Bao gồm ăn sáng
+                                  </span>
+                                </div>
+                              </li>
+                            </div>
+                            <div className="flex items-center max-w-full flex-row justify-between mt-auto gap-x-2">
+                              <div className="flex-col-reverse ClickoutArea_priceWrapper__1EX1i flex flex-col justify-between flex-shrink flex-grow">
+                                <div className="ClickoutArea_price__eFQrA">
+                                  <span className="flex flex-wrap-reverse items-baseline gap-x-1">
+                                    <p className="font-bold text-grey-900 text-sm">
+                                      {item.price.toLocaleString()}VND/Đêm
+                                    </p>
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="ClickoutAreaCTASection_buttonWrapper__BgcvI ">
+                                <button className="viewTS_btn">
+                                  <Link
+                                    to={`/timeshare/${item.id}`}
+                                    className="viewTS_link"
+                                  >
+                                    <span className="flex items-center justify-center">
+                                      Xem timeshare
+                                    </span>
+                                  </Link>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="IntroSection_wrapper">
+                            <p>{item.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       </section>
     </div>
