@@ -61,17 +61,17 @@ const Checkout = () => {
 
   return (
     <>
-      <div className="checkoutCard">
-        <div className="checkoutContent">
-          <div className="checkoutImage">
+      <div className="checkoutCard-admin">
+        <div className="checkoutContent-admin">
+          <div className="checkoutImage-admin">
             <img
-              className="image-booking"
+              className="image-booking-admin"
               src={BASE_URL + (photoUrls.length > 0 ? photoUrls[0] : "")}
               alt=""
             />
           </div>
-          <div className="title-booking"></div>
-          <div className="checkoutText">
+          <div className="title-booking-admin"></div>
+          <div className="checkoutText-admin">
             <h1>
               Tên khách sạn: {booking.realestate ? booking.realestate.name : ""}
             </h1>
