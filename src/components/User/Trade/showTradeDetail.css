@@ -50,11 +50,11 @@ h1 {
 }
 /* Styles for trade1 when status is 1 */
 .statusTrade {
-  margin-top: 10px;
-  margin-left: 16px;
+  margin-top: 40px;
+  margin-left: 90px;
   display: flex;
-  width: 260px;
-  justify-content: space-around;
+  width: 840px;
+  justify-content: space-between;
   border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
@@ -64,7 +64,7 @@ h1 {
   color: white;
   font-size: 20px;
   font-weight: 700;
-  margin-left: 90px;
+
   padding: 18px;
   border-radius: 5px;
   background-color: orange; /* Change background color to orange */
@@ -75,7 +75,7 @@ h1 {
   color: white;
   font-size: 20px;
   font-weight: 700;
-  margin-left: 90px;
+
   padding: 18px;
   border-radius: 5px;
   background-color: green; /* Change background color to green */
@@ -86,7 +86,7 @@ h1 {
   color: white;
   font-size: 20px;
   font-weight: 700;
-  margin-left: 90px;
+
   padding: 18px;
   border-radius: 5px;
   background-color: red; /* Change background color to red */

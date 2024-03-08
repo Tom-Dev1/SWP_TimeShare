@@ -1,7 +1,7 @@
 .userprofile {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
 }
 .userprofilein {
   display: flex;
@@ -9,21 +9,31 @@
   justify-content: center;
   margin-top: 10vh;
   gap: 20px;
+  height: auto;
 }
 .userprofile .userprofilein .left {
   width: 20%;
   /* background-color: aqua; */
-  border: 1px solid rgb(207, 207, 207);
+  padding: 40px;
   border-radius: 5px;
   min-height: 50vh;
+  height: 60vh;
+  border-radius: 30px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 
 .userprofile .userprofilein .right {
   width: 60%;
   /* background-color: aqua; */
-  border: 1px solid rgb(207, 207, 207);
+  padding: 40px;
   border-radius: 5px;
+  max-width: 110vh;
+  height: auto;
   min-height: 50vh;
+  border-radius: 30px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
+    rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }
 .usersidebar {
   width: 100%;
@@ -35,7 +45,9 @@
   padding: 20px 10px;
   text-align: center;
   justify-content: center;
+  border-radius: 50px;
 }
 .user-active {
   background-color: rgb(58, 157, 223);
+  border-radius: 50px;
 }
