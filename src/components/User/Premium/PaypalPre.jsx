@@ -7,14 +7,14 @@ import { useEffect } from "react";
 import { FUNDING } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
-import { UpdateBookingStatus } from "../../API/APIConfigure";
+import { UpdateStatusPremium } from "../../API/APIConfigure";
 // This value is from the props in the UI
 const style = { layout: "vertical" };
 import { useState } from "react";
 // Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({ currency, showSpinner, amount }) => {
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
-  const id = useParams();
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     dispatch({
@@ -51,8 +51,8 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
                 text: "Bạn đã mua gói thành công",
                 icon: "success",
               }).then(() => {
-                UpdateBookingStatus(id.id, "2").then((res) => {
-                  window.location.reload();
+                UpdateStatusPremium(userInfo.id, true).then((res) => {
+                  // window.location.reload();
                 });
               });
             }
