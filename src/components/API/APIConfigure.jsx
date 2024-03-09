@@ -129,6 +129,12 @@ export const UpdatePaymentStatus = (PaymentID, newStatus) => {
   });
 };
 
+export const UpdateStatusPremium = (userID, newStatus) => {
+  return customAxios.put(`api/Accounts/UpdateAccountPremium?id=${userID}`, {
+    isPremium: newStatus,
+  });
+};
+
 export {
   SignInAccount,
   SignUpAccount,
