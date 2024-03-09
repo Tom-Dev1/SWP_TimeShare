@@ -2,27 +2,39 @@ import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
-} from '@paypal/react-paypal-js';
-import { useEffect } from 'react';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+} from "@paypal/react-paypal-js";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import {
+  GetPaymentbyBookingID,
   UpdateBookingStatus,
   UpdatePaymentStatus,
   UpdateTimeShareStatus,
-} from '../../API/APIConfigure';
+} from "../../API/APIConfigure";
 // This value is from the props in the UI
-const style = { layout: 'vertical' };
-import { useState } from 'react';
+const style = { layout: "vertical" };
+import { useState } from "react";
 // Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
   const id = useParams();
+  const [dataPay, setDataPay] = useState("");
+  const fetchPaymentDetails = async ({ id }) => {
+    try {
+      const response = await GetPaymentbyBookingID({ id });
+      if (response.length > 0) {
+        setDataPay(response[0]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     dispatch({
-      type: 'resetOptions',
+      type: "resetOptions",
       value: {
         ...options,
         currency: currency,
@@ -41,23 +53,28 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
         createOrder={(data, action) =>
           action.order
             .create({
-              purchase_units: [{ amount: { currency_code: currency, value: amount } }],
+              purchase_units: [
+                { amount: { currency_code: currency, value: amount } },
+              ],
             })
             .then((orderID) => orderID)
         }
         onApprove={(data, action) =>
           action.order.capture().then(async (response) => {
-            if (response.status === 'COMPLETED') {
+            if (response.status === "COMPLETED") {
               Swal.fire({
-                title: 'Thanh toán thành công',
-                text: 'Chúc bạn có kỳ nghỉ vui vẻ',
-                icon: 'success',
+                title: "Thanh toán thành công",
+                text: "Chúc bạn có kỳ nghỉ vui vẻ",
+                icon: "success",
               }).then(() => {
-
                 UpdateBookingStatus(id.id, "2").then((res) => {
-                  // UpdatePaymentStatus(id.id, "2");
+                  fetchPaymentDetails(id.id);
+                  fetchPaymentDetails(id.id).then(() => {
+                    if (dataPay && dataPay.payId) {
+                      UpdatePaymentStatus(dataPay.payId, "2").then((res) => {});
+                    }
+                  });
                   UpdateTimeShareStatus(timeshareId, "2").then((res) => {
-
                     window.location.reload();
                   });
                 });
@@ -72,17 +89,17 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
 
 export default function PayPal({ amount, timeshareId }) {
   return (
-    <div style={{ maxWidth: '750px', minHeight: '100px' }}>
+    <div style={{ maxWidth: "750px", minHeight: "100px" }}>
       <PayPalScriptProvider
         options={{
           clientId:
-            'AcKdF_dbUAtvyM_4GmsVWZt2SQpcH2HoRiQHszUL0IFoGcAcSsjC77LUdebronMEvzr6D03gZ2v7_RaD',
-          components: 'buttons',
-          currency: 'USD',
+            "AcKdF_dbUAtvyM_4GmsVWZt2SQpcH2HoRiQHszUL0IFoGcAcSsjC77LUdebronMEvzr6D03gZ2v7_RaD",
+          components: "buttons",
+          currency: "USD",
         }}
       >
         <ButtonWrapper
-          currency={'USD'}
+          currency={"USD"}
           amount={amount}
           showSpinner={false}
           timeshareId={timeshareId}

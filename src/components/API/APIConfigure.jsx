@@ -108,6 +108,9 @@ export const GetTradeByMemberID = (memberID) => {
     `api/Exchange/GetExchangebymemberID?memberid=${memberID}`
   );
 };
+export const GetPaymentbyBookingID = (BookingID) => {
+  return customAxios.get(`api/Payment/GetbyBookingID?id=${BookingID}`);
+};
 export const UpdateTradeStatus = (tradeID, newStatus) => {
   return customAxios.put(`api/Exchange/Updatestatus?id=${tradeID}`, {
     status: newStatus,
