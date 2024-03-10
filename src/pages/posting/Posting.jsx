@@ -95,6 +95,8 @@ const Posting = () => {
         money: total,
         bookingId: response.id,
         status: "1",
+        title: "Thanh toán đặt phòng",
+        type: "Payment",
       };
       const responsePayment = await CreatePayment(paymentData);
       Swal.fire({

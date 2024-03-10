@@ -18,7 +18,7 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CategoryIcon from "@mui/icons-material/Category";
 import FeedbackIcon from "@mui/icons-material/Feedback";
-import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+// import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import MapIcon from "@mui/icons-material/Map";
@@ -232,7 +232,7 @@ export default function Sidebar() {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem
+          {/* <ListItem
             disablePadding
             sx={{ display: "block" }}
             onClick={() => {
@@ -260,7 +260,7 @@ export default function Sidebar() {
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
           <ListItem
             disablePadding
             sx={{ display: "block" }}
