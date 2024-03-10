@@ -51,3 +51,8 @@
   background-color: rgb(58, 157, 223);
   border-radius: 50px;
 }
+.profile-title {
+  font-weight: 500;
+  line-height: 23px;
+  font-size: 28px;
+}
