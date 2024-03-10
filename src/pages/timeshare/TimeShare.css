@@ -8,9 +8,7 @@
   margin-bottom: 20px;
   border: 1px solid lightgray;
 }
-.homeContainer {
-  /* width: 100vw; */
-}
+
 .siImg {
   width: 150px;
   height: 150px;
@@ -72,12 +70,10 @@
   flex-direction: column;
   gap: 5px;
 }
-
 .siTaxOp {
   font-size: 12px;
   color: gray;
 }
-
 .siCheckButton {
   background-color: #0071c2;
   color: white;
@@ -85,7 +81,7 @@
   padding: 15px 10px;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 30px;
 }
 
 /* Table */
