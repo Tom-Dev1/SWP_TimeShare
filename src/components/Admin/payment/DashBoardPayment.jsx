@@ -109,6 +109,14 @@ const DashBoardPayment = () => {
                   }}
                   align="center"
                 >
+                  Loại thanh toán
+                </TableCell>
+                <TableCell
+                  style={{
+                    fontSize: "20px",
+                  }}
+                  align="center"
+                >
                   Giá
                 </TableCell>
                 <TableCell
@@ -136,11 +144,13 @@ const DashBoardPayment = () => {
                   <TableCell align="center">
                     {new Date(item.date).toLocaleString()}
                   </TableCell>
+                  <TableCell align="center">{item.title}</TableCell>
+
                   <TableCell align="center">
                     {item.money.toLocaleString()}VNĐ
                   </TableCell>
                   <TableCell align="center">
-                    {((item.money * 4.6) / 100).toLocaleString()}VNĐ
+                    {((item.money * 2.5) / 100).toLocaleString()}VNĐ
                   </TableCell>
                   <TableCell align="center">
                     <Button

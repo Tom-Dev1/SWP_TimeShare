@@ -211,7 +211,7 @@ export default function Navbar() {
                 <AccountCircle />
               </IconButton>
             ) : (
-              console.log("lỗi truy cập vào link")
+              <h1></h1>
             )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

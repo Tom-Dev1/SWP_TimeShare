@@ -1,7 +1,7 @@
 import Sidebar from "../../components/Admin/sidebar/Sidebar";
 import Navbar from "../../components/Admin/navbar/Navbar";
 import Box from "@mui/material/Box";
-import React from "react";
+import Booking from "../../components/Admin/dashboard/Booking";
 
 export default function Admin() {
   return (
@@ -11,7 +11,7 @@ export default function Admin() {
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <h3>Home</h3>
+          <Booking />
         </Box>
       </Box>
     </div>
