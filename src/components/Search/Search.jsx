@@ -165,10 +165,72 @@
 // };
 
 // export default Search;
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 
+// import { useEffect } from "react";
+
+// const Search = ({ onSearch, searchValue, setSearchValue }) => {
+//     useEffect(() => {
+//         const storedSearchTerm = localStorage.getItem("searchkey");
+//         if (storedSearchTerm) {
+//             setSearchValue(JSON.parse(storedSearchTerm).destination);
+//         }
+//     }, []);
+
+//     const handleSearch = () => {
+//         onSearch(searchValue);
+//     };
+
+//     const handleChange = (e) => {
+//         const value = e.target.value;
+//         setSearchValue(value);
+//         localStorage.setItem("searchkey", JSON.stringify({ destination: value }));
+//     };
+
+//     return (
+//         <>
+//             <div className="search-form ">
+//                 <div className="fresnel-container">
+//                     <div className="max-w-screen-2xl m-auto py-5">
+//                         <div className="fresnel-container-form">
+//                             <div className="SearchForm_searchForm SearchForm_isRow">
+//                                 <div className="flex-grow w-full px-1 h-15 rounded-l-md">
+//                                     <div className="searchForm_w-full">
+//                                         <div className="searchForm_w-full_focus-within">
+//                                             <div className="iconSearch_form">
+//                                                 <span className="icon_search">
+//                                                     <SearchIcon fontSize="large" />
+//                                                 </span>
+//                                             </div>
+//                                             <span className="inputSearch_form">
+//                                                 <label className="text_search">Điểm đến</label>
+//                                                 <input
+//                                                     placeholder="Bạn muốn đến đâu ?"
+//                                                     type="text"
+//                                                     value={searchValue}
+//                                                     className="input_search"
+//                                                     onChange={handleChange}
+//                                                 />
+//                                             </span>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                                 <button onClick={handleSearch} className="searchButton_button">
+//                                     <span className="AnimatedContent">
+//                                         <span>Tìm</span>
+//                                     </span>
+//                                 </button>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </>
+//     );
+// };
+// export default Search;
+import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import { useEffect } from "react";
-
 const Search = ({ onSearch, searchValue, setSearchValue }) => {
     useEffect(() => {
         const storedSearchTerm = localStorage.getItem("searchkey");
@@ -186,64 +248,29 @@ const Search = ({ onSearch, searchValue, setSearchValue }) => {
         setSearchValue(value);
         localStorage.setItem("searchkey", JSON.stringify({ destination: value }));
     };
-
     return (
-        <>
-            <div className="search-form ">
-                <div className="fresnel-container">
-                    <div className="max-w-screen-2xl m-auto py-5">
-                        <div className="fresnel-container-form">
-                            <div className="SearchForm_searchForm SearchForm_isRow">
-                                <div className="flex-grow w-full px-1 h-15 rounded-l-md">
-                                    <div className="searchForm_w-full">
-                                        <div className="searchForm_w-full_focus-within">
-                                            <div className="iconSearch_form">
-                                                <span className="icon_search">
-                                                    <SearchIcon fontSize="large" />
-                                                </span>
-                                            </div>
-                                            <span className="inputSearch_form">
-                                                <label className="text_search">Điểm đến</label>
-                                                <input
-                                                    placeholder="Bạn muốn đến đâu ?"
-                                                    type="text"
-                                                    value={searchValue}
-                                                    className="input_search"
-                                                    onChange={handleChange}
-                                                />
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button onClick={handleSearch} className="searchButton_button">
-                                    <span className="AnimatedContent">
-                                        <span>Tìm</span>
-                                    </span>
-                                </button>
-                            </div>
+        <div className="booking-search-block ht_tablet_hide">
+            <div className="bs-done">
+                <div className="bs-wrapper desktop search-container">
+                    <div className="bs-item-desktop n_des">
+                        <PlaceOutlinedIcon />
+                        <div className="input-wrapper">
+                            <input
+                                placeholder="Bạn muốn đến đâu ?"
+                                type="text"
+                                value={searchValue}
+                                className="bs-tit-desktop bs-info-desktop"
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
+                    <button onClick={handleSearch} className="bs-item-desktop submit ht_mirror">
+                        <span className="submit-btn_click">Tìm kiếm</span>
+                    </button>
                 </div>
             </div>
-        </>
-        // <div className="headerSearch">
-        //     <div className="headerSearchItem">
-        //         <FontAwesomeIcon icon={faBed} className="headerIcon" />
-        //         <input
-        //             type="text"
-        //             placeholder="Bạn muốn đến đâu ?"
-        //             value={searchValue}
-        //             className="headerSearchInput"
-        //             onChange={handleChange}
-        //         />
-        //     </div>
-
-        //     <div className="headerSearchItem">
-        //         <button className="headerBtn" onClick={handleSearch}>
-        //             Search
-        //         </button>
-        //     </div>
-        // </div>
+        </div>
     );
 };
+
 export default Search;

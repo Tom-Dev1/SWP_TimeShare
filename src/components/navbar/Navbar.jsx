@@ -118,6 +118,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import imgLogo from "../../assets/img/logo.png";
 function Navbar({ className }) {
+    const navbarClassname = className ? "home-navbar" : "other";
     const navigate = useNavigate();
     const { isLoggedIn, logout } = useAuth();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -188,19 +189,22 @@ function Navbar({ className }) {
         localStorage.removeItem("searchkey");
     };
     return (
-        <div className={`navbar-wrapper new-navbar-wrapper ${className}`}>
+        <div className={`navbar-wrapper new-navbar-wrapper ${navbarClassname}`}>
             <div className="ht_tablet_hide">
                 <div className="navbar-container">
                     <div className="navbar-left">
-                        <button className="btn_navbar-lef" onClick={handleBookingClick}>
-                            <Link to="/" className="navbar-link">
-                                <div className="navbar-logo">
+                        <div className="logo-wrapper">
+                            <button className="btn_navbar-lef" onClick={handleBookingClick}>
+                                <Link to="/" className="navbar-link">
+                                    {/* <div className="navbar-logo"> */}
                                     <img src={imgLogo} alt="" width={95} height={95} />
-                                </div>
-                                <span className="nav-logo_signature"> Booking</span>
-                            </Link>
-                        </button>
+                                    {/* </div> */}
+                                    <span className="nav-logo_signature"> Booking</span>
+                                </Link>
+                            </button>
+                        </div>
                     </div>
+                    <div className="navbar-center"></div>
                     <div className="navbar-right">
                         {isLoggedIn ? (
                             <div className="btn-icon">
@@ -210,18 +214,21 @@ function Navbar({ className }) {
                                     aria-controls={menuId}
                                     aria-haspopup="true"
                                     onClick={handleProfileMenuOpen}
-                                    color="inherit"
+                                    style={{ color: "#fff" }}
                                 >
                                     <AccountCircle />
                                 </IconButton>
                                 {renderMenu}
                             </div>
                         ) : (
-                            <div className="btn-div">
-                                <button className="navButton" onClick={handleLogin}>
-                                    Đăng nhập
-                                </button>
-                            </div>
+                            // <div className="btn-div">
+                            <button
+                                className="right-panel-open-btn booking-btn ht_mirror ht_tablet_hide"
+                                onClick={handleLogin}
+                            >
+                                Đăng nhập
+                            </button>
+                            // </div>
                         )}
                     </div>
                 </div>
