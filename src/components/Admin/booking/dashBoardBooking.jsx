@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GetAllBookings, GetUserByID } from "../../API/APIConfigure";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -29,7 +30,6 @@ const Dashboard = () => {
       try {
         const response = await GetAllBookings();
         setBookings(Array.isArray(response) ? response : []);
-        // Sau khi nhận được bookings, lấy thông tin người dùng
         fetchUserDetails(response.map((booking) => booking.memberId));
       } catch (err) {
         console.error(err);
@@ -61,6 +61,8 @@ const Dashboard = () => {
     });
   };
 
+  const navigate = useNavigate();
+
   const handleChangePage = (event, newPage) => setPage(newPage);
 
   const handleChangeRowsPerPage = (event) => {
@@ -79,6 +81,18 @@ const Dashboard = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
+
+  const statusTexts = {
+    1: "Chờ thanh toán",
+    2: "Đã thanh toán",
+    3: "Đã hủy",
+  };
+
+  const statusColors = {
+    1: "orange",
+    2: "green",
+    3: "red",
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -120,15 +134,7 @@ const Dashboard = () => {
                   >
                     Người dùng
                   </TableCell>
-                  <TableCell
-                    style={{
-                      fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    align="center"
-                  >
-                    Địa điểm
-                  </TableCell>
+
                   <TableCell
                     style={{
                       fontSize: "20px",
@@ -184,10 +190,7 @@ const Dashboard = () => {
                     </TableCell>
 
                     <TableCell style={{ fontSize: "13px" }} align="center">
-                      {booking.timeshareId}
-                    </TableCell>
-                    <TableCell style={{ fontSize: "13px" }} align="center">
-                      {booking.deposit}
+                      {booking.amount.toLocaleString()}VNĐ
                     </TableCell>
                     <TableCell style={{ fontSize: "13px" }} align="center">
                       {booking.adult}
@@ -203,15 +206,31 @@ const Dashboard = () => {
                         month: "2-digit",
                         year: "numeric",
                       })}
+                      -
+                      {new Date(booking.endDay).toLocaleDateString("vi-VN", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                      })}
                     </TableCell>
-                    <TableCell style={{ fontSize: "13px" }} align="center">
-                      {booking.deposit}
+                    <TableCell
+                      align="center"
+                      style={{
+                        fontSize: "15px",
+                        color: statusColors[booking.status],
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {statusTexts[booking.status]}
                     </TableCell>
                     <TableCell align="center">
                       <Button
                         variant="outlined"
                         color="success"
                         className="edit-btn"
+                        onClick={() =>
+                          navigate(`/admin/booking/details/${booking.id}`)
+                        }
                       >
                         <VisibilityIcon sx={{ fontSize: 25 }} />
                       </Button>

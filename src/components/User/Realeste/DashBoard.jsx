@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Paper,
@@ -12,36 +12,51 @@ import {
   Select,
   MenuItem,
   Button,
-} from "@mui/material";
-import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllRealestatesByMemberID } from "../../API/APIConfigure";
-import { useNavigate } from "react-router-dom";
-import CreateReal from "./CreateReal";
-import CreateTimeShare from "../Timeshare/CreateTimeShare";
+} from '@mui/material';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { GetAllRealestatesByMemberID, GetUserByID } from '../../API/APIConfigure';
+import { useNavigate } from 'react-router-dom';
+import CreateReal from './CreateReal';
+import CreateTimeShare from '../Timeshare/CreateTimeShare';
+import Swal from 'sweetalert2';
 
 const Dashboard = () => {
   const [realestates, setRealestates] = useState([]);
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState('all');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const [selectedRealestateId, setSelectedRealestateId] = useState(null);
-
+  const [userData, setUserData] = useState([]);
   const fetchRealestates = async () => {
     try {
       const response = await GetAllRealestatesByMemberID(userInfo.id);
       setRealestates(response || []);
     } catch (err) {
-      toast.error("Failed to fetch Realestates");
+      toast.error('Failed to fetch Realestates');
       console.error(err);
     }
   };
 
   useEffect(() => {
     fetchRealestates();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await GetUserByID(userInfo.id);
+      setUserData(response || []);
+    } catch (err) {
+      toast.error('Failed to fetch Realestates');
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, []);
 
   const handleChangePage = (event, newPage) => {
@@ -54,43 +69,37 @@ const Dashboard = () => {
   };
 
   const filtered = realestates.filter((item) => {
-    return (
-      selectedStatusFilter === "all" ||
-      item.status.toString() === selectedStatusFilter
-    );
+    return selectedStatusFilter === 'all' || item.status.toString() === selectedStatusFilter;
   });
 
-  const slicedFeedback = filtered.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
+  const slicedFeedback = filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const statusTexts = {
-    1: "Chờ xác nhận",
-    2: "Đã xác nhận",
-    3: "Tạm dừng",
-    4: "Vô hiệu hóa",
-    5: "Từ chối",
+    1: 'Chờ xác nhận',
+    2: 'Đã xác nhận',
+    3: 'Tạm dừng',
+    4: 'Vô hiệu hóa',
+    5: 'Từ chối',
   };
 
   const statusColors = {
-    1: "orange",
-    2: "green",
-    3: "gray",
-    4: "red",
-    5: "red",
+    1: 'orange',
+    2: 'green',
+    3: 'gray',
+    4: 'red',
+    5: 'red',
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
         <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
-            marginTop: "30px",
-            marginBottom: "20px",
-            justifyContent: "space-between",
+            display: 'flex',
+            alignItems: 'center',
+            marginTop: '30px',
+            marginBottom: '20px',
+            justifyContent: 'space-between',
           }}
         >
           <Select
@@ -104,29 +113,16 @@ const Dashboard = () => {
               </MenuItem>
             ))}
           </Select>
-          <CreateReal onCreateSuccess={fetchRealestates} />
+          <CreateReal Premium={userData.isPremium} onCreateSuccess={fetchRealestates} />
         </Box>
         <TableContainer component={Paper}>
-          <h2
-            style={{
-              textAlign: "center",
-              color: "#205295",
-              fontSize: "40px",
-              marginTop: "20px",
-              marginBottom: "20px",
-              fontFamily: "Arial, sans-serif",
-              fontWeight: "bold",
-            }}
-          >
-            Bất Động Sản Của Bạn
-          </h2>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell
                   style={{
-                    fontSize: "20px",
-                    fontFamily: "Arial, sans-serif",
+                    fontSize: '20px',
+                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -134,8 +130,8 @@ const Dashboard = () => {
                 </TableCell>
                 <TableCell
                   style={{
-                    fontSize: "20px",
-                    fontFamily: "Arial, sans-serif",
+                    fontSize: '20px',
+                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -143,8 +139,8 @@ const Dashboard = () => {
                 </TableCell>
                 <TableCell
                   style={{
-                    fontSize: "20px",
-                    fontFamily: "Arial, sans-serif",
+                    fontSize: '20px',
+                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -152,8 +148,8 @@ const Dashboard = () => {
                 </TableCell>
                 <TableCell
                   style={{
-                    fontSize: "20px",
-                    fontFamily: "Arial, sans-serif",
+                    fontSize: '20px',
+                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -161,8 +157,8 @@ const Dashboard = () => {
                 </TableCell>
                 <TableCell
                   style={{
-                    fontSize: "20px",
-                    fontFamily: "Arial, sans-serif",
+                    fontSize: '20px',
+                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -180,7 +176,7 @@ const Dashboard = () => {
                     align="center"
                     style={{
                       color: statusColors[item.status],
-                      fontWeight: "bold",
+                      fontWeight: 'bold',
                     }}
                   >
                     {statusTexts[item.status]}

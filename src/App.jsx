@@ -21,18 +21,19 @@ import CheckOut from "./pages/user/CheckOut";
 import TradeTimeShare from "./pages/trade/TradeTimeShare";
 import ConfirmTrade from "./pages/trade/ConfirmTrade";
 import DetailsTrade from "./pages/trade/DetailsTrade";
+import DetailsBooking from "./pages/admin/DetailsBooking";
+import Premium from "./pages/user/Premium";
 
 const AdminWrapper = ({ children }) => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    const isAdmin = userInfo?.isAdmin;
-    return isAdmin ? children : <ErrorPage />;
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const isAdmin = userInfo?.isAdmin;
+  return isAdmin ? children : <ErrorPage />;
 };
 const UserWrapper = ({ children }) => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    return userInfo ? children : <ErrorPage />;
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  return userInfo ? children : <ErrorPage />;
 };
 function App() {
-
   return (
     <Routes>
       <Route path="/*" element={<ErrorPage />} />
@@ -87,6 +88,14 @@ function App() {
         element={
           <UserWrapper>
             <DetailsTrade />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/premium"
+        element={
+          <UserWrapper>
+            <Premium />
           </UserWrapper>
         }
       />
@@ -156,6 +165,14 @@ function App() {
         }
       />
       <Route
+        path="/admin/booking/details/:id"
+        element={
+          <AdminWrapper>
+            <DetailsBooking />
+          </AdminWrapper>
+        }
+      />
+      <Route
         path="/admin/voucher"
         element={
           <AdminWrapper>
@@ -173,7 +190,6 @@ function App() {
       />
     </Routes>
   );
-
 }
 
 export default App;

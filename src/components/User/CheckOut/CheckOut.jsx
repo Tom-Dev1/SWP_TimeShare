@@ -77,7 +77,6 @@ const Checkout = () => {
               src={BASE_URL + (photoUrls.length > 0 ? photoUrls[0] : "")}
               alt=""
             />
-            <div className="title-booking"></div>
             <div className="paymentConfirm">
               <h1>Xác nhận thông tin của bạn</h1>
               <h1>
@@ -100,21 +99,25 @@ const Checkout = () => {
               <h1>Người lớn: {booking.adult}</h1>
               <h1>Trẻ em: {booking.children}</h1>
               <div className="_line"></div>
-              <h2 className="total-summary">
-                Tổng giá tiền: {booking.amount.toLocaleString()}VNĐ
-              </h2>
-            </div>
-            <div className="Cancel-booking">
-              <Cancel status={booking.status} />
+              <div className="totalCheckoutAndCancel">
+                <h2 className="total-summary">
+                  Tổng giá tiền: {booking.amount.toLocaleString()}VNĐ
+                </h2>
+                <div className="Cancel-booking">
+                  <Cancel status={booking.status} />
+                </div>
+              </div>
             </div>
           </div>
-
           {booking ? (
             <div className="payment-container">
-              <div className="paymentConfirm"></div>
               {booking.status !== "2" && (
                 <div className="payment-booking">
-                  <PayPal amount={total} timeshareId={booking.timeshareId} />
+                  <PayPal
+                    amount={total}
+                    timeshareId={booking.timeshareId}
+                    idPay={id}
+                  />
                 </div>
               )}
             </div>

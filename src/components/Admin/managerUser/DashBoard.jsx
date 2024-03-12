@@ -121,7 +121,6 @@ const Dashboard = () => {
                 fontSize: "40px",
                 marginTop: "20px",
                 marginBottom: "20px",
-                fontFamily: "Arial, sans-serif",
                 fontWeight: "bold",
               }}
             >
@@ -137,7 +136,6 @@ const Dashboard = () => {
                   <TableCell
                     style={{
                       fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
                     }}
                     align="center"
                   >
@@ -146,7 +144,6 @@ const Dashboard = () => {
                   <TableCell
                     style={{
                       fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
                     }}
                     align="center"
                   >
@@ -155,7 +152,6 @@ const Dashboard = () => {
                   <TableCell
                     style={{
                       fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
                     }}
                     align="center"
                   >
@@ -164,7 +160,14 @@ const Dashboard = () => {
                   <TableCell
                     style={{
                       fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
+                    }}
+                    align="center"
+                  >
+                    Loại tài khoản
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
                     }}
                     align="center"
                   >
@@ -173,7 +176,6 @@ const Dashboard = () => {
                   <TableCell
                     style={{
                       fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
                     }}
                     align="center"
                   >
@@ -193,6 +195,16 @@ const Dashboard = () => {
                     </TableCell>
                     <TableCell style={{ fontSize: "13px" }} align="center">
                       {user.phone}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        fontSize: "15px",
+                        color: user.isPremium ? "green" : "gray",
+                        fontWeight: "bold",
+                      }}
+                      align="center"
+                    >
+                      {user.isPremium ? "Thành viên" : "Khách"}
                     </TableCell>
                     <TableCell
                       style={{

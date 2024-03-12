@@ -56,6 +56,11 @@ export const GetAllBookingsByMemberID = (userID) => {
 const CreateVouchers = (voucherData) => {
   return instance.post(`api/Vouchers/Createvoucher`, voucherData);
 };
+export const UpdateStatusVoucherByID = (voucherID, newStatus) => {
+  return customAxios.put(`api/Vouchers/Updatevoucherstatus?id=${voucherID}`, {
+    status: newStatus,
+  });
+};
 export const GetbyRealestateID = (realetatesID) => {
   return customAxios.get(
     `api/Realestates/GetbyRealestateID?id=${realetatesID}`
@@ -103,14 +108,35 @@ export const GetTradeByMemberID = (memberID) => {
     `api/Exchange/GetExchangebymemberID?memberid=${memberID}`
   );
 };
+export const GetPaymentbyBookingID = (BookingID) => {
+  return customAxios.get(`api/Payment/GetbyBookingID?id=${BookingID}`);
+};
 export const UpdateTradeStatus = (tradeID, newStatus) => {
-  return customAxios.put(`api/Exchange/Updatestatus?id==${tradeID}`, {
+  return customAxios.put(`api/Exchange/Updatestatus?id=${tradeID}`, {
     status: newStatus,
   });
 };
 
 export const CreateTrade = (tradeData) => {
-  return instance.post(`api/Exchange/CreateExchange`, tradeData);
+  return customAxios.post(`api/Exchange/CreateExchange`, tradeData);
+};
+export const CreatePayment = (PaymentData) => {
+  return customAxios.post(`api/Payment/CreatePayment`, PaymentData);
+};
+export const UpdatePaymentStatus = (PaymentID, newStatus) => {
+  return customAxios.put(`API/Payment/UpdatePaymentSta?id=${PaymentID}`, {
+    status: newStatus,
+  });
+};
+
+export const GetAllPayment = () => {
+  return customAxios.get(`api/Payment/GetAll`);
+};
+
+export const UpdateStatusPremium = (userID, newStatus) => {
+  return customAxios.put(`api/Accounts/UpdateAccountPremium?id=${userID}`, {
+    isPremium: newStatus,
+  });
 };
 
 export {

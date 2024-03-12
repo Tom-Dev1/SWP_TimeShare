@@ -1,9 +1,10 @@
+import React from "react";
+import Box from "@mui/material/Box";
 import Sidebar from "../../components/Admin/sidebar/Sidebar";
 import Navbar from "../../components/Admin/navbar/Navbar";
-import Box from "@mui/material/Box";
-import Booking from "../../components/Admin/dashboard/Booking";
+import ViewDetailsBooking from "../../components/Admin/booking/viewDetailsBooking";
 
-export default function Admin() {
+export default function About() {
   return (
     <div>
       <Navbar />
@@ -11,7 +12,7 @@ export default function Admin() {
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Booking />
+          <ViewDetailsBooking />
         </Box>
       </Box>
     </div>
