@@ -68,6 +68,18 @@ const DashBoardPayment = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+  const statusTexts = {
+    1: "Chờ thanh toán",
+    2: "Đã thanh toán",
+    3: "Đã hủy",
+  };
+
+  const statusColors = {
+    1: "orange",
+    2: "green",
+    3: "red",
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
@@ -135,6 +147,14 @@ const DashBoardPayment = () => {
                 >
                   Xem đơn
                 </TableCell>
+                <TableCell
+                  style={{
+                    fontSize: "20px",
+                  }}
+                  align="center"
+                >
+                  Trạng thái
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -151,6 +171,15 @@ const DashBoardPayment = () => {
                   </TableCell>
                   <TableCell align="center">
                     {((item.money * 2.5) / 100).toLocaleString()}VNĐ
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      color: statusColors[item.status],
+                      fontWeight: "bold",
+                    }}
+                    align="center"
+                  >
+                    {statusTexts[item.status]}
                   </TableCell>
                   <TableCell align="center">
                     <Button
