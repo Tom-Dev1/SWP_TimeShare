@@ -21,17 +21,19 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
   const id = useParams();
   const [dataPay, setDataPay] = useState("");
-  const fetchPaymentDetails = async ({ id }) => {
-    try {
-      const response = await GetPaymentbyBookingID({ id });
-      if (response.length > 0) {
-        setDataPay(response[0]);
+  useEffect(() => {
+    const fetchPaymentDetails = async () => {
+      try {
+        const response = await GetPaymentbyBookingID(id.id);
+        if (response.length > 0) {
+          setDataPay(response[0]);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+    };
+    fetchPaymentDetails();
+  }, []);
   useEffect(() => {
     dispatch({
       type: "resetOptions",
@@ -41,7 +43,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
       },
     });
   }, [currency, showSpinner]);
-
+  console.log(dataPay.payId);
   return (
     <>
       {showSpinner && isPending && <div className="spinner" />}
@@ -68,12 +70,9 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
                 icon: "success",
               }).then(() => {
                 UpdateBookingStatus(id.id, "2").then((res) => {
-                  fetchPaymentDetails(id.id);
-                  fetchPaymentDetails(id.id).then(() => {
-                    if (dataPay && dataPay.payId) {
-                      UpdatePaymentStatus(dataPay.payId, "2").then((res) => {});
-                    }
-                  });
+                  if (dataPay && dataPay.payId) {
+                    UpdatePaymentStatus(dataPay.payId, "2").then((res) => {});
+                  }
                   UpdateTimeShareStatus(timeshareId, "2").then((res) => {
                     window.location.reload();
                   });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Paper,
@@ -9,12 +9,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
-  TextField,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { GetAllBookings, GetUserByID } from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 
@@ -190,6 +187,7 @@ const Dashboard = () => {
               onClick={() => navigate(`/admin/booking`)}
               variant="contained"
               color="primary"
+              style={{ width: "inherit" }}
               sx={{ mt: 1 }}
             >
               Xem thêm
