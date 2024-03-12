@@ -48,23 +48,22 @@ const SignUp = ({ handleToggleForm }) => {
 
         if (!formData.password) {
             newErrors.password = "Mật khẩu không được để trống.";
+        } else if (formData.password.length < 6 || !/[A-Z]/.test(formData.password)) {
+            newErrors.password = "Mật khẩu phải có ít nhất 6 kí tự và ít nhất 1 kí tự viết hoa.";
         }
 
         if (!formData.confirmPassword) {
             newErrors.confirmPassword = "Xác nhận mật khẩu không được để trống.";
         }
 
-        if (!formData.phone) {
-            newErrors.phone = "Số điện thoại không được để trống.";
-        }
-
         if (formData.password !== formData.confirmPassword) {
             newErrors.confirmPassword = "Mật khẩu và xác nhận mật khẩu không khớp.";
         }
 
-        const phoneRegex = /^[0-9]{10}$/;
-        if (!phoneRegex.test(formData.phone)) {
-            newErrors.phone = "Số điện thoại không hợp lệ [0-10].";
+        if (!formData.phone) {
+            newErrors.phone = "Số điện thoại không được để trống.";
+        } else if (formData.phone.length !== 10 || !/^\d{10}$/.test(formData.phone)) {
+            newErrors.phone = "Số điện thoại phải có đúng 10 chữ số.";
         }
         setErrors(newErrors);
         return newErrors;

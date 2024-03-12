@@ -262,6 +262,7 @@
 import { Link } from "react-router-dom";
 import bg1 from "../../assets/img/banner.png";
 import "./header.css";
+
 const Header = ({ isUnVisible }) => {
     return (
         <div className={`header-element-contain ${isUnVisible ? "visible" : ""}`}>

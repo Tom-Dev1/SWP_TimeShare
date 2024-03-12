@@ -47,7 +47,7 @@ function Home() {
     console.log(isHomeTitleVisible);
     return (
         <div className={`path-frontpage ${isScrolled ? "header-scroll" : ""} ${isHomeTitleVisible ? "fixed-bs" : ""}`}>
-            <Navbar className={isHomePage ? "home-navbar" : ""} />
+            <Navbar className={isHomePage} />
             <Header />
             <Search onSearch={handleSearch} searchValue={searchValue} setSearchValue={setSearchValue} />
 
