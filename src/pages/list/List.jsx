@@ -121,7 +121,13 @@ const List = () => {
     const keepDiacritics = (str) => {
         return str.normalize("NFD");
     };
+    useEffect(() => {
+        getData();
+    }, []);
 
+    useEffect(() => {
+        getData();
+    }, [date]);
     const getData = async () => {
         try {
             const response = await GetAllRealestates();
@@ -162,7 +168,7 @@ const List = () => {
                 return [...acc, ...realestateTimeshares];
             }, []);
 
-            // console.log(timeshares);
+            console.log(timeshares);
             setSearchResult(filteredResults);
         } catch (error) {
             console.log(error);

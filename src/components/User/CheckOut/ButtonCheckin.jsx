@@ -33,13 +33,23 @@ function ButtonCheckin({ bookingStatus, startDay, endDay }) {
       }
     });
   };
+  function formatDate(date) {
+    let d = new Date(date);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
   return (
     <div>
-      {bookingStatus == '2' && new Date() >= new Date() && new Date() <= new Date() && (
-        <button className="btn-checkin" onClick={() => handleClick({ idBooking: id, status: '4' })}>
-          Check In
-        </button>
-      )}
+      {bookingStatus === "2" &&
+        formatDate(new Date()) >= formatDate(startDay) &&
+        formatDate(new Date()) < formatDate(endDay) && (
+          <button
+            className="btn-checkin"
+            onClick={() => handleClick({ idBooking: id, status: "4" })}
+          >
+            Check In
+          </button>
+        )}
+
     </div>
   );
 }
