@@ -80,42 +80,7 @@ const Posting = () => {
             }));
         }
     }, [timeshare]);
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const updatedBookData = {
-    //         phone: bookData.phone,
-    //         fullName: bookData.fullName,
-    //         timeshareId: bookData.timeshareId,
-    //         startDay: bookData.startDay,
-    //         endDay: bookData.endDay,
-    //         amount: total,
-    //         memberId: bookData.memberId,
-    //         adult: bookData.adult,
-    //         children: bookData.children,
-    //         status: bookData.status,
-    //     };
 
-    //     try {
-    //         const response = await CreateBooking(updatedBookData);
-    //         const paymentData = {
-    //             memberId: bookData.memberId,
-    //             money: total,
-    //             bookingId: response.id,
-    //             status: "1",
-    //             title: "Thanh toán đặt phòng",
-    //             type: "Payment",
-    //         };
-    //         const responsePayment = await CreatePayment(paymentData);
-    //         Swal.fire({
-    //             icon: "success",
-    //             title: "Đặt chỗ thành công",
-    //         }).then(() => {
-    //             navigate(`/user/checkout/${response.id}`);
-    //         });
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // };
     const handleSubmit = async (e) => {
         e.preventDefault();
         const updatedBookData = {
@@ -133,10 +98,28 @@ const Posting = () => {
 
         console.log("Dữ liệu đã được gửi:", updatedBookData);
 
-        // Hiển thị thông báo thành công
+        try {
+            const response = await CreateBooking(updatedBookData);
+            const paymentData = {
+                memberId: bookData.memberId,
+                money: total,
+                bookingId: response.id,
+                status: "1",
+                title: "Thanh toán đặt phòng",
+                type: "Payment",
+            };
+            const responsePayment = await CreatePayment(paymentData);
+            Swal.fire({
+                icon: "success",
+                title: "Đặt chỗ thành công",
+            }).then(() => {
+                navigate(`/user/checkout/${response.id}`);
+            });
+        } catch (err) {
+            console.log(err);
+        }
         console.log("Đặt chỗ thành công");
 
-        // Reset dữ liệu form (nếu cần)w
         setBookData({
             phone: "",
             fullName: "",
@@ -150,9 +133,6 @@ const Posting = () => {
             children: "",
             status: "1",
         });
-
-        // Hiển thị thông báo lỗi nếu cần
-        // console.log("Đã xảy ra lỗi:", error);
     };
 
     const handleInputChange = (event) => {
