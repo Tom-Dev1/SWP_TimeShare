@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { GetAllPayment } from "../../API/APIConfigure";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { toast } from "react-toastify";
+import { Skeleton } from "@mui/material";
 
 export default function LineChartTotal() {
   const [payment, setPayment] = useState([]);
@@ -90,7 +91,12 @@ export default function LineChartTotal() {
         <input type="date" value={endDate} onChange={handleEndDateChange} />
       </label>
       {isLoading ? (
-        <p>Loading...</p>
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          width={500}
+          height={300}
+        />
       ) : (
         <div style={{ marginLeft: "20px" }}>
           <LineChart

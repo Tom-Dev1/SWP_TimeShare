@@ -9,6 +9,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Skeleton,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -18,9 +19,11 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
   const [userDetails, setUserDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBookings = async () => {
+      setIsLoading(true);
       try {
         let response = await GetAllBookings();
         if (Array.isArray(response)) {
@@ -40,11 +43,12 @@ const Dashboard = () => {
         toast.error("Failed to fetch bookings");
       }
     };
-
+    setIsLoading(false);
     fetchBookings();
   }, []);
 
   const fetchUserDetails = async (memberIds) => {
+    setIsLoading(true);
     memberIds.forEach(async (id) => {
       if (!userDetails[id]) {
         try {
@@ -63,6 +67,7 @@ const Dashboard = () => {
         }
       }
     });
+    setIsLoading(false);
   };
 
   const navigate = useNavigate();
@@ -92,97 +97,109 @@ const Dashboard = () => {
             >
               Đơn hàng thanh toán gần nhất
             </h2>
-            <Table
-              size="small"
-              sx={{ minWidth: 650 }}
-              aria-label="simple table"
-              className="staff-table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    style={{
-                      fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    align="center"
-                  >
-                    Người dùng
-                  </TableCell>
-
-                  <TableCell
-                    style={{
-                      fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    align="center"
-                  >
-                    Giá tiền
-                  </TableCell>
-
-                  <TableCell
-                    style={{
-                      fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    align="center"
-                  >
-                    Ngày đặt
-                  </TableCell>
-                  <TableCell
-                    style={{
-                      fontSize: "20px",
-                      fontFamily: "Arial, sans-serif",
-                    }}
-                    align="center"
-                  >
-                    Trạng thái
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {bookings.map((booking) => (
-                  <TableRow key={booking.id}>
-                    <TableCell style={{ fontSize: "13px" }} align="center">
-                      {userDetails[booking.memberId] || booking.memberId}
-                    </TableCell>
-
-                    <TableCell style={{ fontSize: "13px" }} align="center">
-                      {booking.amount.toLocaleString()}VNĐ
+            {isLoading ? (
+              <Skeleton
+                animation="wave"
+                variant="rectangular"
+                width={500}
+                height={300}
+              />
+            ) : (
+              <Table
+                size="small"
+                sx={{ minWidth: 650 }}
+                aria-label="simple table"
+                className="staff-table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      style={{
+                        fontSize: "20px",
+                        fontFamily: "Arial, sans-serif",
+                      }}
+                      align="center"
+                    >
+                      Người dùng
                     </TableCell>
 
                     <TableCell
                       style={{
-                        fontSize: "13px",
+                        fontSize: "20px",
+                        fontFamily: "Arial, sans-serif",
                       }}
                       align="center"
                     >
-                      {new Date(booking.startDay).toLocaleDateString("vi-VN", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      })}
-                      -
-                      {new Date(booking.endDay).toLocaleDateString("vi-VN", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      })}
+                      Giá tiền
+                    </TableCell>
+
+                    <TableCell
+                      style={{
+                        fontSize: "20px",
+                        fontFamily: "Arial, sans-serif",
+                      }}
+                      align="center"
+                    >
+                      Ngày đặt
                     </TableCell>
                     <TableCell
-                      align="center"
                       style={{
-                        fontSize: "15px",
-                        color: statusColors[booking.status],
-                        fontWeight: "bold",
+                        fontSize: "20px",
+                        fontFamily: "Arial, sans-serif",
                       }}
+                      align="center"
                     >
-                      {statusTexts[booking.status]}
+                      Trạng thái
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHead>
+                <TableBody>
+                  {bookings.map((booking) => (
+                    <TableRow key={booking.id}>
+                      <TableCell style={{ fontSize: "13px" }} align="center">
+                        {userDetails[booking.memberId] || booking.memberId}
+                      </TableCell>
+
+                      <TableCell style={{ fontSize: "13px" }} align="center">
+                        {booking.amount.toLocaleString()}VNĐ
+                      </TableCell>
+
+                      <TableCell
+                        style={{
+                          fontSize: "13px",
+                        }}
+                        align="center"
+                      >
+                        {new Date(booking.startDay).toLocaleDateString(
+                          "vi-VN",
+                          {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          }
+                        )}
+                        -
+                        {new Date(booking.endDay).toLocaleDateString("vi-VN", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        })}
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        style={{
+                          fontSize: "15px",
+                          color: statusColors[booking.status],
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {statusTexts[booking.status]}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
             <Button
               onClick={() => navigate(`/admin/booking`)}
               variant="contained"

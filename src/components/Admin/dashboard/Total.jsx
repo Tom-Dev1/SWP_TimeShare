@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { GetAllPayment } from "../../API/APIConfigure";
-import { Typography } from "@mui/material";
+import { Skeleton, Typography } from "@mui/material";
 export default function Total() {
   const [payment, setPayment] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +45,12 @@ export default function Total() {
         Doanh thu
       </h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          width={500}
+          height={300}
+        />
       ) : (
         <Typography variant="h6">
           {((totalPayment / 100) * 2.5).toLocaleString()}VNĐ

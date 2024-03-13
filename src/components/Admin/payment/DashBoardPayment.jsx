@@ -12,6 +12,7 @@ import {
   Select,
   MenuItem,
   Button,
+  Skeleton,
 } from "@mui/material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -25,9 +26,10 @@ const DashBoardPayment = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-  const [memberName, setMemberName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchRealestates = async () => {
+    setIsLoading(true);
     try {
       const response = await GetAllPayment();
       const payments = Array.isArray(response) ? response : [];
@@ -44,6 +46,7 @@ const DashBoardPayment = () => {
       toast.error("Failed to fetch Realestates");
       console.error(err);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -96,107 +99,117 @@ const DashBoardPayment = () => {
           >
             Báo cáo thanh toán
           </h2>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Tài khoản
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Ngày tạo
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Loại thanh toán
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Giá
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Phí nền tảng
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Xem đơn
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  align="center"
-                >
-                  Trạng thái
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {slicedPayment.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell align="center">{item.memberId}</TableCell>
-                  <TableCell align="center">
-                    {new Date(item.date).toLocaleString()}
-                  </TableCell>
-                  <TableCell align="center">{item.title}</TableCell>
-
-                  <TableCell align="center">
-                    {item.money.toLocaleString()}VNĐ
-                  </TableCell>
-                  <TableCell align="center">
-                    {((item.money * 2.5) / 100).toLocaleString()}VNĐ
-                  </TableCell>
+          {isLoading ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              height={300}
+              width={1550}
+            />
+          ) : (
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
                   <TableCell
                     style={{
-                      color: statusColors[item.status],
-                      fontWeight: "bold",
+                      fontSize: "20px",
                     }}
                     align="center"
                   >
-                    {statusTexts[item.status]}
+                    Tài khoản
                   </TableCell>
-                  <TableCell align="center">
-                    <Button
-                      variant="outlined"
-                      color="success"
-                      className="edit-btn"
-                      onClick={() =>
-                        navigate(`/admin/booking/details/${item.bookingId}`)
-                      }
-                    >
-                      <VisibilityIcon sx={{ fontSize: 25 }} />
-                    </Button>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Ngày tạo
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Loại thanh toán
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Giá
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Phí nền tảng
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Xem đơn
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Trạng thái
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+
+              <TableBody>
+                {slicedPayment.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="center">{item.memberId}</TableCell>
+                    <TableCell align="center">
+                      {new Date(item.date).toLocaleString()}
+                    </TableCell>
+                    <TableCell align="center">{item.title}</TableCell>
+
+                    <TableCell align="center">
+                      {item.money.toLocaleString()}VNĐ
+                    </TableCell>
+                    <TableCell align="center">
+                      {((item.money * 2.5) / 100).toLocaleString()}VNĐ
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        color: statusColors[item.status],
+                        fontWeight: "bold",
+                      }}
+                      align="center"
+                    >
+                      {statusTexts[item.status]}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Button
+                        variant="outlined"
+                        color="success"
+                        className="edit-btn"
+                        onClick={() =>
+                          navigate(`/admin/booking/details/${item.bookingId}`)
+                        }
+                      >
+                        <VisibilityIcon sx={{ fontSize: 25 }} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
