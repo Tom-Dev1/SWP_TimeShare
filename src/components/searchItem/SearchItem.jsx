@@ -116,32 +116,74 @@
 
 // export default SearchItem;
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./searchItem.css";
 import CheckIcon from "@mui/icons-material/Check";
 import { Rating } from "@mui/material";
-import React, { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { GetbyRealestateID } from "../API/APIConfigure";
+import { useAuth } from "../../hook/AuthContext";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const SearchItem = ({ searchResult }) => {
+    console.log(searchResult);
     const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
-    const [value, setValue] = React.useState(4);
+    const [value, setValue] = useState(4);
+    const navigate = useNavigate();
+    const { isLoggedIn } = useAuth();
+    const [userLoggedIn, setUserLoggedIn] = useState(isLoggedIn);
+    useEffect(() => {
+        setUserLoggedIn(isLoggedIn);
+    }, [isLoggedIn]);
 
+    const handleHotelsLinkClick = (e) => {
+        if (!userLoggedIn) {
+            e.preventDefault();
+            Swal.fire({
+                icon: "error",
+                title: "Vui lòng đăng nhập để xem thông tin!",
+                showConfirmButton: true,
+                confirmButtonText: "Đăng nhập",
+                showCancelButton: true,
+                cancelButtonText: "Huỷ",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login-register");
+                }
+            });
+            console.log("Bạn cần đăng nhập để xem Hotels.");
+        }
+    };
     const handleViewTimeshare = async (itemId) => {
-        try {
-            const response = await GetbyRealestateID(itemId);
+        if (userLoggedIn) {
+            try {
+                const response = await GetbyRealestateID(itemId);
 
-            const realEstate = response;
+                const realEstate = response;
 
-            localStorage.setItem("Realestate", JSON.stringify(realEstate));
+                localStorage.setItem("Realestate", JSON.stringify(realEstate));
 
-            const photoUrls = realEstate.photo ? realEstate.photo.split(",") : [];
-            localStorage.setItem("imageReal", JSON.stringify(photoUrls));
-
-            // setRealEstateData(realEstate);
-        } catch (error) {
-            console.error("Error fetching real estate data", error);
+                const photoUrls = realEstate.photo ? realEstate.photo.split(",") : [];
+                localStorage.setItem("imageReal", JSON.stringify(photoUrls));
+                navigate(`/timeshare/${itemId}`);
+                // setRealEstateData(realEstate);
+            } catch (error) {
+                console.error("Error fetching real estate data", error);
+            }
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Vui lòng đăng nhập để xem thông tin!",
+                showConfirmButton: true,
+                confirmButtonText: "Đăng nhập",
+                showCancelButton: true,
+                cancelButtonText: "Huỷ",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login-register");
+                }
+            });
         }
     };
 
@@ -159,6 +201,7 @@ const SearchItem = ({ searchResult }) => {
                                         <article className="flex  text-grey-900 relative rounded-md">
                                             <Link
                                                 to={`/hotels/${item.id}`}
+                                                onClick={handleHotelsLinkClick}
                                                 className="AccommodationItem_infoWrapper AccommodationItem_infoSection flex-1"
                                             >
                                                 <div className="relative overflow-hidden min-h-full rounded-l-md ImageSectionWrapper_imageSectionFull__ZDCP6 w-full">
@@ -226,14 +269,9 @@ const SearchItem = ({ searchResult }) => {
                                                                     className="viewTS_btn"
                                                                     onClick={() => handleViewTimeshare(item.id)}
                                                                 >
-                                                                    <Link
-                                                                        to={`/timeshare/${item.id}`}
-                                                                        className="viewTS_link"
-                                                                    >
-                                                                        <span className="flex items-center justify-center">
-                                                                            Xem timeshare
-                                                                        </span>
-                                                                    </Link>
+                                                                    <span className="flex items-center justify-center">
+                                                                        Xem timeshare
+                                                                    </span>
                                                                 </button>
                                                             </div>
                                                         </div>
