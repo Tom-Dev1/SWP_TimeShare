@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { GetAllBookings } from "../../API/APIConfigure";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { toast } from "react-toastify";
+import { Skeleton } from "@mui/material";
 
 export default function Booking() {
   const [bookings, setBookings] = useState([]);
@@ -99,7 +100,12 @@ export default function Booking() {
         <input type="date" value={endDate} onChange={handleEndDateChange} />
       </label>
       {isLoading ? (
-        <p>Loading...</p>
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          width={500}
+          height={300}
+        />
       ) : (
         <>
           <h1>Thống kê số lượng đặt hàng : </h1>

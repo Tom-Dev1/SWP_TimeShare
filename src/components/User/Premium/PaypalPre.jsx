@@ -11,11 +11,12 @@ import { UpdateStatusPremium } from "../../API/APIConfigure";
 // This value is from the props in the UI
 const style = { layout: "vertical" };
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // Custom component to wrap the PayPalButtons and show loading spinner
 const ButtonWrapper = ({ currency, showSpinner, amount }) => {
   const [{ isPending, options }, dispatch] = usePayPalScriptReducer();
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch({
       type: "resetOptions",
@@ -53,6 +54,7 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
               }).then(() => {
                 UpdateStatusPremium(userInfo.id, true).then((res) => {
                   // window.location.reload();
+                  navigate("/user/profile");
                 });
               });
             }

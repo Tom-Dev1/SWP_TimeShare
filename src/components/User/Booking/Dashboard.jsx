@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Paper,
@@ -12,26 +12,29 @@ import {
   Select,
   MenuItem,
   Button,
-} from '@mui/material';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+  Skeleton,
+} from "@mui/material";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   GetAllBookingsByMemberID,
   GetbyRealestateID,
   GetTimeShareById,
-} from '../../API/APIConfigure';
-import { useNavigate } from 'react-router-dom';
+} from "../../API/APIConfigure";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [booking, setBooking] = useState([]);
-  const [selectedStatusFilter, setSelectedStatusFilter] = useState('all');
+  const [selectedStatusFilter, setSelectedStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const navigate = useNavigate();
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchBooking = async () => {
+    setIsLoading(true);
     try {
       const response = await GetAllBookingsByMemberID(userInfo.id);
       const bookingsWithRealestate = await Promise.all(
@@ -43,9 +46,10 @@ const Dashboard = () => {
       );
       setBooking(bookingsWithRealestate || []);
     } catch (err) {
-      toast.error('Lỗi lấy thông tin Booking');
+      toast.error("Lỗi lấy thông tin Booking");
       console.error(err);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -62,30 +66,36 @@ const Dashboard = () => {
   };
 
   const filtered = booking.filter((item) => {
-    return selectedStatusFilter === 'all' || item.status.toString() === selectedStatusFilter;
+    return (
+      selectedStatusFilter === "all" ||
+      item.status.toString() === selectedStatusFilter
+    );
   });
 
-  const sliced = filtered.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const sliced = filtered.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
 
   const statusTexts = {
-    1: 'Chờ thanh toán',
-    2: 'Đã xác nhận',
-    3: 'Đã hủy',
+    1: "Chờ thanh toán",
+    2: "Đã xác nhận",
+    3: "Đã hủy",
   };
 
   const statusColors = {
-    1: 'orange',
-    2: 'green',
-    3: 'red',
+    1: "orange",
+    2: "green",
+    3: "red",
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
         <Select
           value={selectedStatusFilter}
           onChange={(e) => setSelectedStatusFilter(e.target.value)}
-          style={{ marginTop: '30px', marginBottom: '20px' }}
+          style={{ marginTop: "30px", marginBottom: "20px" }}
         >
           <MenuItem value="all">Tất cả</MenuItem>
           {Object.keys(statusTexts).map((status) => (
@@ -96,91 +106,102 @@ const Dashboard = () => {
         </Select>
 
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell
-                  style={{
-                    fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
-                  }}
-                  align="center"
-                >
-                  Realestes
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
-                  }}
-                  align="center"
-                >
-                  Số Ngày
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
-                  }}
-                  align="center"
-                >
-                  Giá
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
-                  }}
-                  align="center"
-                >
-                  Status
-                </TableCell>
-                <TableCell
-                  style={{
-                    fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
-                  }}
-                  align="center"
-                >
-                  Xem chi tiết
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sliced.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell align="center">{item.realestate.name}</TableCell>
-                  <TableCell align="center">
-                    {item.endDay && item.startDay
-                      ? Math.ceil(
-                          (new Date(item.endDay) - new Date(item.startDay)) / (1000 * 60 * 60 * 24)
-                        )
-                      : 'Invalid date'}
-                  </TableCell>
-                  <TableCell align="center">{item.amount}</TableCell>
+          {isLoading ? (
+            <Skeleton
+              animation="wave"
+              variant="rectangular"
+              width={850}
+              height={300}
+            />
+          ) : (
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
                   <TableCell
-                    align="center"
                     style={{
-                      color: statusColors[item.status],
-                      fontWeight: 'bold',
+                      fontSize: "20px",
                     }}
+                    align="center"
                   >
-                    {statusTexts[item.status]}
+                    Realestes
                   </TableCell>
-                  <TableCell align="center">
-                    <Button
-                      variant="outlined"
-                      color="success"
-                      className="edit-btn"
-                      onClick={() => navigate(`/user/checkout/${item.id}`)}
-                    >
-                      <VisibilityIcon sx={{ fontSize: 25 }} />
-                    </Button>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Số Ngày
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Giá
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Status
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      fontSize: "20px",
+                    }}
+                    align="center"
+                  >
+                    Xem chi tiết
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {sliced.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell align="center">{item.realestate.name}</TableCell>
+                    <TableCell align="center">
+                      {item.endDay && item.startDay
+                        ? Math.max(
+                            0,
+                            Math.ceil(
+                              (new Date(item.endDay) -
+                                new Date(item.startDay)) /
+                                (1000 * 60 * 60 * 24)
+                            )
+                          )
+                        : "Invalid date"}
+                    </TableCell>
+                    <TableCell align="center">
+                      {item.amount.toLocaleString()}VNĐ
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      style={{
+                        color: statusColors[item.status],
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {statusTexts[item.status]}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Button
+                        variant="outlined"
+                        color="success"
+                        className="edit-btn"
+                        onClick={() => navigate(`/user/checkout/${item.id}`)}
+                      >
+                        <VisibilityIcon sx={{ fontSize: 25 }} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GetAllAccounts } from "../../API/APIConfigure";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { Skeleton } from "@mui/material";
 
 export default function PieUser() {
   const [user, setUser] = useState();
@@ -45,7 +46,12 @@ export default function PieUser() {
         Thống kê người dùng
       </h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <Skeleton
+          animation="wave"
+          variant="rectangular"
+          width={500}
+          height={300}
+        />
       ) : (
         <PieChart
           series={[
