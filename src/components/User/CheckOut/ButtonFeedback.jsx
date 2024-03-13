@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Rating } from "@mui/material";
-import { CreateFeedback, UpdateBookingStatus } from "../../API/APIConfigure";
-import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Rating } from '@mui/material';
+import { CreateFeedback, UpdateBookingStatus } from '../../API/APIConfigure';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import './btnFeedback.css';
 const ButtonFeedback = ({ status, realID, bookingID }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [rate, setRate] = useState(0);
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
   const handleButtonClick = () => {
     setShowPopup(true);
@@ -30,37 +30,56 @@ const ButtonFeedback = ({ status, realID, bookingID }) => {
       const response = await CreateFeedback(feedbackData);
       if (response) {
         Swal.fire({
-          title: "Cảm ơn bạn đã đánh giá ",
-          text: "Đánh giá của bạn góp phần giúp chúng tôi cải thiện dịch vụ tốt hơn",
-          icon: "success",
+          title: 'Cảm ơn bạn đã đánh giá ',
+          text: 'Đánh giá của bạn góp phần giúp chúng tôi cải thiện dịch vụ tốt hơn',
+          icon: 'success',
         });
-        UpdateBookingStatus(bookingID, "6");
+        UpdateBookingStatus(bookingID, '6');
       }
     } catch (err) {
-      toast.error("Lỗi tạo feedback");
+      toast.error('Lỗi tạo feedback');
       console.error(err);
     }
   };
 
   return (
-    <div>
-      {status === "5" && <button onClick={handleButtonClick}>Đánh giá</button>}
+    <div className="feeback-wapper">
+      <div>
+        {status === '5' && (
+          <button className="btn-btn-rating" onClick={handleButtonClick}>
+            Đánh giá kỳ nghỉ
+          </button>
+        )}
+      </div>
       {showPopup && (
         <div className="popup">
-          <h3>Đánh giá sản phẩm</h3>
-          <input
-            type="text"
-            placeholder="Feedback Text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <Rating
-            name="simple-controlled"
-            value={rate}
-            onChange={(e) => setRate(Number(e.target.value))}
-          />
-          <button onClick={handleSubmit}>Gửi</button>
-          <button onClick={closePopup}>Đóng</button>
+          <h3 className="titleFeedback">Nhận xét của bạn </h3>
+          <div className="feedback">
+            <div>
+              <input
+                className="inputFeedback"
+                type="text"
+                placeholder="Nhập vào đây....."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </div>
+            <div className="ratingStar">
+              <Rating
+                name="simple-controlled"
+                value={rate}
+                onChange={(e) => setRate(Number(e.target.value))}
+              />
+            </div>
+          </div>
+          <div className="btn-feedback">
+            <button className="btn-btn-ratingSend" onClick={handleSubmit}>
+              Gửi
+            </button>
+            <button className="btn-btn-ratingClose" onClick={closePopup}>
+              Đóng
+            </button>
+          </div>
         </div>
       )}
     </div>
