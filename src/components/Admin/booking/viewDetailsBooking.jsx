@@ -9,6 +9,7 @@ import {
 } from "../../API/APIConfigure";
 
 import "./viewDetails.css";
+import LoadingPage from "../../LoadingPage/LoadingPage";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const Checkout = () => {
   }, [id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   const photoUrls = booking.realestate.photo

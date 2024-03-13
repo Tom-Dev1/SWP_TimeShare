@@ -12,7 +12,7 @@ import {
   GetTimeShareById,
   GetbyRealestateID,
 } from "../../API/APIConfigure";
-
+import LoadingPage from "../../LoadingPage/LoadingPage";
 import "./checkout.css";
 import Cancel from "./Cancel";
 import ButtonCheckOut from "./ButtonCheckOut";
@@ -47,7 +47,11 @@ const Checkout = () => {
     fetchBooking();
   }, [id]);
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LoadingPage />
+      </div>
+    );
   }
 
   const total = Math.round(booking.amount / 24500);
