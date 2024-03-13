@@ -276,9 +276,9 @@ const SearchItem = ({ searchResult }) => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="IntroSection_wrapper">
+                                                    {/* <div className="IntroSection_wrapper">
                                                         <p>{item.description}</p>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         </article>
