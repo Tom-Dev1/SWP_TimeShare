@@ -67,7 +67,7 @@ export const GetbyRealestateID = (realetatesID) => {
   );
 };
 export const GetFeebackbyRealestate = (realetatesID) => {
-  return customAxios.get(`api/Feedbacks/GetbyRealestateID?id=${realetatesID}`);
+  return instance.get(`api/Feedbacks/GetbyRealestateID?id=${realetatesID}`);
 };
 const CreateBooking = (data) => {
   return customAxios.post(`api/Bookings/Createbooking`, data);
@@ -137,6 +137,10 @@ export const UpdateStatusPremium = (userID, newStatus) => {
   return customAxios.put(`api/Accounts/UpdateAccountPremium?id=${userID}`, {
     isPremium: newStatus,
   });
+};
+
+export const CreateFeedback = (data) => {
+  return customAxios.post(`api/Feedbacks/Createfeedback`, data);
 };
 
 export {

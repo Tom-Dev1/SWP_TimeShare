@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { FUNDING } from "@paypal/react-paypal-js";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
-import { UpdateStatusPremium } from "../../API/APIConfigure";
+import { CreatePayment, UpdateStatusPremium } from "../../API/APIConfigure";
 // This value is from the props in the UI
 const style = { layout: "vertical" };
 import { useState } from "react";
@@ -54,6 +54,15 @@ const ButtonWrapper = ({ currency, showSpinner, amount }) => {
               }).then(() => {
                 UpdateStatusPremium(userInfo.id, true).then((res) => {
                   // window.location.reload();
+                  const paymentData = {
+                    memberId: userInfo.id,
+                    money: 120000,
+                    bookingId: null,
+                    status: "2",
+                    title: "Nâng cấp thành viên",
+                    type: "Premium",
+                  };
+                  CreatePayment(paymentData);
                   navigate("/user/profile");
                 });
               });

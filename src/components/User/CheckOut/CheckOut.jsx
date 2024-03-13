@@ -15,6 +15,9 @@ import {
 
 import "./checkout.css";
 import Cancel from "./Cancel";
+import ButtonCheckOut from "./ButtonCheckOut";
+import ButtonCheckin from "./ButtonCheckin";
+import ButtonFeedback from "./ButtonFeedback";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -43,7 +46,6 @@ const Checkout = () => {
 
     fetchBooking();
   }, [id]);
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -61,11 +63,16 @@ const Checkout = () => {
         return "Đã thanh toán";
       case "3":
         return "Đã hủy";
+      case "4":
+        return "Đã check in";
+      case "5":
+        return "Đã check out";
+      case "6":
+        return "Đã check out";
       default:
         return "";
     }
   };
-
   return (
     <>
       <Navbar />
@@ -106,12 +113,29 @@ const Checkout = () => {
                 <div className="Cancel-booking">
                   <Cancel status={booking.status} />
                 </div>
+                <div className="Checkin-booking">
+                  <ButtonCheckin
+                    bookingStatus={booking.status}
+                    startDay={booking.startDay}
+                    endDay={booking.endDay}
+                  />
+                </div>
+                <div className="Checkout-booking">
+                  <ButtonCheckOut bookingStatus={booking.status} />
+                </div>
+                <div className="feedback-booking">
+                  <ButtonFeedback
+                    status={booking.status}
+                    realID={booking.realestate.id}
+                    bookingID={booking.id}
+                  />
+                </div>
               </div>
             </div>
           </div>
           {booking ? (
             <div className="payment-container">
-              {booking.status !== "2" && (
+              {booking.status === "1" && (
                 <div className="payment-booking">
                   <PayPal
                     amount={total}

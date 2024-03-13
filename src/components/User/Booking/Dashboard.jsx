@@ -81,12 +81,18 @@ const Dashboard = () => {
     1: "Chờ thanh toán",
     2: "Đã xác nhận",
     3: "Đã hủy",
+    4: "Đã check in",
+    5: "Đã check out",
+    6: "Đã check out",
   };
 
   const statusColors = {
     1: "orange",
     2: "green",
     3: "red",
+    4: "green",
+    5: "green",
+    6: "green",
   };
 
   return (

@@ -8,7 +8,11 @@ const Cancel = ({ status }) => {
   const [bookingStatus, setBookingStatus] = useState(status);
   const id = useParams();
   const handleClick = ({ idBooking, status }) => {
-    if (bookingStatus === "2") {
+    if (
+      bookingStatus === "2" ||
+      bookingStatus === "4" ||
+      bookingStatus === "5"
+    ) {
       Swal.fire({
         icon: "error",
         title: "Không thể hủy",
@@ -29,7 +33,7 @@ const Cancel = ({ status }) => {
             Swal.fire({
               icon: "success",
               title: "Hủy thành công",
-            }).then(() => {
+            }).then((res) => {
               window.location.reload();
             });
           } catch (err) {
@@ -46,7 +50,12 @@ const Cancel = ({ status }) => {
 
   return (
     <div>
-      {bookingStatus !== "3" && (
+      {!(
+        bookingStatus === "3" ||
+        bookingStatus === "4" ||
+        bookingStatus === "5" ||
+        bookingStatus === "6"
+      ) && (
         <button
           className="btn-cancel"
           onClick={() => handleClick({ idBooking: id, status: "3" })}

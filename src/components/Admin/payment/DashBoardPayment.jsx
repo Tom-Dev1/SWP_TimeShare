@@ -156,7 +156,7 @@ const DashBoardPayment = () => {
                     }}
                     align="center"
                   >
-                    Xem đơn
+                    Trạng thái
                   </TableCell>
                   <TableCell
                     style={{
@@ -164,7 +164,7 @@ const DashBoardPayment = () => {
                     }}
                     align="center"
                   >
-                    Trạng thái
+                    Xem đơn
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -182,7 +182,10 @@ const DashBoardPayment = () => {
                       {item.money.toLocaleString()}VNĐ
                     </TableCell>
                     <TableCell align="center">
-                      {((item.money * 2.5) / 100).toLocaleString()}VNĐ
+                      {item.type !== "Premium"
+                        ? ((item.money * 2.5) / 100).toLocaleString()
+                        : item.money.toLocaleString()}
+                      VNĐ
                     </TableCell>
                     <TableCell
                       style={{
@@ -194,16 +197,18 @@ const DashBoardPayment = () => {
                       {statusTexts[item.status]}
                     </TableCell>
                     <TableCell align="center">
-                      <Button
-                        variant="outlined"
-                        color="success"
-                        className="edit-btn"
-                        onClick={() =>
-                          navigate(`/admin/booking/details/${item.bookingId}`)
-                        }
-                      >
-                        <VisibilityIcon sx={{ fontSize: 25 }} />
-                      </Button>
+                      {item.type !== "Premium" && (
+                        <Button
+                          variant="outlined"
+                          color="success"
+                          className="edit-btn"
+                          onClick={() =>
+                            navigate(`/admin/booking/details/${item.bookingId}`)
+                          }
+                        >
+                          <VisibilityIcon sx={{ fontSize: 25 }} />
+                        </Button>
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
