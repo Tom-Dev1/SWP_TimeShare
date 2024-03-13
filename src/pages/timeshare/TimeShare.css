@@ -1,7 +1,7 @@
 .searchItem {
   width: 900px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   display: flex;
   justify-content: flex-end;
   gap: 20px;
@@ -10,6 +10,8 @@
 }
 
 .siImg {
+  margin-top: 5px;
+  border-radius: 20px;
   width: 150px;
   height: 150px;
 }
@@ -75,6 +77,8 @@
   color: gray;
 }
 .siCheckButton {
+  margin-top: 10px;
+  text-decoration: none;
   background-color: #0071c2;
   color: white;
   font-weight: bold;

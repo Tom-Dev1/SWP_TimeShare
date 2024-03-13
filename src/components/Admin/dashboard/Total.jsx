@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { GetAllPayment } from "../../API/APIConfigure";
-import { Skeleton, Typography } from "@mui/material";
+import { useState, useEffect } from 'react';
+import { GetAllPayment } from '../../API/APIConfigure';
+import { Skeleton, Typography } from '@mui/material';
 export default function Total() {
   const [payment, setPayment] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -17,8 +17,7 @@ export default function Total() {
         setPayment(response);
 
         const total = response.reduce(
-          (sum, payment) =>
-            payment.status === "2" ? sum + payment.money : sum,
+          (sum, payment) => (payment.status === '2' ? sum + payment.money : sum),
           0
         );
         setTotalPayment(total);
@@ -35,25 +34,21 @@ export default function Total() {
     <div>
       <h2
         style={{
-          color: "#205295",
-          fontSize: "30px",
-          marginTop: "20px",
-          marginBottom: "20px",
-          fontWeight: "bold",
+          color: '#205295',
+          fontSize: '30px',
+          marginTop: '20px',
+          marginBottom: '20px',
+          fontWeight: 'bold',
+          align: 'center',
         }}
       >
-        Doanh thu
+        Doanh thu hiện tại
       </h2>
       {isLoading ? (
-        <Skeleton
-          animation="wave"
-          variant="rectangular"
-          width={500}
-          height={300}
-        />
+        <Skeleton animation="wave" variant="rectangular" width={500} height={300} />
       ) : (
         <Typography variant="h6">
-          {((totalPayment / 100) * 2.5).toLocaleString()}VNĐ
+          Tổng doanh thu: {((totalPayment / 100) * 2.5).toLocaleString()} VNĐ
         </Typography>
       )}
     </div>

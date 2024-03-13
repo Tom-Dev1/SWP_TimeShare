@@ -1,36 +1,37 @@
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
-import List from "./pages/list/List";
-import Hotel from "./pages/hotel/Hotel";
-import Admin from "./pages/admin/Admin";
-import About from "./pages/admin/About";
-import User from "./pages/admin/User";
-import Account from "./pages/admin/Account";
-import Wallet from "./pages/admin/Wallet";
-import Feedback from "./pages/admin/Feedback";
-import Trade from "./pages/admin/Trade";
-import Form from "./pages/form/Form";
-import UserPage from "./pages/user/userPage";
-import Booking from "./pages/admin/Booking";
-import Voucher from "./pages/admin/Voucher";
-import Realestates from "./pages/admin/Realestates";
-import ErrorPage from "./pages/ErrorPage";
-import Timeshare from "./pages/timeshare/Timeshare";
-import Posting from "./pages/posting/Posting";
-import CheckOut from "./pages/user/CheckOut";
-import TradeTimeShare from "./pages/trade/TradeTimeShare";
-import ConfirmTrade from "./pages/trade/ConfirmTrade";
-import DetailsTrade from "./pages/trade/DetailsTrade";
-import DetailsBooking from "./pages/admin/DetailsBooking";
-import Premium from "./pages/user/Premium";
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/home/Home';
+import List from './pages/list/List';
+import Hotel from './pages/hotel/Hotel';
+import Admin from './pages/admin/Admin';
+import About from './pages/admin/About';
+import User from './pages/admin/User';
+import Account from './pages/admin/Account';
+import Wallet from './pages/admin/Wallet';
+import Feedback from './pages/admin/Feedback';
+import Trade from './pages/admin/Trade';
+import Form from './pages/form/Form';
+import UserPage from './pages/user/userPage';
+import Booking from './pages/admin/Booking';
+import Voucher from './pages/admin/Voucher';
+import Realestates from './pages/admin/Realestates';
+import ErrorPage from './pages/ErrorPage';
+import Timeshare from './pages/timeshare/Timeshare';
+import Posting from './pages/posting/Posting';
+import CheckOut from './pages/user/CheckOut';
+import TradeTimeShare from './pages/trade/TradeTimeShare';
+import ConfirmTrade from './pages/trade/ConfirmTrade';
+import DetailsTrade from './pages/trade/DetailsTrade';
+import DetailsBooking from './pages/admin/DetailsBooking';
+import Premium from './pages/user/Premium';
+import LoadingPage from './components/LoadingPage/LoadingPage';
 
 const AdminWrapper = ({ children }) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const isAdmin = userInfo?.isAdmin;
   return isAdmin ? children : <ErrorPage />;
 };
 const UserWrapper = ({ children }) => {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   return userInfo ? children : <ErrorPage />;
 };
 function App() {
@@ -48,6 +49,14 @@ function App() {
         element={
           <UserWrapper>
             <UserPage />
+          </UserWrapper>
+        }
+      />
+      <Route
+        path="/user/loading"
+        element={
+          <UserWrapper>
+            <LoadingPage />
           </UserWrapper>
         }
       />

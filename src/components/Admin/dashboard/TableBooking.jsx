@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   Box,
   Paper,
@@ -10,11 +10,11 @@ import {
   TableHead,
   TableRow,
   Skeleton,
-} from "@mui/material";
-import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
-import { GetAllBookings, GetUserByID } from "../../API/APIConfigure";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import { GetAllBookings, GetUserByID } from '../../API/APIConfigure';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -28,11 +28,9 @@ const Dashboard = () => {
         let response = await GetAllBookings();
         if (Array.isArray(response)) {
           // Filter bookings with status "2"
-          response = response.filter((booking) => booking.status === "2");
+          response = response.filter((booking) => booking.status === '2');
           // Sort bookings by createdDay in descending order
-          response.sort(
-            (a, b) => new Date(b.createdDay) - new Date(a.createdDay)
-          );
+          response.sort((a, b) => new Date(b.createdDay) - new Date(a.createdDay));
           // Take the first 10 bookings
           response = response.slice(0, 10);
         }
@@ -40,7 +38,7 @@ const Dashboard = () => {
         fetchUserDetails(response.map((booking) => booking.memberId));
       } catch (err) {
         console.error(err);
-        toast.error("Failed to fetch bookings");
+        toast.error('Failed to fetch bookings');
       }
     };
     setIsLoading(false);
@@ -73,37 +71,32 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const statusTexts = {
-    2: "Đã thanh toán",
+    2: 'Đã thanh toán',
   };
 
   const statusColors = {
-    2: "green",
+    2: 'green',
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: 'flex' }}>
       <Box component="main" sx={{ flexGrow: 1, p: 5 }}>
         <div className="main">
           <TableContainer component={Paper} className="dashboard-container">
             <h2
               style={{
-                textAlign: "center",
-                color: "#205295",
-                fontSize: "40px",
-                marginTop: "20px",
-                marginBottom: "20px",
-                fontWeight: "bold",
+                textAlign: 'center',
+                color: '#205295',
+                fontSize: '40px',
+                marginTop: '20px',
+                marginBottom: '20px',
+                fontWeight: 'bold',
               }}
             >
               Đơn hàng thanh toán gần nhất
             </h2>
             {isLoading ? (
-              <Skeleton
-                animation="wave"
-                variant="rectangular"
-                width={500}
-                height={300}
-              />
+              <Skeleton animation="wave" variant="rectangular" width={500} height={300} />
             ) : (
               <Table
                 size="small"
@@ -115,8 +108,8 @@ const Dashboard = () => {
                   <TableRow>
                     <TableCell
                       style={{
-                        fontSize: "20px",
-                        fontFamily: "Arial, sans-serif",
+                        fontSize: '20px',
+                        fontFamily: 'Arial, sans-serif',
                       }}
                       align="center"
                     >
@@ -125,8 +118,8 @@ const Dashboard = () => {
 
                     <TableCell
                       style={{
-                        fontSize: "20px",
-                        fontFamily: "Arial, sans-serif",
+                        fontSize: '20px',
+                        fontFamily: 'Arial, sans-serif',
                       }}
                       align="center"
                     >
@@ -135,8 +128,8 @@ const Dashboard = () => {
 
                     <TableCell
                       style={{
-                        fontSize: "20px",
-                        fontFamily: "Arial, sans-serif",
+                        fontSize: '20px',
+                        fontFamily: 'Arial, sans-serif',
                       }}
                       align="center"
                     >
@@ -144,8 +137,8 @@ const Dashboard = () => {
                     </TableCell>
                     <TableCell
                       style={{
-                        fontSize: "20px",
-                        fontFamily: "Arial, sans-serif",
+                        fontSize: '20px',
+                        fontFamily: 'Arial, sans-serif',
                       }}
                       align="center"
                     >
@@ -156,41 +149,38 @@ const Dashboard = () => {
                 <TableBody>
                   {bookings.map((booking) => (
                     <TableRow key={booking.id}>
-                      <TableCell style={{ fontSize: "13px" }} align="center">
+                      <TableCell style={{ fontSize: '15px' }} align="center">
                         {userDetails[booking.memberId] || booking.memberId}
                       </TableCell>
 
-                      <TableCell style={{ fontSize: "13px" }} align="center">
+                      <TableCell style={{ fontSize: '13px' }} align="center">
                         {booking.amount.toLocaleString()}VNĐ
                       </TableCell>
 
                       <TableCell
                         style={{
-                          fontSize: "13px",
+                          fontSize: '13px',
                         }}
                         align="center"
                       >
-                        {new Date(booking.startDay).toLocaleDateString(
-                          "vi-VN",
-                          {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric",
-                          }
-                        )}
+                        {new Date(booking.startDay).toLocaleDateString('vi-VN', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                        })}
                         -
-                        {new Date(booking.endDay).toLocaleDateString("vi-VN", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric",
+                        {new Date(booking.endDay).toLocaleDateString('vi-VN', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
                         })}
                       </TableCell>
                       <TableCell
                         align="center"
                         style={{
-                          fontSize: "15px",
+                          fontSize: '15px',
                           color: statusColors[booking.status],
-                          fontWeight: "bold",
+                          fontWeight: 'bold',
                         }}
                       >
                         {statusTexts[booking.status]}
@@ -204,7 +194,7 @@ const Dashboard = () => {
               onClick={() => navigate(`/admin/booking`)}
               variant="contained"
               color="primary"
-              style={{ width: "inherit" }}
+              style={{ width: 'inherit' }}
               sx={{ mt: 1 }}
             >
               Xem thêm
