@@ -11,13 +11,14 @@ import {
   GetAllBookingsByID,
   GetTimeShareById,
   GetbyRealestateID,
-} from '../../API/APIConfigure';
+} from "../../API/APIConfigure";
+import LoadingPage from "../../LoadingPage/LoadingPage";
+import "./checkout.css";
+import Cancel from "./Cancel";
+import ButtonCheckOut from "./ButtonCheckOut";
+import ButtonCheckin from "./ButtonCheckin";
+import ButtonFeedback from "./ButtonFeedback";
 
-import './checkout.css';
-import Cancel from './Cancel';
-import ButtonCheckOut from './ButtonCheckOut';
-import ButtonCheckin from './ButtonCheckin';
-import ButtonFeedback from './ButtonFeedback';
 
 const Checkout = () => {
   const { id } = useParams();
@@ -47,7 +48,11 @@ const Checkout = () => {
     fetchBooking();
   }, [id]);
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <LoadingPage />
+      </div>
+    );
   }
 
   const total = Math.round(booking.amount / 24500);
