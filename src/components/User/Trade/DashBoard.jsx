@@ -16,7 +16,11 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { GetAllTrade, GetbyRealestateID } from "../../API/APIConfigure";
+import {
+  GetAllTrade,
+  GetTradeByMemberID,
+  GetbyRealestateID,
+} from "../../API/APIConfigure";
 import { useNavigate } from "react-router-dom";
 import { Skeleton } from "@mui/material";
 
@@ -35,9 +39,12 @@ const Dashboard = () => {
     setIsLoading(true);
 
     try {
-      const response = await GetAllTrade(userInfo.id);
+      const response = await GetTradeByMemberID(userInfo.id);
+      const responseArray = Array.isArray(response) ? response : [response];
+      console.log(responseArray);
+
       const tradeData = await Promise.all(
-        response.map(async (item) => {
+        responseArray.map(async (item) => {
           const name1 = await fetchNameById(item.timeshareId1);
           const name2 = await fetchNameById(item.timeshareId2);
           console.log("name1, name2:", name1, name2);
@@ -46,7 +53,6 @@ const Dashboard = () => {
       );
       setTrade(tradeData);
     } catch (err) {
-      toast.error("Failed to fetch Realestates");
       console.error(err);
     }
     setIsLoading(false);
