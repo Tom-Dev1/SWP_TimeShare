@@ -330,7 +330,8 @@
     width: 1170px;
 }
 .RowItems_dateFilter {
-    width: 30%;
+    /* width: 30%; */
+    width: 25%;
 }
 .RowItems_rowItem {
     width: 16.66%;

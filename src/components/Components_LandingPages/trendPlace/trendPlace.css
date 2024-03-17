@@ -1,4 +1,4 @@
-.tP__container {
+/* .tP__container {
   width: 1024px;
   max-width: 100%;
   box-sizing: border-box;
@@ -38,7 +38,6 @@
   text-shadow: 1px 1px 1px #060606;
 }
 
-/* container2 */
 .tP__container2 {
   margin-top: 15px;
 }
@@ -71,4 +70,90 @@
   font-size: 24px;
   line-height: 32px;
   text-shadow: 1px 1px 1px #060606;
+} */
+
+.destination-block {
+    background: #fbf8f2;
+    padding-top: 65px;
+    padding-bottom: 64px;
+}
+.destination-block > .home-container {
+    display: flex;
+    justify-content: space-between;
+    height: 568px;
+}
+.destination-block > .home-container > div.column-1,
+.destination-block > .home-container > div.column-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.destination-block > .home-container > div {
+    width: calc((100% - 36px) / 3);
+}
+
+.destination-block .item-wrapper {
+    position: relative;
+}
+.destination-block .item-wrapper::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.87%, rgba(0, 0, 0, 0.79) 100%),
+        linear-gradient(0deg, rgba(218, 191, 129, 0.24), rgba(218, 191, 129, 0.24));
+}
+/* .homepage-tit {
+    margin-bottom: 30px;
+    font-family: "EB Garamond";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 44px;
+    color: #343a40;
+} */
+.destination-block .tit_n_des .homepage-tit {
+    margin-bottom: 16px;
+}
+.destination-block .tit_n_des .des-description {
+    margin-bottom: 37px;
+    font-size: 14px;
+    line-height: 22px;
+    color: #616971;
+    padding-right: 17px;
+}
+
+.destination-block > .home-container > div.column-1 .img-wrapper {
+    height: 382px;
+}
+.destination-block > .home-container > div.column-2 .img-wrapper {
+    height: 568px;
+}
+.destination-block .item-wrapper._3 {
+    height: 298px;
+    overflow: hidden;
+}
+
+.destination-block .item-wrapper._4 {
+    height: 250px;
+    overflow: hidden;
+}
+.destination-block > .home-container > div .img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.destination-block .item-wrapper .item-info {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    width: calc(100% - 24px);
+    z-index: 1;
+    transition: 0.5s;
+}
+.destination-block .item-wrapper .item-tit {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 34px;
+    color: #fff;
 }
