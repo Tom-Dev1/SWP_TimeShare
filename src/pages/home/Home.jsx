@@ -44,27 +44,27 @@ function Home() {
         localStorage.setItem("searchkey", JSON.stringify(searchTerm));
         navigate("/hotels");
     };
-    console.log(isHomeTitleVisible);
+    // console.log(isHomeTitleVisible);
     return (
         <div className={`path-frontpage ${isScrolled ? "header-scroll" : ""} ${isHomeTitleVisible ? "fixed-bs" : ""}`}>
             <Navbar className={isHomePage} />
             <Header />
             <Search onSearch={handleSearch} searchValue={searchValue} setSearchValue={setSearchValue} />
 
-            <div className="homeContainer" ref={homeTitleRef}>
-                <Featured />
-                <div className="homeTitle">Điểm đến đang thịnh hành</div>
-                <div className="homeTitle litle">Các lựa chọn phổ biến nhất cho du khách từ Việt Nam</div>
+            <div className="main-home-container">
+                <Featured homeTitleRef={homeTitleRef} />
+                {/* <div className="homeTitle">Điểm đến đang thịnh hành</div> */}
+                {/* <div className="homeTitle litle">Các lựa chọn phổ biến nhất cho du khách từ Việt Nam</div> */}
                 <TrendPlace />
-                <div className="homeTitle">Khám phá Việt Nam</div>
-                <div className="homeTitle litle">Các điểm đến phổ biến này có nhiều điều chờ đón bạn</div>
-                <FavLocations />
+                {/* <div className="homeTitle">Khám phá Việt Nam</div> */}
+                {/* <div className="homeTitle litle">Các điểm đến phổ biến này có nhiều điều chờ đón bạn</div> */}
+                {/* <FavLocations />
                 <div className="homeTitle">Tìm theo loại chỗ nghỉ</div>
                 <FindByPlace />
                 <div className="homeTitle"></div>
                 <PropertyList />
-                <div className="homeTitle">Nhà ở mà khách yêu thích</div>
-                <FeatureProperties />
+                <div className="homeTitle">Nhà ở mà khách yêu thích</div> */}
+                {/* <FeatureProperties /> */}
                 <MailList />
                 <Footer />
             </div>

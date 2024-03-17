@@ -1,4 +1,4 @@
-.featured {
+/* .featured {
   width: 100%;
   max-width: 1024px;
   display: flex;
@@ -21,4 +21,88 @@
   position: absolute;
   bottom: 20px;
   left: 10px;
+} */
+.exp-block {
+    padding-top: 30px;
+    overflow: hidden;
+}
+.home-container {
+    max-width: 1170px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+.homepage-tit {
+    margin-bottom: 30px;
+    font-family: "EB Garamond";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 44px;
+    color: #343a40;
+}
+.exp-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+.exp-item._741x500 {
+    width: calc(741 * 100% / 1170);
+}
+.img1 {
+    width: 741px;
+    height: 500px;
+}
+.eb-garamond {
+    font-family: "EB Garamond";
+}
+.exp-block .exp-item-tit {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 34px;
+    color: #353c46;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    transition: 0.5s;
+}
+.exp-block .exp-item-des {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #616971;
+    margin-bottom: 21px;
+}
+.exp-block .exp-item .exp-item-cta a {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    color: #e8952f;
+    display: inline-flex;
+    padding-right: 24px;
+    text-decoration: unset !important;
+    transition: 0.5s;
+}
+.exp-block .exp-item .info-wrapper {
+    padding-bottom: 18px;
+    margin-bottom: 40px;
+}
+.exp-item._409x500 {
+    width: calc(409 * 100% / 1170);
+}
+.img2 {
+    width: 409px;
+    height: 500px;
+}
+.exp-block > .home-container::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: -64px;
+    height: 494px;
+    width: 100vw;
+    background: #fbf8f2;
+    z-index: -1;
 }
