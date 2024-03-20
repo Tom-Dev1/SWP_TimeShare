@@ -43,7 +43,6 @@ const ButtonWrapper = ({ currency, showSpinner, amount, timeshareId }) => {
       },
     });
   }, [currency, showSpinner]);
-  console.log(dataPay.payId);
   return (
     <>
       {showSpinner && isPending && <div className="spinner" />}
