@@ -54,7 +54,8 @@ const Cancel = ({ status }) => {
         bookingStatus === "3" ||
         bookingStatus === "4" ||
         bookingStatus === "5" ||
-        bookingStatus === "6"
+        bookingStatus === "6" ||
+        bookingStatus === "7"
       ) && (
         <button
           className="btn-cancel"
