@@ -162,7 +162,7 @@ function CreateReal({ Premium, onCreateSuccess }) {
             )}
 
             <label htmlFor="location" className="form-label">
-              Địa điểm
+              Địa điểm:
             </label>
             <input
               type="text"
@@ -174,7 +174,7 @@ function CreateReal({ Premium, onCreateSuccess }) {
             )}
 
             <label htmlFor="description" className="form-label">
-              Mô tả
+              Mô tả:
             </label>
             <input
               type="text"
@@ -186,7 +186,7 @@ function CreateReal({ Premium, onCreateSuccess }) {
             )}
 
             <label htmlFor="facility" className="form-label">
-              Facility
+              Số người tối đa:
             </label>
             <input
               type="text"
@@ -198,7 +198,7 @@ function CreateReal({ Premium, onCreateSuccess }) {
             )}
 
             <label htmlFor="price" className="form-label">
-              Giá:
+              Giá thuê một ngày:
             </label>
             <input
               type="text"
