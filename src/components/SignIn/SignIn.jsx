@@ -6,7 +6,6 @@ import { useAuth } from "../../hook/AuthContext";
 import { IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
 import { SignInAccount } from "../API/APIConfigure";
 
 const SignIn = ({ setShowLoading }) => {
@@ -62,7 +61,7 @@ const SignIn = ({ setShowLoading }) => {
                     if (response === null) {
                         Swal.fire({
                             icon: "error",
-                            title: response.messageError,
+                            title: "Sai tài khoản hoặc mật khẩu",
                         });
                     } else if (response.status === false) {
                         Swal.fire({
