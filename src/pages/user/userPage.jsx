@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import { AccountCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import Dashboard from './Dashboard';
+
 import Profile from './Profile';
 import { MenuItem } from '@mui/material';
 import Order from './Order';
@@ -15,7 +15,7 @@ import MyTrade from './MyTrade';
 import MailList from '../../components/mailList/MailList';
 import FeatureProperties from '../../components/featureProperties/FeatureProperties';
 const UserPage = () => {
-  const [activeMenu, setActiveMenu] = useState('dashboard');
+  const [activeMenu, setActiveMenu] = useState('profile');
   const [users, setUsers] = useState([]);
 
   const handleMenuClick = (menu) => {
@@ -30,16 +30,6 @@ const UserPage = () => {
             <div className="left">
               <div className="usersidebar">
                 <div>
-                  <div className={`${activeMenu === 'dashboard' ? 'user-active' : ''}`}>
-                    <MenuItem
-                      className="user-item"
-                      component={Link}
-                      to="/user/dashboard"
-                      onClick={() => handleMenuClick('dashboard')}
-                    >
-                      Bảng Điều Khiển
-                    </MenuItem>
-                  </div>
                   <div className={`${activeMenu === 'profile' ? 'user-active' : ''}`}>
                     <MenuItem
                       className="user-item"
@@ -86,7 +76,7 @@ const UserPage = () => {
             </div>
             <div className="right">
               {activeMenu === 'profile' && <Profile />}
-              {activeMenu === 'dashboard' && <Dashboard />}
+
               {activeMenu === 'order' && <Order />}
               {activeMenu === 'mypost' && <MyPost />}
               {activeMenu === 'mytrade' && <MyTrade />}

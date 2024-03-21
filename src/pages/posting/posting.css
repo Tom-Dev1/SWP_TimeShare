@@ -22,7 +22,6 @@
   box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px,
     rgba(17, 17, 26, 0.1) 0px 24px 80px;
   width: 100%;
-  margin-bottom: 20px;
 }
 
 .booking-form {
@@ -109,6 +108,7 @@
   cursor: pointer;
   display: block;
   width: 100%;
+  border-radius: 10px;
 }
 
 .btn-primary:hover {
@@ -120,9 +120,7 @@
   border-radius: 6px;
   margin-bottom: 10px;
 }
-.voucherLabel {
-  margin-top: 100px;
-}
+
 ._linePosting {
   border: #ccc 0.5px solid;
   margin: 10px 0;

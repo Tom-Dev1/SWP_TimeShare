@@ -93,6 +93,9 @@
 }
 .feedback-booking {
   display: flex;
-  justify-content: center;
-  width: 500px;
+  justify-content: space-around;
+}
+.btn-in-button {
+  display: flex;
+  justify-content: space-around;
 }
