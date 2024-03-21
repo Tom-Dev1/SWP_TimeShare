@@ -33,7 +33,7 @@ const Form = () => {
                                     <button className="btn-form">Đăng Nhập</button>
                                 </div>
                                 <div className="overlay-panel overlay-right">
-                                    <h1 className="sign-up-title">Xin chào bạn!</h1>
+                                    <h1 className="sign-up-title">Xin chào!</h1>
                                     <p className="intro-text">
                                         Nhập thông tin cá nhân của bạn và bắt đầu hành trình với chúng tôi
                                     </p>

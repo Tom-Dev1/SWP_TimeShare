@@ -160,7 +160,8 @@
 }
 
 .DealAreaWrapper_clickoutSectionFull__iYkvL {
-    min-width: 330px;
+    width: 360px;
+    max-width: 100%;
     padding: 8px;
 }
 button {
