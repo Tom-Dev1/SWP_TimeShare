@@ -103,15 +103,7 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.87%, rgba(0, 0, 0, 0.79) 100%),
         linear-gradient(0deg, rgba(218, 191, 129, 0.24), rgba(218, 191, 129, 0.24));
 }
-/* .homepage-tit {
-    margin-bottom: 30px;
-    font-family: "EB Garamond";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 34px;
-    line-height: 44px;
-    color: #343a40;
-} */
+
 .destination-block .tit_n_des .homepage-tit {
     margin-bottom: 16px;
 }

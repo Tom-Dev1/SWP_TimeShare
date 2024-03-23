@@ -36,7 +36,6 @@
 }
 .homepage-tit {
     margin-bottom: 30px;
-    font-family: "EB Garamond";
     font-style: normal;
     font-weight: 500;
     font-size: 34px;
@@ -57,7 +56,7 @@
     height: 500px;
 }
 .eb-garamond {
-    font-family: "EB Garamond";
+    /* font-family: "EB Garamond"; */
 }
 .exp-block .exp-item-tit {
     font-weight: 500;

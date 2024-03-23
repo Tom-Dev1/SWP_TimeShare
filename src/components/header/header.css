@@ -177,7 +177,7 @@
     /* padding-left: 8px; */
 }
 .banner-info .banner-tit {
-    font-family: "EB Garamond";
+    /* font-family: "EB Garamond"; */
     font-style: normal;
     font-weight: 500;
     font-size: 50px;
@@ -201,7 +201,7 @@
     color: #fff;
     padding-left: 24px;
     padding-right: 39px;
-    font-family: "EB Garamond";
+    /* font-family: "EB Garamond"; */
     font-weight: 600;
     font-size: 16px;
     line-height: 21px;

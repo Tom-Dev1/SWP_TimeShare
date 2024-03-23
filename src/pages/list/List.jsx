@@ -1,19 +1,3 @@
-// const getData = async () => {
-//     try {
-//         const response = await GetAllRealestates();
-//         if (response === null) {
-//             throw new Error("Network response was not ok");
-//         }
-//         const normalizedDestination = keepDiacritics(searchValue.toLowerCase());
-//         const filteredResults = response.filter(
-//             (item) => item.location && keepDiacritics(item.location.toLowerCase()).includes(normalizedDestination),
-//         );
-//         setSearchResult(filteredResults);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-
 import { useEffect, useRef, useState } from "react";
 import Search from "../../components/Search/Search";
 import "./list.css";
@@ -111,10 +95,6 @@ const List = () => {
     useEffect(() => {
         getData();
     }, []);
-
-    // useEffect(() => {s
-    //     getData();
-    // }, [startDate, endDate]);
 
     const getData = async () => {
         try {
