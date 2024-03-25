@@ -14,6 +14,7 @@ import MyTrade from './MyTrade';
 
 import MailList from '../../components/mailList/MailList';
 import FeatureProperties from '../../components/featureProperties/FeatureProperties';
+import PaymentUser from './PaymentUser';
 const UserPage = () => {
   const [activeMenu, setActiveMenu] = useState('profile');
   const [users, setUsers] = useState([]);
@@ -40,7 +41,16 @@ const UserPage = () => {
                       Thông Tin Cá Nhân
                     </MenuItem>
                   </div>
-
+                  <div className={`${activeMenu === 'payment' ? 'user-active' : ''}`}>
+                    <MenuItem
+                      className="user-item"
+                      component={Link}
+                      to="/user/payment"
+                      onClick={() => handleMenuClick('payment')}
+                    >
+                      Thanh Toán Cá Nhân
+                    </MenuItem>
+                  </div>
                   <div className={`${activeMenu === 'order' ? 'user-active' : ''}`}>
                     <MenuItem
                       className="user-item"
@@ -76,7 +86,7 @@ const UserPage = () => {
             </div>
             <div className="right">
               {activeMenu === 'profile' && <Profile />}
-
+              {activeMenu === 'payment' && <PaymentUser />}
               {activeMenu === 'order' && <Order />}
               {activeMenu === 'mypost' && <MyPost />}
               {activeMenu === 'mytrade' && <MyTrade />}
