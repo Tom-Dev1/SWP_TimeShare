@@ -5,6 +5,7 @@ import { GetAllRealestates } from "../../components/API/APIConfigure";
 import Navbar from "../../components/navbar/Navbar";
 import SearchItem from "../../components/searchItem/SearchItem";
 import Filter from "../Filter/Filter";
+import LoadingPage from "../../components/LoadingPage/LoadingPage";
 
 const List = () => {
     const [searchResult, setSearchResult] = useState([]);
@@ -19,6 +20,8 @@ const List = () => {
     const [selectedPriceRange, setSelectedPriceRange] = useState(
         `${minPrice.toLocaleString()} - ${maxPrice.toLocaleString()} VND +`,
     );
+    const [showLoadingPage, setShowLoadingPage] = useState(false);
+
     const dropdownRef = useRef(null);
     const dateDropdownRef = useRef(null);
     useEffect(() => {
@@ -98,6 +101,8 @@ const List = () => {
 
     const getData = async () => {
         try {
+            setShowLoadingPage(true);
+
             const response = await GetAllRealestates();
             if (response === null) {
                 throw new Error("Network response was not ok");
@@ -135,19 +140,26 @@ const List = () => {
                 );
             });
 
-            // console.log(timeshares);
+            setTimeout(() => {
+                setShowLoadingPage(false);
+                setSearchResult(filteredResults);
+            }, 3000);
+
             setSearchResult(filteredResults);
         } catch (error) {
             console.log(error);
+            setShowLoadingPage(false);
         }
     };
 
     const handleSearch = (searchValue) => {
+        setShowLoadingPage(true);
         const searchTerm = {
             destination: searchValue,
         };
         localStorage.setItem("searchkey", JSON.stringify(searchTerm));
         setSearchValue(searchValue);
+
         getData();
     };
 
@@ -176,34 +188,41 @@ const List = () => {
                 setEndDate={setEndDate}
                 priceDropdown={priceDropdown}
             />
-            {searchResult.length === 0 ? (
-                <>
-                    <img
-                        style={{
-                            display: "block",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            textAlign: "center",
-                            width: "40%",
-                        }}
-                        src="https://cdni.iconscout.com/illustration/premium/thumb/search-not-found-6275834-5210416.png"
-                        alt="Không tìm thấy kết quả trùng khớp"
-                    />
-                    <div
-                        style={{
-                            display: "block",
-                            marginLeft: "auto",
-                            marginRight: "auto",
-                            textAlign: "center",
-                            fontSize: "30px",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        Không tìm thấy kết quả trùng khớp
-                    </div>
-                </>
+
+            {showLoadingPage ? (
+                <LoadingPage />
             ) : (
-                <SearchItem searchResult={searchResult} />
+                <>
+                    {searchResult.length === 0 ? (
+                        <>
+                            <img
+                                style={{
+                                    display: "block",
+                                    marginLeft: "auto",
+                                    marginRight: "auto",
+                                    textAlign: "center",
+                                    width: "40%",
+                                }}
+                                src="https://cdni.iconscout.com/illustration/premium/thumb/search-not-found-6275834-5210416.png"
+                                alt="Không tìm thấy kết quả trùng khớp"
+                            />
+                            <div
+                                style={{
+                                    display: "block",
+                                    marginLeft: "auto",
+                                    marginRight: "auto",
+                                    textAlign: "center",
+                                    fontSize: "30px",
+                                    fontWeight: "bold",
+                                }}
+                            >
+                                Không tìm thấy kết quả trùng khớp
+                            </div>
+                        </>
+                    ) : (
+                        <SearchItem searchResult={searchResult} />
+                    )}
+                </>
             )}
         </div>
     );
