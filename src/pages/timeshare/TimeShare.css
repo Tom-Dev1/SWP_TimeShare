@@ -1,3 +1,8 @@
+.homeContainer {
+    width: 1024px;
+    margin: 0 auto;
+}
+
 .searchItem {
     width: 900px;
     padding: 10px;
