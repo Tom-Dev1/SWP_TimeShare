@@ -19,6 +19,7 @@ function CreateReal({ Premium, onCreateSuccess }) {
     const [description, setDescription] = useState("");
     const [facility, setFacility] = useState(0);
     const [price, setPrice] = useState(0);
+
     const [imageFiles, setImageFiles] = useState([]);
     const [previewImages, setPreviewImages] = useState([]);
     const [errors, setErrors] = useState({
@@ -118,11 +119,7 @@ function CreateReal({ Premium, onCreateSuccess }) {
         const formattedValue = parseInt(value.replace(/\D/g, ""), 10);
         setPrice(formattedValue);
     };
-    const handleFacilityChange = (e) => {
-        const { value } = e.target;
-        const formattedValue = parseInt(value.replace(/\D/g, ""), 10);
-        setFacility(formattedValue);
-    };
+
 
     return (
         <div className="create-real-estate">
@@ -175,12 +172,14 @@ function CreateReal({ Premium, onCreateSuccess }) {
                             Số người tối đa:
                         </label>
                         <input type="text" value={facility} onChange={handleFacilityChange} />
+
                         {errors.facility && <Typography color="error">{errors.facility}</Typography>}
 
                         <label htmlFor="price" className="form-label">
                             Giá thuê một ngày:
                         </label>
                         <input type="text" value={price.toLocaleString("VND")} onChange={handlePriceChange} />
+
 
                         {errors.price && <Typography color="error">{errors.price}</Typography>}
 

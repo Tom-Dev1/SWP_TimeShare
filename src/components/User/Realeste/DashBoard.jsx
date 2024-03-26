@@ -122,7 +122,6 @@ const Dashboard = () => {
                 <TableCell
                   style={{
                     fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -131,7 +130,6 @@ const Dashboard = () => {
                 <TableCell
                   style={{
                     fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -140,7 +138,6 @@ const Dashboard = () => {
                 <TableCell
                   style={{
                     fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -149,7 +146,6 @@ const Dashboard = () => {
                 <TableCell
                   style={{
                     fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -158,7 +154,6 @@ const Dashboard = () => {
                 <TableCell
                   style={{
                     fontSize: '20px',
-                    fontFamily: 'Arial, sans-serif',
                   }}
                   align="center"
                 >
@@ -190,7 +185,7 @@ const Dashboard = () => {
                     >
                       <VisibilityIcon sx={{ fontSize: 25 }} />
                     </Button>
-                    <CreateTimeShare realestateId={item.id} />
+                    <CreateTimeShare realestateId={item.id} priceReal={item.price}/>
                   </TableCell>
                 </TableRow>
               ))}

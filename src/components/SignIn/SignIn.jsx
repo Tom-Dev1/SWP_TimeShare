@@ -96,7 +96,7 @@ const SignIn = ({ setShowLoading }) => {
                             }
                         });
                     }
-                }, 3000);
+                }, 1500);
             } catch (error) {
                 Swal.fire({
                     icon: "error",

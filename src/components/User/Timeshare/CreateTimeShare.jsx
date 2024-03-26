@@ -11,19 +11,18 @@ import { BASE_URL } from "../../API/APIConfigure";
 function CreateTimeShare({
   onCreateSuccess,
   realestateId: initialRealestateId,
+  priceReal,
 }) {
   const [open, setOpen] = useState(false);
   const [realestatId, setRealestateId] = useState("");
-  const [startDay, setStartDay] = useState("");
-  const [endDay, setEndDay] = useState("");
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  const [price, setPrice] = useState(""); // Added price state
+  const [price, setPrice] = useState(""); 
   const [errors, setErrors] = useState({
     startDay: "",
     endDay: "",
     price: "",
   });
-
+const [differenceInDays, setDifferenceInDays] = useState(0);
   useEffect(() => {
     setRealestateId(initialRealestateId || "");
   }, [initialRealestateId]);
@@ -94,29 +93,37 @@ function CreateTimeShare({
 
   const handleStartDayChange = (value) => {
     setStartDay(value);
-
     let today = new Date();
     today.setHours(0, 0, 0, 0);
-
+  
     if (new Date(value) < today) {
       setErrors((prevErrors) => ({
         ...prevErrors,
         startDay: "Ngày bắt đầu không thể nhỏ hơn hôm nay",
       }));
+    } else if (new Date(value) > new Date(endDay)) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        startDay: "Ngày bắt đầu không thể lớn hơn ngày kết thúc",
+      }));
+    
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, startDay: "" }));
     }
+  
+    const startDayDate = new Date(value);
+    const endDayDate = new Date(endDay);
+    const differenceInMilliseconds = endDayDate - startDayDate;
+    const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    setDifferenceInDays(differenceInDays);
+    setPrice(priceReal * differenceInDays);
   };
-
-  const handlePriceChange = (value) => {
-    setPrice(value);
-
-    setErrors((prevErrors) => ({ ...prevErrors, price: "" }));
-  };
-
+  
   const handleEndDayChange = (value) => {
     setEndDay(value);
-
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+  
     if (new Date(value) < new Date(startDay)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -125,7 +132,25 @@ function CreateTimeShare({
     } else {
       setErrors((prevErrors) => ({ ...prevErrors, endDay: "" }));
     }
+  
+    const startDayDate = new Date(startDay);
+    const endDayDate = new Date(value);
+    const differenceInMilliseconds = endDayDate - startDayDate;
+    const differenceInDays = Math.floor(differenceInMilliseconds / (1000 * 60 * 60 * 24));
+    setDifferenceInDays(differenceInDays);
+    setPrice(priceReal * differenceInDays);
   };
+  
+  let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
+
+today = yyyy + '-' + mm + '-' + dd;
+
+const [endDay, setEndDay] = useState(today);
+const [startDay, setStartDay] = useState(today);
+
   return (
     <div className="create-time-share">
       <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
@@ -147,6 +172,7 @@ function CreateTimeShare({
                 Ngày bắt đầu:
               </label>
               <input
+              min={today}
                 type="date"
                 value={startDay}
                 onChange={(e) => handleStartDayChange(e.target.value)}
@@ -160,6 +186,7 @@ function CreateTimeShare({
                 Ngày kết thúc:
               </label>
               <input
+              min={startDay}
                 type="date"
                 value={endDay}
                 onChange={(e) => handleEndDayChange(e.target.value)}
@@ -170,16 +197,15 @@ function CreateTimeShare({
             </Typography>
             <Typography variant="h6" className="form-field">
               <label htmlFor="price" className="form-label">
+                Số ngày cho thuê:
+              </label>
+              {" "} {differenceInDays < 0 ? 0 : differenceInDays} ngày
+            </Typography>
+            <Typography variant="h6" className="form-field">
+              <label htmlFor="price" className="form-label">
                 Giá cho thuê:
               </label>
-              <input
-                type="number"
-                value={price}
-                onChange={(e) => handlePriceChange(e.target.value)}
-              />
-              {errors.price && (
-                <span className="error-message">{errors.price}</span>
-              )}
+              {" "}{price < 0 ? 0 : price.toLocaleString()} VNĐ
             </Typography>
             <Button
               className="form-field"

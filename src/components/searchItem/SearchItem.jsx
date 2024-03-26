@@ -5,12 +5,10 @@ import { Rating } from "@mui/material";
 import { useEffect, useState } from "react";
 import { GetbyRealestateID } from "../API/APIConfigure";
 import { useAuth } from "../../hook/AuthContext";
-import { toast } from "react-toastify";
+
 import Swal from "sweetalert2";
 
 const SearchItem = ({ searchResult }) => {
-    console.log(searchResult);
-    console.log(searchResult.map((item) => item.status === "2"));
     const BASE_URL = "http://meokool-001-site1.ltempurl.com/";
     const [value, setValue] = useState(4);
     const navigate = useNavigate();

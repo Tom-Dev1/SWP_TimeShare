@@ -63,7 +63,7 @@ const Filter = ({
                                                 <span className="truncate w-full lsItem flex items-center">
                                                     <span></span>
                                                     <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-                                                    {/* <div className="headerSearchText w-full"> */}
+
                                                     <DatePicker
                                                         ref={datePickerRef}
                                                         selectsRange
@@ -75,7 +75,6 @@ const Filter = ({
                                                         isClearable
                                                         className="date-input-range"
                                                     />
-                                                    {/* </div> */}
                                                 </span>
                                                 <span className="optionItem_plus rotate-90 transform">
                                                     <KeyboardArrowDownIcon />
@@ -172,13 +171,13 @@ const Filter = ({
                                                                     onClick={resetFilter}
                                                                     className="FilterDropdown_resetBtn"
                                                                 >
-                                                                    Reset
+                                                                    Đặt lại
                                                                 </button>
                                                                 <button
                                                                     onClick={handleApplyFilter}
                                                                     className="FilterDropdown_applyBtn"
                                                                 >
-                                                                    Apply
+                                                                    Áp dụng
                                                                 </button>
                                                             </footer>
                                                         </section>
