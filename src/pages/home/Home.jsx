@@ -69,7 +69,9 @@ function Home() {
                 <TrendPlace />
 
                 <MailList />
-                <Footer />
+                <div className="homeContainer" style={{ marginTop: "50px" }}>
+                    <Footer />
+                </div>
             </div>
         </div>
     );

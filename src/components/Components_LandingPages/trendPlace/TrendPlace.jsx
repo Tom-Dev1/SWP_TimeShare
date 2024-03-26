@@ -110,7 +110,7 @@ const TrendPlace = () => {
                                     />
                                 </div>
                                 <div className="item-info">
-                                    <div className="item-tit eb-garamond">TP Ho Chi Minh</div>
+                                    <div className="item-tit eb-garamond">TP Hồ Chí Minh</div>
                                 </div>
                             </div>
                         </div>

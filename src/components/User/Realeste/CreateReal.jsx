@@ -61,6 +61,8 @@ function CreateReal({ Premium, onCreateSuccess }) {
             formErrors.price = "Vui lòng nhập giá";
         } else if (isNaN(Number(price))) {
             formErrors.price = "Giá tiền phải là một số";
+        } else if (Number(price) < 1000) {
+            formErrors.price = "Giá tiền phải lớn hơn 1.000VND";
         }
         if (!hasImage) {
             formErrors.image = "Vui lòng chọn ít nhất một hình ảnh";
@@ -110,6 +112,16 @@ function CreateReal({ Premium, onCreateSuccess }) {
                 title: "Tạo mới thất bại, vui lòng thử lại!!!",
             });
         }
+    };
+    const handlePriceChange = (e) => {
+        const { value } = e.target;
+        const formattedValue = parseInt(value.replace(/\D/g, ""), 10);
+        setPrice(formattedValue);
+    };
+    const handleFacilityChange = (e) => {
+        const { value } = e.target;
+        const formattedValue = parseInt(value.replace(/\D/g, ""), 10);
+        setFacility(formattedValue);
     };
 
     return (
@@ -162,13 +174,13 @@ function CreateReal({ Premium, onCreateSuccess }) {
                         <label htmlFor="facility" className="form-label">
                             Số người tối đa:
                         </label>
-                        <input type="text" value={facility} onChange={(e) => setFacility(e.target.value)} />
+                        <input type="text" value={facility} onChange={handleFacilityChange} />
                         {errors.facility && <Typography color="error">{errors.facility}</Typography>}
 
                         <label htmlFor="price" className="form-label">
                             Giá thuê một ngày:
                         </label>
-                        <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+                        <input type="text" value={price.toLocaleString("VND")} onChange={handlePriceChange} />
                         {errors.price && <Typography color="error">{errors.price}</Typography>}
 
                         <label htmlFor="imageFiles" className="form-label">
